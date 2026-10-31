@@ -1,0 +1,415 @@
+{
+	"lib/components/admin/AdminNav.svelte": {
+		"awzJBNCB": "Benutzer",
+		"ViBeEsIP": "Arten",
+		"VAK8ADUq": "Grundkarten",
+		"dKiDoDe8": "Einstellungen"
+	},
+	"lib/components/admin/BasemapDialog.svelte": {
+		"pkh7rnSQ": "Grundkarte bearbeiten",
+		"m8Kp25zi": "Grundkarte hinzufügen",
+		"dl_iLOXU": "Von einer Vorlage starten",
+		"SUynj3N0": "Eigene",
+		"3NHVIj9z": "Name",
+		"Vt6JntAV": "Wird in der Kartenauswahl angezeigt",
+		"KAD1EEws": "Luftbild",
+		"uq3fcPtd": "Typ",
+		"wtxyOCWR": "Vektorstil",
+		"_6CjlPTS": "Rasterkacheln",
+		"IhssZR_u": "Stil-URL",
+		"hFn5Hijf": "Kachel-URL",
+		"swF_Ucge": "Eine MapLibre style.json, z. B. https://tiles.openfreemap.org/styles/liberty",
+		"jxAersDC": "XYZ-Vorlage mit {z}, {x} und {y}, z. B. https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+		"qQLczgiG": "Quellenangabe",
+		"bM3ZxxkN": "HTML erlaubt, wird in der Kartenecke angezeigt",
+		"Yh06yKDl": "Kachelgröße",
+		"_WACN1qf": "Max. Zoom",
+		"hMUCq8fO": "Höchste Zoomstufe mit Kacheln, darüber wird hochskaliert",
+		"MwzHDshi": "Straßen- und Ortsnamen darüber anzeigen",
+		"9W1Lf_Wy": "Nutzt die Beschriftungen des ersten Vektorstils, praktisch für Luftbilder",
+		"GXZu1syy": "Abbrechen",
+		"FQn1YfJB": "Speichern"
+	},
+	"lib/components/admin/BasemapRow.svelte": {
+		"N6juwc4Z": "Standard",
+		"O5xPbDql": "Vektorstil",
+		"SlcrYUZ8": "Raster + Beschriftung",
+		"klxIGgN5": "Raster",
+		"RtzIjlts": "{basemap.name} für Benutzer anzeigen",
+		"xm_rXrjy": "Nach oben",
+		"QLtQ2hYM": "Nach unten",
+		"9DuUJRCU": "Als Standard festlegen",
+		"RkxP_QGe": "Bearbeiten",
+		"f0yPgNpQ": "Grundkarte löschen",
+		"QKDcliDb": "Grundkarte löschen?",
+		"b4SxLyah": "„{basemap.name}“ steht dann in keinem Plan mehr zur Verfügung."
+	},
+	"lib/components/admin/BasemapSettings.svelte": {
+		"uXokTOsL": "Grundkarten ({basemaps.length})",
+		"5iITKku4": "Die Karten, zwischen denen Benutzer in einem Plan wechseln können. Der erste Vektorstil liefert auch die Beschriftungen über Rasterkarten.",
+		"m8Kp25zi": "Grundkarte hinzufügen",
+		"LDAe7LEL": "Noch keine Grundkarten",
+		"vCQ7K6uR": "Bis du eine hinzufügst, zeigen Pläne einen leeren Hintergrund. Starte mit den Standardkarten ({defaults}) oder füge eigene hinzu.",
+		"v2R5G4mZ": "Standardkarten hinzufügen",
+		"-EnotfSH": "Grundkarte",
+		"uq3fcPtd": "Typ",
+		"ksHN_fTL": "Aktiv"
+	},
+	"lib/components/admin/SignupSetting.svelte": {
+		"3dAKjk8j": "Registrierung erlauben",
+		"4elmqx0B": "Wenn deaktiviert, können keine neuen Konten erstellt werden. Bestehende Benutzer können sich weiterhin anmelden."
+	},
+	"lib/components/admin/SpeciesTranslationsDialog.svelte": {
+		"Fu_NIddP": "Speichern fehlgeschlagen",
+		"f_I8krYh": "„{species.baseName}“ übersetzen",
+		"aVUPPyZo": "Wird in der gewählten Sprache statt des Namens angezeigt. Leer lassen, um den Namen zu verwenden.",
+		"GXZu1syy": "Abbrechen",
+		"FQn1YfJB": "Speichern"
+	},
+	"lib/components/admin/UserRow.svelte": {
+		"0etHx3V2": "(du)",
+		"jGl25bVB": "Admin",
+		"BPiZbadj": "Benutzer",
+		"Uu8YvYVz": "deaktiviert",
+		"UGADmJEJ": "Adminrechte entziehen",
+		"NNm8Tatx": "Zum Admin machen",
+		"LcdHj71C": "Reaktivieren",
+		"-x5vpVMn": "Deaktivieren",
+		"WDY_2UJA": "Benutzer löschen",
+		"qXS9v49L": "Benutzer löschen?",
+		"ZNDGt2ln": "{user.name} und alle zugehörigen Pläne werden endgültig gelöscht."
+	},
+	"lib/components/layout/AppHeader.svelte": {
+		"3-iy8N4m": "Pläne",
+		"ViBeEsIP": "Arten",
+		"wcIksDzZ": "Admin",
+		"v9QCsvbz": "Anmelden"
+	},
+	"lib/components/layout/UserMenu.svelte": {
+		"b6Jb4cUL": "Benutzermenü",
+		"jGl25bVB": "Admin",
+		"Y4ND_sfA": "Verwaltung",
+		"SPDT05fU": "Abmelden"
+	},
+	"lib/components/map/BasemapToggle.svelte": {
+		"-EnotfSH": "Grundkarte"
+	},
+	"lib/components/map/PlaceSearch.svelte": {
+		"SZJfLfxq": "Adresse oder Ort suchen"
+	},
+	"lib/components/map/TimelineBar.svelte": {
+		"hY5Lp6Kf": "Pause",
+		"3x3pEyHj": "Wachstum abspielen",
+		"KwZcfJzk": "Heute",
+		"JiiUO_Rk": "in 1 Jahr",
+		"PPwaufDy": "in {years} Jahren",
+		"ifaDJWDe": "Jahr",
+		"hKl0L5rj": "Zurück zu heute"
+	},
+	"lib/components/plan/AddTreeDialog.svelte": {
+		"fVt38b7l": "Baum hinzufügen",
+		"XvPXWs1V": "Wähle, was du pflanzen möchtest, und platziere es dann auf der Karte.",
+		"ViBeEsIP": "Arten",
+		"3NHVIj9z": "Name",
+		"mMxtcfBS": "Optional, z. B. „Opas Apfelbaum“",
+		"tPED68PN": "Pflanzdatum",
+		"wFy6QuzW": "Kann für geplante Bäume in der Zukunft liegen",
+		"GXZu1syy": "Abbrechen",
+		"eqYNlO_B": "Auf der Karte platzieren"
+	},
+	"lib/components/plan/ConflictList.svelte": {
+		"_VgCIsSY": "Genug Platz",
+		"iPNRpvL4": "Keine Kronen überschneiden sich, auch nicht, wenn alle Bäume ausgewachsen sind.",
+		"vuL8suGb": "Überschneidungen {year}",
+		"pRH7OgvE": "Kronen überschneiden sich um {overlap} · {distance} Abstand",
+		"-J9JHxG2": "Später",
+		"s3yS-GbA": "Kronen berühren sich ab etwa {c.year}"
+	},
+	"lib/components/plan/GrowthStats.svelte": {
+		"1WeOvKiM": "Größe {year}",
+		"q1-AYEMz": "1 Jahr nach der Pflanzung",
+		"QmkvA8fU": "{age} Jahre nach der Pflanzung",
+		"_7T1XDYw": "noch nicht gepflanzt",
+		"v-LspAF5": "Höhe",
+		"C-sp0ySY": "ausgewachsen {matureHeight}",
+		"k8rSuo9P": "Kronenbreite",
+		"k--vUDVm": "ausgewachsen {matureSpread}",
+		"rGSUz1FW": "Wachstum bis zur Endgröße"
+	},
+	"lib/components/plan/MapLegend.svelte": {
+		"dILjdLW9": "Legende",
+		"m0RT2K7Y": "Krone im gewählten Jahr",
+		"LvXiF1ZD": "Noch nicht gepflanzt",
+		"ZpDBvJCk": "Zu nah",
+		"deVJalwn": "Endgröße",
+		"vo5LAXp4": "Endgröße anzeigen"
+	},
+	"lib/components/plan/PlanSettingsDialog.svelte": {
+		"-GvycTav": "Planeinstellungen",
+		"3NHVIj9z": "Name",
+		"Um4Ah8w_": "Beschreibung",
+		"GXZu1syy": "Abbrechen",
+		"FQn1YfJB": "Speichern"
+	},
+	"lib/components/plan/PlanView.svelte": {
+		"Wr6eH7xb": "Darf bearbeiten",
+		"m0xshZDp": "Nur ansehen",
+		"N3ThwgSs": "Geteilt von {owner}",
+		"bJjRvTS8": "Plan teilen",
+		"-GvycTav": "Planeinstellungen",
+		"9msViuJl": "Bäume ({trees.length})",
+		"n16jXcf5": "Konflikte",
+		"pp_1LE0K": "Hier pflanzen",
+		"VvEkd3dJ": "Hierher verschieben",
+		"GXZu1syy": "Abbrechen",
+		"fVt38b7l": "Baum hinzufügen",
+		"yuCZ6gh9": "Es sind noch keine Grundkarten eingerichtet. Ein Admin kann sie unter Verwaltung hinzufügen.",
+		"FuROpwjX": "Verschiebe die Karte, um den Baum zu platzieren"
+	},
+	"lib/components/plan/SharePlanDialog.svelte": {
+		"bJjRvTS8": "Plan teilen",
+		"qqW4AZaB": "Mit einem Ansehen-Link kann jede Person diesen Plan ohne Konto ansehen. Mit Bearbeiten-Links können angemeldete Personen Bäume hinzufügen, verschieben und ändern.",
+		"ukZVpBco": "Dieser Plan ist noch nicht geteilt.",
+		"Wr6eH7xb": "Darf bearbeiten",
+		"m0xshZDp": "Nur ansehen",
+		"cSpII8y5": "Freigabelink",
+		"2_Ni1PIQ": "Link kopieren",
+		"2jce4eFB": "Link widerrufen",
+		"7Fugq7cX": "Zugriff",
+		"5rhQz_av": "Link erstellen"
+	},
+	"lib/components/plan/TreeDetails.svelte": {
+		"Xaj3-8Kd": "Zurück zur Liste",
+		"Hd47zDnt": "Baum bearbeiten",
+		"c3I5Wxwn": "Baum löschen",
+		"ViBeEsIP": "Arten",
+		"krXGLqWH": "Gepflanzt",
+		"FZSJTTak": "Verschiebe die Karte, um den Baum zu platzieren.",
+		"GXZu1syy": "Abbrechen",
+		"mluM8qF_": "Baum verschieben",
+		"Z6-jUvMQ": "Überschneidet sich {year} um {overlap} mit {name}",
+		"9ngb3uJL": "Berührt {name} ab etwa {c.year}",
+		"inUlsUkv": "Notizen",
+		"TZEwQysI": "Die Größen sind Schätzungen. Boden, Klima und Schnitt beeinflussen stark, wie groß ein Baum tatsächlich wird.",
+		"WNPfer3r": "Baum löschen?",
+		"AUSAq47k": "„{displayName}“ wird aus diesem Plan entfernt."
+	},
+	"lib/components/plan/TreeEditDialog.svelte": {
+		"Hd47zDnt": "Baum bearbeiten",
+		"3NHVIj9z": "Name",
+		"mMxtcfBS": "Optional, z. B. „Opas Apfelbaum“",
+		"ViBeEsIP": "Arten",
+		"tPED68PN": "Pflanzdatum",
+		"wFy6QuzW": "Kann für geplante Bäume in der Zukunft liegen",
+		"c09VkM4t": "Höhe beim Pflanzen",
+		"avbd2eT2": "Krone beim Pflanzen",
+		"SECWDUok": "Endgröße anpassen",
+		"aaANJg1f": "Praktisch für schwach wachsende Unterlagen oder geschnittene Bäume. Leer lassen, um den Wert der Art zu verwenden.",
+		"NwJmOCHn": "Endhöhe (m)",
+		"GCMszQD0": "Endkrone (m)",
+		"inUlsUkv": "Notizen",
+		"GXZu1syy": "Abbrechen",
+		"3QrnpcvP": "Änderungen speichern"
+	},
+	"lib/components/plan/TreeList.svelte": {
+		"ByaXcHRu": "Noch keine Bäume",
+		"ShpkOXCu": "Wähle über der Karte eine Art, klicke auf „Baum hinzufügen“ und dann auf die Karte, um ihn zu platzieren."
+	},
+	"lib/components/plan/TreeListItem.svelte": {
+		"Q3bwBUTa": "{height} hoch",
+		"mw8bEK_1": "geplant",
+		"_1DG3LXL": "Zu nah an einem anderen Baum"
+	},
+	"lib/components/plans/CreatePlanDialog.svelte": {
+		"A2stOQ-J": "Dein Standort",
+		"K1DxLS5R": "Standort nicht verfügbar, du kannst später auf der Karte suchen",
+		"DmRoJd-c": "Neuer Plan",
+		"4bLDbdiV": "Ein Plan ist eine Fläche, etwa dein Garten oder deine Obstwiese.",
+		"3NHVIj9z": "Name",
+		"jvNfFmSf": "Garten",
+		"Um4Ah8w_": "Beschreibung",
+		"Wb5xMzyW": "Optional",
+		"kAG-2ovZ": "An meinem Standort starten",
+		"GXZu1syy": "Abbrechen",
+		"TiB6SP72": "Plan erstellen"
+	},
+	"lib/components/plans/PlanCard.svelte": {
+		"ZhtWdVNB": "Plan löschen",
+		"GTBmW0ED": "1 Baum",
+		"_UAauY-k": "{plan.treeCount} Bäume",
+		"6aK770b2": "Plan löschen?",
+		"nk5ZC1YO": "„{plan.name}“ und alle seine Bäume werden endgültig gelöscht."
+	},
+	"lib/components/species/SpeciesForm.svelte": {
+		"3NHVIj9z": "Name",
+		"gMX387sL": "Feige",
+		"KSwG8ARa": "Kategorie",
+		"Ao6VYWwY": "Kartenfarbe",
+		"NwJmOCHn": "Endhöhe (m)",
+		"GCMszQD0": "Endkrone (m)",
+		"oEoo5Lnr": "Jahre bis ausgewachsen",
+		"VyaLo-UC": "Ungefähr, wann der Baum seine volle Größe erreicht"
+	},
+	"lib/components/species/SpeciesRow.svelte": {
+		"rataWEbm": "{species.yearsToMaturity} J.",
+		"pNJoaAF8": "geteilt",
+		"PDnruuF2": "Namen übersetzen",
+		"gFKBzmKJ": "Art bearbeiten",
+		"zJaky6wA": "Art löschen",
+		"GXZu1syy": "Abbrechen",
+		"FQn1YfJB": "Speichern",
+		"5UimrjmI": "Art löschen?",
+		"tAeC_QT5": "„{species.name}“ wird aus dem Katalog aller Benutzer entfernt.",
+		"n8U0wz4v": "„{species.name}“ wird aus deinem Katalog entfernt.",
+		"AANfZ2W6": "Löschen fehlgeschlagen"
+	},
+	"lib/components/ui/ConfirmDialog.svelte": {
+		"GXZu1syy": "Abbrechen",
+		"4tClSWjq": "Löschen"
+	},
+	"lib/components/ui/Dialog.svelte": {
+		"fZ63rLE-": "Schließen"
+	},
+	"lib/components/ui/Spinner.svelte": {
+		"uju74Q2L": "Wird geladen…"
+	},
+	"lib/remote/admin.remote.ts": {
+		"5FycCTg9": "Dein eigenes Konto kannst du hier nicht ändern"
+	},
+	"lib/remote/auth.remote.ts": {
+		"xugf33iz": "Gib eine gültige E-Mail-Adresse ein",
+		"wGv5ZwF0": "Gib dein Passwort ein",
+		"DgC76DX4": "Zu viele Versuche, versuche es in einer Minute erneut",
+		"TU_y47n2": "E-Mail oder Passwort ist falsch",
+		"Ca2obe5M": "Dieses Konto wurde deaktiviert",
+		"BCHeEgRE": "Gib deinen Namen ein",
+		"6sSfjlo_": "Verwende mindestens 8 Zeichen",
+		"3LCibxe3": "Die Registrierung ist derzeit deaktiviert",
+		"hIpe5zSW": "Es gibt bereits ein Konto mit dieser E-Mail-Adresse"
+	},
+	"lib/remote/basemaps.remote.ts": {
+		"YE_RsuKc": "Name ist erforderlich",
+		"eVTEQg-W": "Gib eine gültige URL ein",
+		"F9IAHhbE": "Kachel-URLs brauchen die Platzhalter {z}, {x} und {y}",
+		"UokobM4P": "Grundkarte nicht gefunden",
+		"O9VskjYV": "Unbekannte Vorlage"
+	},
+	"lib/remote/plans.remote.ts": {
+		"8tPjQGr9": "Gib deinem Plan einen Namen"
+	},
+	"lib/remote/shares.remote.ts": {
+		"c5NnHuKg": "Freigabelink nicht gefunden"
+	},
+	"lib/remote/species.remote.ts": {
+		"YE_RsuKc": "Name ist erforderlich",
+		"SFCxdLcT": "Erforderlich",
+		"qPNEr8JT": "Art nicht gefunden",
+		"ExXPXV2K": "Unbekannte Sprache",
+		"Qu2Er34O": "Diese Art wird noch von Bäumen in einem Plan verwendet"
+	},
+	"lib/remote/trees.remote.ts": {
+		"Hf6TCjdF": "Unbekannte Art",
+		"hFjj1bu3": "Baum nicht gefunden",
+		"9Cc51kIG": "Gib ein gültiges Datum ein",
+		"SFCxdLcT": "Erforderlich"
+	},
+	"lib/server/access.ts": {
+		"Ie7Iv0Jz": "Plan nicht gefunden",
+		"0UVFkd2L": "Melde dich an, um diesen Plan zu bearbeiten",
+		"vPt8ThiR": "Du kannst diesen Plan nicht ändern"
+	},
+	"lib/server/guards.ts": {
+		"SR_JHNdu": "Nicht angemeldet",
+		"tscJJsGq": "Nur für Admins"
+	},
+	"lib/species.ts": {
+		"q9TwROKu": "Laubbaum",
+		"ClrxLVgi": "Nadelbaum",
+		"d5CJs_dX": "Obstbaum",
+		"LbQPcAc5": "Strauch"
+	},
+	"routes/(app)/admin/+layout.server.ts": {
+		"tscJJsGq": "Nur für Admins"
+	},
+	"routes/(app)/admin/+layout.svelte": {
+		"S0LGaQ6-": "Verwaltung",
+		"qu73uDc3": "Verwalte Konten, geteilte Arten, Karten und wer beitreten darf."
+	},
+	"routes/(app)/admin/maps/+page.svelte": {
+		"VAK8ADUq": "Grundkarten",
+		"wcIksDzZ": "Admin"
+	},
+	"routes/(app)/admin/settings/+page.svelte": {
+		"dKiDoDe8": "Einstellungen",
+		"wcIksDzZ": "Admin"
+	},
+	"routes/(app)/admin/species/+page.svelte": {
+		"ViBeEsIP": "Arten",
+		"wcIksDzZ": "Admin",
+		"rwqsXsVP": "Geteilte Arten ({species.length})",
+		"k_kM7u-n": "Für alle Benutzer neben ihren eigenen Arten sichtbar. Arten, die noch von Bäumen verwendet werden, können nicht gelöscht werden.",
+		"ON6H9LOn": "Art hinzufügen",
+		"B-A6A0HG": "Noch keine geteilten Arten",
+		"f_zgS4DH": "Benutzer sehen nur die Arten, die sie selbst hinzugefügt haben.",
+		"KSwG8ARa": "Kategorie",
+		"v-LspAF5": "Höhe",
+		"KZaMONH6": "Krone",
+		"JeJxtilY": "Reife",
+		"KfNINi4-": "Geteilte Art hinzufügen",
+		"GXZu1syy": "Abbrechen"
+	},
+	"routes/(app)/admin/users/+page.svelte": {
+		"awzJBNCB": "Benutzer",
+		"wcIksDzZ": "Admin",
+		"VN91WilE": "Benutzer ({users.length})",
+		"tRLZfny_": "Benutzer",
+		"FHNqLrn0": "Rolle",
+		"3-iy8N4m": "Pläne",
+		"aTGLDGqS": "Beigetreten"
+	},
+	"routes/(app)/plans/+page.svelte": {
+		"3-iy8N4m": "Pläne",
+		"1-7QxhLS": "Deine Pläne",
+		"NtP8a8in": "Jeder Plan ist eine Karte mit Bäumen, die du pflanzen möchtest.",
+		"DmRoJd-c": "Neuer Plan",
+		"0hLQjJ1A": "Noch keine Pläne",
+		"5fZYneyd": "Erstelle einen Plan, setze Bäume auf die Karte und sieh, wie viel Platz sie beim Wachsen brauchen.",
+		"hkfOWzWS": "Ersten Plan erstellen"
+	},
+	"routes/(app)/species/+page.svelte": {
+		"ViBeEsIP": "Arten",
+		"2tw-s92K": "Die Endgrößen bestimmen die Wachstumsschätzung auf der Karte. Füge eigene Arten hinzu, falls eine fehlt.",
+		"ON6H9LOn": "Art hinzufügen",
+		"KSwG8ARa": "Kategorie",
+		"v-LspAF5": "Höhe",
+		"KZaMONH6": "Krone",
+		"JeJxtilY": "Reife",
+		"GXZu1syy": "Abbrechen"
+	},
+	"routes/(auth)/login/+page.svelte": {
+		"v9QCsvbz": "Anmelden",
+		"ZiEklRS3": "Willkommen zurück",
+		"KUGFq9Vr": "Melde dich an, um deine Bäume weiter zu planen.",
+		"lpzL089j": "E-Mail",
+		"588-9PF8": "Passwort",
+		"cxbMUQ-c": "Noch kein Konto?",
+		"XiuOllA9": "Registrieren"
+	},
+	"routes/(auth)/signup/+page.svelte": {
+		"XiuOllA9": "Registrieren",
+		"hgM_daTA": "Konto erstellen",
+		"pG77_Kum": "Plane, wo deine Bäume hinkommen, bevor du gräbst.",
+		"40X8bImu": "Die Registrierung ist derzeit deaktiviert. Bitte einen Administrator, ein Konto für dich anzulegen.",
+		"1YdQOuzR": "Dies ist das erste Konto, es erhält Administratorrechte.",
+		"3NHVIj9z": "Name",
+		"lpzL089j": "E-Mail",
+		"588-9PF8": "Passwort",
+		"l387Jnap": "Mindestens 8 Zeichen",
+		"eYyizhi_": "Konto erstellen",
+		"53_qk20-": "Schon ein Konto?",
+		"v9QCsvbz": "Anmelden"
+	},
+	"routes/(share)/s/[token]/+page.server.ts": {
+		"heo_8rfG": "Dieser Freigabelink existiert nicht oder wurde widerrufen"
+	}
+}

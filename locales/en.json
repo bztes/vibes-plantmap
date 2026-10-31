@@ -1,0 +1,415 @@
+{
+	"lib/components/admin/AdminNav.svelte": {
+		"awzJBNCB": "Users",
+		"ViBeEsIP": "Species",
+		"VAK8ADUq": "Base maps",
+		"dKiDoDe8": "Settings"
+	},
+	"lib/components/admin/BasemapDialog.svelte": {
+		"pkh7rnSQ": "Edit base map",
+		"m8Kp25zi": "Add base map",
+		"dl_iLOXU": "Start from a preset",
+		"SUynj3N0": "Custom",
+		"3NHVIj9z": "Name",
+		"Vt6JntAV": "Shown in the map switcher",
+		"KAD1EEws": "Aerial",
+		"uq3fcPtd": "Type",
+		"wtxyOCWR": "Vector style",
+		"_6CjlPTS": "Raster tiles",
+		"IhssZR_u": "Style URL",
+		"hFn5Hijf": "Tile URL",
+		"swF_Ucge": "A MapLibre style.json, e.g. https://tiles.openfreemap.org/styles/liberty",
+		"jxAersDC": "XYZ template with {z}, {x} and {y}, e.g. https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+		"qQLczgiG": "Attribution",
+		"bM3ZxxkN": "HTML allowed, shown in the map corner",
+		"Yh06yKDl": "Tile size",
+		"_WACN1qf": "Max zoom",
+		"hMUCq8fO": "Highest zoom with tiles, deeper zooms upscale",
+		"MwzHDshi": "Show street and place names on top",
+		"9W1Lf_Wy": "Uses the labels of the first vector style, useful for aerial imagery",
+		"GXZu1syy": "Cancel",
+		"FQn1YfJB": "Save"
+	},
+	"lib/components/admin/BasemapRow.svelte": {
+		"N6juwc4Z": "default",
+		"O5xPbDql": "vector style",
+		"SlcrYUZ8": "raster + labels",
+		"klxIGgN5": "raster",
+		"RtzIjlts": "Show {basemap.name} to users",
+		"xm_rXrjy": "Move up",
+		"QLtQ2hYM": "Move down",
+		"9DuUJRCU": "Make default",
+		"RkxP_QGe": "Edit",
+		"f0yPgNpQ": "Delete base map",
+		"QKDcliDb": "Delete base map?",
+		"b4SxLyah": "“{basemap.name}” will no longer be available on any plan."
+	},
+	"lib/components/admin/BasemapSettings.svelte": {
+		"uXokTOsL": "Base maps ({basemaps.length})",
+		"5iITKku4": "The maps users can switch between on a plan. The first vector style also provides the labels shown over raster maps.",
+		"m8Kp25zi": "Add base map",
+		"LDAe7LEL": "No base maps yet",
+		"vCQ7K6uR": "Plans show a blank background until you add one. Start with the defaults ({defaults}) or add your own.",
+		"v2R5G4mZ": "Add default maps",
+		"-EnotfSH": "Base map",
+		"uq3fcPtd": "Type",
+		"ksHN_fTL": "Enabled"
+	},
+	"lib/components/admin/SignupSetting.svelte": {
+		"3dAKjk8j": "Allow sign ups",
+		"4elmqx0B": "When disabled, new people can't create an account. Existing users can still sign in."
+	},
+	"lib/components/admin/SpeciesTranslationsDialog.svelte": {
+		"Fu_NIddP": "Could not save",
+		"f_I8krYh": "Translate “{species.baseName}”",
+		"aVUPPyZo": "Shown instead of the name in the chosen language. Leave empty to use the name.",
+		"GXZu1syy": "Cancel",
+		"FQn1YfJB": "Save"
+	},
+	"lib/components/admin/UserRow.svelte": {
+		"0etHx3V2": "(you)",
+		"jGl25bVB": "admin",
+		"BPiZbadj": "user",
+		"Uu8YvYVz": "deactivated",
+		"UGADmJEJ": "Remove admin rights",
+		"NNm8Tatx": "Make admin",
+		"LcdHj71C": "Reactivate",
+		"-x5vpVMn": "Deactivate",
+		"WDY_2UJA": "Delete user",
+		"qXS9v49L": "Delete user?",
+		"ZNDGt2ln": "{user.name} and all of their plans will be deleted permanently."
+	},
+	"lib/components/layout/AppHeader.svelte": {
+		"3-iy8N4m": "Plans",
+		"ViBeEsIP": "Species",
+		"wcIksDzZ": "Admin",
+		"v9QCsvbz": ""
+	},
+	"lib/components/layout/UserMenu.svelte": {
+		"b6Jb4cUL": "User menu",
+		"jGl25bVB": "admin",
+		"Y4ND_sfA": "Admin panel",
+		"SPDT05fU": "Sign out"
+	},
+	"lib/components/map/BasemapToggle.svelte": {
+		"-EnotfSH": "Base map"
+	},
+	"lib/components/map/PlaceSearch.svelte": {
+		"SZJfLfxq": "Search address or place"
+	},
+	"lib/components/map/TimelineBar.svelte": {
+		"hY5Lp6Kf": "Pause",
+		"3x3pEyHj": "Play growth",
+		"KwZcfJzk": "Today",
+		"JiiUO_Rk": "in 1 year",
+		"PPwaufDy": "in {years} years",
+		"ifaDJWDe": "Year",
+		"hKl0L5rj": "Back to today"
+	},
+	"lib/components/plan/AddTreeDialog.svelte": {
+		"fVt38b7l": "Add tree",
+		"XvPXWs1V": "Choose what to plant, then position it on the map.",
+		"ViBeEsIP": "Species",
+		"3NHVIj9z": "Name",
+		"mMxtcfBS": "Optional, e.g. “Grandpa's apple”",
+		"tPED68PN": "Planting date",
+		"wFy6QuzW": "Can be in the future for planned trees",
+		"GXZu1syy": "Cancel",
+		"eqYNlO_B": "Place on map"
+	},
+	"lib/components/plan/ConflictList.svelte": {
+		"_VgCIsSY": "Plenty of room",
+		"iPNRpvL4": "No crowns overlap, not even when all trees are fully grown.",
+		"vuL8suGb": "Overlapping in {year}",
+		"pRH7OgvE": "Crowns overlap by {overlap} · {distance} apart",
+		"-J9JHxG2": "Later on",
+		"s3yS-GbA": "Crowns start touching around {c.year}"
+	},
+	"lib/components/plan/GrowthStats.svelte": {
+		"1WeOvKiM": "Size in {year}",
+		"q1-AYEMz": "1 year after planting",
+		"QmkvA8fU": "{age} years after planting",
+		"_7T1XDYw": "not planted yet",
+		"v-LspAF5": "Height",
+		"C-sp0ySY": "mature {matureHeight}",
+		"k8rSuo9P": "Crown width",
+		"k--vUDVm": "mature {matureSpread}",
+		"rGSUz1FW": "Growth towards mature size"
+	},
+	"lib/components/plan/MapLegend.svelte": {
+		"dILjdLW9": "",
+		"m0RT2K7Y": "Crown at selected year",
+		"LvXiF1ZD": "Not planted yet",
+		"ZpDBvJCk": "Too close",
+		"deVJalwn": "Mature size",
+		"vo5LAXp4": "Show mature size"
+	},
+	"lib/components/plan/PlanSettingsDialog.svelte": {
+		"-GvycTav": "Plan settings",
+		"3NHVIj9z": "Name",
+		"Um4Ah8w_": "Description",
+		"GXZu1syy": "Cancel",
+		"FQn1YfJB": "Save"
+	},
+	"lib/components/plan/PlanView.svelte": {
+		"Wr6eH7xb": "",
+		"m0xshZDp": "",
+		"N3ThwgSs": "",
+		"bJjRvTS8": "",
+		"-GvycTav": "",
+		"9msViuJl": "",
+		"n16jXcf5": "",
+		"pp_1LE0K": "",
+		"VvEkd3dJ": "",
+		"GXZu1syy": "",
+		"fVt38b7l": "",
+		"yuCZ6gh9": "",
+		"FuROpwjX": ""
+	},
+	"lib/components/plan/SharePlanDialog.svelte": {
+		"bJjRvTS8": "",
+		"qqW4AZaB": "",
+		"ukZVpBco": "",
+		"Wr6eH7xb": "",
+		"m0xshZDp": "",
+		"cSpII8y5": "",
+		"2_Ni1PIQ": "",
+		"2jce4eFB": "",
+		"7Fugq7cX": "",
+		"5rhQz_av": ""
+	},
+	"lib/components/plan/TreeDetails.svelte": {
+		"Xaj3-8Kd": "Back to list",
+		"Hd47zDnt": "Edit tree",
+		"c3I5Wxwn": "Delete tree",
+		"ViBeEsIP": "Species",
+		"krXGLqWH": "Planted",
+		"FZSJTTak": "Move the map to position the tree.",
+		"GXZu1syy": "Cancel",
+		"mluM8qF_": "Move tree",
+		"Z6-jUvMQ": "Overlaps {name} by {overlap} in {year}",
+		"9ngb3uJL": "Touches {name} around {c.year}",
+		"inUlsUkv": "Notes",
+		"TZEwQysI": "Sizes are estimates. Soil, climate and pruning have a big influence on how large a tree really gets.",
+		"WNPfer3r": "Delete tree?",
+		"AUSAq47k": "“{displayName}” will be removed from this plan."
+	},
+	"lib/components/plan/TreeEditDialog.svelte": {
+		"Hd47zDnt": "Edit tree",
+		"3NHVIj9z": "Name",
+		"mMxtcfBS": "Optional, e.g. “Grandpa's apple”",
+		"ViBeEsIP": "Species",
+		"tPED68PN": "Planting date",
+		"wFy6QuzW": "Can be in the future for planned trees",
+		"c09VkM4t": "Height when planted",
+		"avbd2eT2": "Crown when planted",
+		"SECWDUok": "Override mature size",
+		"aaANJg1f": "Useful for dwarf rootstocks or pruned trees. Leave empty to use the species default.",
+		"NwJmOCHn": "Mature height (m)",
+		"GCMszQD0": "Mature crown (m)",
+		"inUlsUkv": "Notes",
+		"GXZu1syy": "Cancel",
+		"3QrnpcvP": "Save changes"
+	},
+	"lib/components/plan/TreeList.svelte": {
+		"ByaXcHRu": "No trees yet",
+		"ShpkOXCu": "Pick a species above the map, click “Add tree” and then click on the map to place it."
+	},
+	"lib/components/plan/TreeListItem.svelte": {
+		"Q3bwBUTa": "{height} high",
+		"mw8bEK_1": "planned",
+		"_1DG3LXL": "Too close to another tree"
+	},
+	"lib/components/plans/CreatePlanDialog.svelte": {
+		"A2stOQ-J": "Your location",
+		"K1DxLS5R": "Location unavailable, you can search on the map later",
+		"DmRoJd-c": "New plan",
+		"4bLDbdiV": "A plan is one area, like your garden or orchard.",
+		"3NHVIj9z": "Name",
+		"jvNfFmSf": "Backyard",
+		"Um4Ah8w_": "Description",
+		"Wb5xMzyW": "Optional",
+		"kAG-2ovZ": "Start at my location",
+		"GXZu1syy": "Cancel",
+		"TiB6SP72": "Create plan"
+	},
+	"lib/components/plans/PlanCard.svelte": {
+		"ZhtWdVNB": "Delete plan",
+		"GTBmW0ED": "1 tree",
+		"_UAauY-k": "{plan.treeCount} trees",
+		"6aK770b2": "Delete plan?",
+		"nk5ZC1YO": "“{plan.name}” and all of its trees will be removed permanently."
+	},
+	"lib/components/species/SpeciesForm.svelte": {
+		"3NHVIj9z": "Name",
+		"gMX387sL": "Fig",
+		"KSwG8ARa": "Category",
+		"Ao6VYWwY": "Map color",
+		"NwJmOCHn": "Mature height (m)",
+		"GCMszQD0": "Mature crown (m)",
+		"oEoo5Lnr": "Years to maturity",
+		"VyaLo-UC": "Roughly when the tree reaches its full size"
+	},
+	"lib/components/species/SpeciesRow.svelte": {
+		"rataWEbm": "{species.yearsToMaturity} y",
+		"pNJoaAF8": "shared",
+		"PDnruuF2": "Translate name",
+		"gFKBzmKJ": "",
+		"zJaky6wA": "Delete species",
+		"GXZu1syy": "",
+		"FQn1YfJB": "",
+		"5UimrjmI": "Delete species?",
+		"tAeC_QT5": "“{species.name}” will be removed from the catalog of all users.",
+		"n8U0wz4v": "“{species.name}” will be removed from your catalog.",
+		"AANfZ2W6": "Could not delete"
+	},
+	"lib/components/ui/ConfirmDialog.svelte": {
+		"GXZu1syy": "Cancel",
+		"4tClSWjq": "Delete"
+	},
+	"lib/components/ui/Dialog.svelte": {
+		"fZ63rLE-": "Close"
+	},
+	"lib/components/ui/Spinner.svelte": {
+		"uju74Q2L": "Loading…"
+	},
+	"lib/remote/admin.remote.ts": {
+		"5FycCTg9": "You cannot change your own account here"
+	},
+	"lib/remote/auth.remote.ts": {
+		"xugf33iz": "Enter a valid email",
+		"wGv5ZwF0": "Enter your password",
+		"DgC76DX4": "Too many attempts, try again in a minute",
+		"TU_y47n2": "Invalid email or password",
+		"Ca2obe5M": "This account has been deactivated",
+		"BCHeEgRE": "Enter your name",
+		"6sSfjlo_": "Use at least 8 characters",
+		"3LCibxe3": "Sign up is currently disabled",
+		"hIpe5zSW": "An account with this email already exists"
+	},
+	"lib/remote/basemaps.remote.ts": {
+		"YE_RsuKc": "Name is required",
+		"eVTEQg-W": "Enter a valid URL",
+		"F9IAHhbE": "Tile URLs need {z}, {x} and {y} placeholders",
+		"UokobM4P": "Base map not found",
+		"O9VskjYV": "Unknown preset"
+	},
+	"lib/remote/plans.remote.ts": {
+		"8tPjQGr9": "Give your plan a name"
+	},
+	"lib/remote/shares.remote.ts": {
+		"c5NnHuKg": ""
+	},
+	"lib/remote/species.remote.ts": {
+		"YE_RsuKc": "Name is required",
+		"SFCxdLcT": "Required",
+		"qPNEr8JT": "Species not found",
+		"ExXPXV2K": "Unknown language",
+		"Qu2Er34O": "This species is still used by trees in a plan"
+	},
+	"lib/remote/trees.remote.ts": {
+		"Hf6TCjdF": "Unknown species",
+		"hFjj1bu3": "Tree not found",
+		"9Cc51kIG": "Use a valid date",
+		"SFCxdLcT": "Required"
+	},
+	"lib/server/access.ts": {
+		"Ie7Iv0Jz": "Plan not found",
+		"0UVFkd2L": "",
+		"vPt8ThiR": ""
+	},
+	"lib/server/guards.ts": {
+		"SR_JHNdu": "Not signed in",
+		"tscJJsGq": "Admins only"
+	},
+	"lib/species.ts": {
+		"q9TwROKu": "Deciduous",
+		"ClrxLVgi": "Conifer",
+		"d5CJs_dX": "Fruit",
+		"LbQPcAc5": "Shrub"
+	},
+	"routes/(app)/admin/+layout.server.ts": {
+		"tscJJsGq": "Admins only"
+	},
+	"routes/(app)/admin/+layout.svelte": {
+		"S0LGaQ6-": "Administration",
+		"qu73uDc3": "Manage accounts, shared species, maps and who may join."
+	},
+	"routes/(app)/admin/maps/+page.svelte": {
+		"VAK8ADUq": "Base maps",
+		"wcIksDzZ": "Admin"
+	},
+	"routes/(app)/admin/settings/+page.svelte": {
+		"dKiDoDe8": "Settings",
+		"wcIksDzZ": "Admin"
+	},
+	"routes/(app)/admin/species/+page.svelte": {
+		"ViBeEsIP": "Species",
+		"wcIksDzZ": "Admin",
+		"rwqsXsVP": "Shared species ({species.length})",
+		"k_kM7u-n": "Visible to every user next to their own species. Species still used by trees can't be deleted.",
+		"ON6H9LOn": "Add species",
+		"B-A6A0HG": "No shared species yet",
+		"f_zgS4DH": "Users only see the species they added themselves.",
+		"KSwG8ARa": "Category",
+		"v-LspAF5": "Height",
+		"KZaMONH6": "Crown",
+		"JeJxtilY": "Maturity",
+		"KfNINi4-": "Add shared species",
+		"GXZu1syy": "Cancel"
+	},
+	"routes/(app)/admin/users/+page.svelte": {
+		"awzJBNCB": "Users",
+		"wcIksDzZ": "Admin",
+		"VN91WilE": "Users ({users.length})",
+		"tRLZfny_": "User",
+		"FHNqLrn0": "Role",
+		"3-iy8N4m": "Plans",
+		"aTGLDGqS": "Joined"
+	},
+	"routes/(app)/plans/+page.svelte": {
+		"3-iy8N4m": "Plans",
+		"1-7QxhLS": "Your plans",
+		"NtP8a8in": "Each plan is a map with trees you want to plant.",
+		"DmRoJd-c": "New plan",
+		"0hLQjJ1A": "No plans yet",
+		"5fZYneyd": "Create a plan, place trees on the map and see how much room they need as they grow.",
+		"hkfOWzWS": "Create your first plan"
+	},
+	"routes/(app)/species/+page.svelte": {
+		"ViBeEsIP": "Species",
+		"2tw-s92K": "Mature sizes drive the growth estimate on the map. Add your own species if one is missing.",
+		"ON6H9LOn": "Add species",
+		"KSwG8ARa": "Category",
+		"v-LspAF5": "Height",
+		"KZaMONH6": "Crown",
+		"JeJxtilY": "Maturity",
+		"GXZu1syy": "Cancel"
+	},
+	"routes/(auth)/login/+page.svelte": {
+		"v9QCsvbz": "Sign in",
+		"ZiEklRS3": "Welcome back",
+		"KUGFq9Vr": "Sign in to continue planning your trees.",
+		"lpzL089j": "Email",
+		"588-9PF8": "Password",
+		"cxbMUQ-c": "No account yet?",
+		"XiuOllA9": "Sign up"
+	},
+	"routes/(auth)/signup/+page.svelte": {
+		"XiuOllA9": "Sign up",
+		"hgM_daTA": "Create an account",
+		"pG77_Kum": "Plan where your trees go before you dig.",
+		"40X8bImu": "Sign up is currently disabled. Ask an administrator to create an account for you.",
+		"1YdQOuzR": "This is the first account, it will get administrator rights.",
+		"3NHVIj9z": "Name",
+		"lpzL089j": "Email",
+		"588-9PF8": "Password",
+		"l387Jnap": "At least 8 characters",
+		"eYyizhi_": "Create account",
+		"53_qk20-": "Already have an account?",
+		"v9QCsvbz": "Sign in"
+	},
+	"routes/(share)/s/[token]/+page.server.ts": {
+		"heo_8rfG": ""
+	}
+}

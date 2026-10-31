@@ -1,0 +1,415 @@
+{
+	"lib/components/admin/AdminNav.svelte": {
+		"awzJBNCB": "Användare",
+		"ViBeEsIP": "Arter",
+		"VAK8ADUq": "Bakgrundskartor",
+		"dKiDoDe8": "Inställningar"
+	},
+	"lib/components/admin/BasemapDialog.svelte": {
+		"pkh7rnSQ": "Redigera bakgrundskarta",
+		"m8Kp25zi": "Lägg till bakgrundskarta",
+		"dl_iLOXU": "Utgå från en förinställning",
+		"SUynj3N0": "Anpassad",
+		"3NHVIj9z": "Namn",
+		"Vt6JntAV": "Visas i kartväljaren",
+		"KAD1EEws": "Flygfoto",
+		"uq3fcPtd": "Typ",
+		"wtxyOCWR": "Vektorstil",
+		"_6CjlPTS": "Rasterplattor",
+		"IhssZR_u": "Stil-URL",
+		"hFn5Hijf": "Platt-URL",
+		"swF_Ucge": "En MapLibre-style.json, t.ex. https://tiles.openfreemap.org/styles/liberty",
+		"jxAersDC": "XYZ-mall med {z}, {x} och {y}, t.ex. https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+		"qQLczgiG": "Attribution",
+		"bM3ZxxkN": "HTML tillåtet, visas i kartans hörn",
+		"Yh06yKDl": "Plattstorlek",
+		"_WACN1qf": "Max zoom",
+		"hMUCq8fO": "Högsta zoomnivå med plattor, djupare zoom skalas upp",
+		"MwzHDshi": "Visa gatu- och ortnamn ovanpå",
+		"9W1Lf_Wy": "Använder etiketterna från den första vektorstilen, praktiskt för flygfoton",
+		"GXZu1syy": "Avbryt",
+		"FQn1YfJB": "Spara"
+	},
+	"lib/components/admin/BasemapRow.svelte": {
+		"N6juwc4Z": "standard",
+		"O5xPbDql": "vektorstil",
+		"SlcrYUZ8": "raster + etiketter",
+		"klxIGgN5": "raster",
+		"RtzIjlts": "Visa {basemap.name} för användare",
+		"xm_rXrjy": "Flytta upp",
+		"QLtQ2hYM": "Flytta ned",
+		"9DuUJRCU": "Gör till standard",
+		"RkxP_QGe": "Redigera",
+		"f0yPgNpQ": "Ta bort bakgrundskarta",
+		"QKDcliDb": "Ta bort bakgrundskarta?",
+		"b4SxLyah": "”{basemap.name}” kommer inte längre att vara tillgänglig i någon plan."
+	},
+	"lib/components/admin/BasemapSettings.svelte": {
+		"uXokTOsL": "Bakgrundskartor ({basemaps.length})",
+		"5iITKku4": "Kartorna som användarna kan växla mellan i en plan. Den första vektorstilen står även för etiketterna som visas över rasterkartor.",
+		"m8Kp25zi": "Lägg till bakgrundskarta",
+		"LDAe7LEL": "Inga bakgrundskartor än",
+		"vCQ7K6uR": "Planer visar en tom bakgrund tills du lägger till en. Börja med standardkartorna ({defaults}) eller lägg till egna.",
+		"v2R5G4mZ": "Lägg till standardkartor",
+		"-EnotfSH": "Bakgrundskarta",
+		"uq3fcPtd": "Typ",
+		"ksHN_fTL": "Aktiverad"
+	},
+	"lib/components/admin/SignupSetting.svelte": {
+		"3dAKjk8j": "Tillåt registrering",
+		"4elmqx0B": "När det är avstängt kan nya personer inte skapa ett konto. Befintliga användare kan fortfarande logga in."
+	},
+	"lib/components/admin/SpeciesTranslationsDialog.svelte": {
+		"Fu_NIddP": "Kunde inte spara",
+		"f_I8krYh": "Översätt ”{species.baseName}”",
+		"aVUPPyZo": "Visas i stället för namnet på det valda språket. Lämna tomt för att använda namnet.",
+		"GXZu1syy": "Avbryt",
+		"FQn1YfJB": "Spara"
+	},
+	"lib/components/admin/UserRow.svelte": {
+		"0etHx3V2": "(du)",
+		"jGl25bVB": "admin",
+		"BPiZbadj": "användare",
+		"Uu8YvYVz": "inaktiverad",
+		"UGADmJEJ": "Ta bort adminbehörighet",
+		"NNm8Tatx": "Gör till admin",
+		"LcdHj71C": "Återaktivera",
+		"-x5vpVMn": "Inaktivera",
+		"WDY_2UJA": "Ta bort användare",
+		"qXS9v49L": "Ta bort användare?",
+		"ZNDGt2ln": "{user.name} och alla deras planer tas bort permanent."
+	},
+	"lib/components/layout/AppHeader.svelte": {
+		"3-iy8N4m": "Planer",
+		"ViBeEsIP": "Arter",
+		"wcIksDzZ": "Admin",
+		"v9QCsvbz": "Logga in"
+	},
+	"lib/components/layout/UserMenu.svelte": {
+		"b6Jb4cUL": "Användarmeny",
+		"jGl25bVB": "admin",
+		"Y4ND_sfA": "Adminpanel",
+		"SPDT05fU": "Logga ut"
+	},
+	"lib/components/map/BasemapToggle.svelte": {
+		"-EnotfSH": "Bakgrundskarta"
+	},
+	"lib/components/map/PlaceSearch.svelte": {
+		"SZJfLfxq": "Sök adress eller plats"
+	},
+	"lib/components/map/TimelineBar.svelte": {
+		"hY5Lp6Kf": "Pausa",
+		"3x3pEyHj": "Spela upp tillväxt",
+		"KwZcfJzk": "Idag",
+		"JiiUO_Rk": "om 1 år",
+		"PPwaufDy": "om {years} år",
+		"ifaDJWDe": "År",
+		"hKl0L5rj": "Tillbaka till idag"
+	},
+	"lib/components/plan/AddTreeDialog.svelte": {
+		"fVt38b7l": "Lägg till träd",
+		"XvPXWs1V": "Välj vad du vill plantera och placera det sedan på kartan.",
+		"ViBeEsIP": "Art",
+		"3NHVIj9z": "Namn",
+		"mMxtcfBS": "Valfritt, t.ex. ”Morfars äppelträd”",
+		"tPED68PN": "Planteringsdatum",
+		"wFy6QuzW": "Kan ligga i framtiden för planerade träd",
+		"GXZu1syy": "Avbryt",
+		"eqYNlO_B": "Placera på kartan"
+	},
+	"lib/components/plan/ConflictList.svelte": {
+		"_VgCIsSY": "Gott om plats",
+		"iPNRpvL4": "Inga kronor överlappar, inte ens när alla träd är fullvuxna.",
+		"vuL8suGb": "Överlappar år {year}",
+		"pRH7OgvE": "Kronorna överlappar med {overlap} · {distance} isär",
+		"-J9JHxG2": "Längre fram",
+		"s3yS-GbA": "Kronorna börjar nudda varandra runt {c.year}"
+	},
+	"lib/components/plan/GrowthStats.svelte": {
+		"1WeOvKiM": "Storlek år {year}",
+		"q1-AYEMz": "1 år efter plantering",
+		"QmkvA8fU": "{age} år efter plantering",
+		"_7T1XDYw": "inte planterat än",
+		"v-LspAF5": "Höjd",
+		"C-sp0ySY": "fullvuxen {matureHeight}",
+		"k8rSuo9P": "Kronbredd",
+		"k--vUDVm": "fullvuxen {matureSpread}",
+		"rGSUz1FW": "Tillväxt mot fullvuxen storlek"
+	},
+	"lib/components/plan/MapLegend.svelte": {
+		"dILjdLW9": "Teckenförklaring",
+		"m0RT2K7Y": "Krona valt år",
+		"LvXiF1ZD": "Inte planterat än",
+		"ZpDBvJCk": "För nära",
+		"deVJalwn": "Fullvuxen storlek",
+		"vo5LAXp4": "Visa fullvuxen storlek"
+	},
+	"lib/components/plan/PlanSettingsDialog.svelte": {
+		"-GvycTav": "Planinställningar",
+		"3NHVIj9z": "Namn",
+		"Um4Ah8w_": "Beskrivning",
+		"GXZu1syy": "Avbryt",
+		"FQn1YfJB": "Spara"
+	},
+	"lib/components/plan/PlanView.svelte": {
+		"Wr6eH7xb": "Kan redigera",
+		"m0xshZDp": "Endast visning",
+		"N3ThwgSs": "Delad av {owner}",
+		"bJjRvTS8": "Dela plan",
+		"-GvycTav": "Planinställningar",
+		"9msViuJl": "Träd ({trees.length})",
+		"n16jXcf5": "Konflikter",
+		"pp_1LE0K": "Plantera här",
+		"VvEkd3dJ": "Flytta hit",
+		"GXZu1syy": "Avbryt",
+		"fVt38b7l": "Lägg till träd",
+		"yuCZ6gh9": "Inga bakgrundskartor är inställda än. En administratör kan lägga till dem under Administration.",
+		"FuROpwjX": "Flytta kartan för att placera trädet"
+	},
+	"lib/components/plan/SharePlanDialog.svelte": {
+		"bJjRvTS8": "Dela plan",
+		"qqW4AZaB": "Alla med en visningslänk kan se planen utan konto. Med redigeringslänkar kan inloggade personer lägga till, flytta och ändra träd.",
+		"ukZVpBco": "Planen är inte delad än.",
+		"Wr6eH7xb": "Kan redigera",
+		"m0xshZDp": "Endast visning",
+		"cSpII8y5": "Delningslänk",
+		"2_Ni1PIQ": "Kopiera länk",
+		"2jce4eFB": "Återkalla länk",
+		"7Fugq7cX": "Åtkomst",
+		"5rhQz_av": "Skapa länk"
+	},
+	"lib/components/plan/TreeDetails.svelte": {
+		"Xaj3-8Kd": "Tillbaka till listan",
+		"Hd47zDnt": "Redigera träd",
+		"c3I5Wxwn": "Ta bort träd",
+		"ViBeEsIP": "Art",
+		"krXGLqWH": "Planterat",
+		"FZSJTTak": "Flytta kartan för att placera trädet.",
+		"GXZu1syy": "Avbryt",
+		"mluM8qF_": "Flytta träd",
+		"Z6-jUvMQ": "Överlappar {name} med {overlap} år {year}",
+		"9ngb3uJL": "Nuddar {name} runt {c.year}",
+		"inUlsUkv": "Anteckningar",
+		"TZEwQysI": "Storlekarna är uppskattningar. Jord, klimat och beskärning påverkar mycket hur stort ett träd faktiskt blir.",
+		"WNPfer3r": "Ta bort träd?",
+		"AUSAq47k": "”{displayName}” tas bort från den här planen."
+	},
+	"lib/components/plan/TreeEditDialog.svelte": {
+		"Hd47zDnt": "Redigera träd",
+		"3NHVIj9z": "Namn",
+		"mMxtcfBS": "Valfritt, t.ex. ”Morfars äppelträd”",
+		"ViBeEsIP": "Art",
+		"tPED68PN": "Planteringsdatum",
+		"wFy6QuzW": "Kan ligga i framtiden för planerade träd",
+		"c09VkM4t": "Höjd vid plantering",
+		"avbd2eT2": "Krona vid plantering",
+		"SECWDUok": "Ändra fullvuxen storlek",
+		"aaANJg1f": "Praktiskt för dvärgunderlag eller beskurna träd. Lämna tomt för artens standardvärde.",
+		"NwJmOCHn": "Fullvuxen höjd (m)",
+		"GCMszQD0": "Fullvuxen krona (m)",
+		"inUlsUkv": "Anteckningar",
+		"GXZu1syy": "Avbryt",
+		"3QrnpcvP": "Spara ändringar"
+	},
+	"lib/components/plan/TreeList.svelte": {
+		"ByaXcHRu": "Inga träd än",
+		"ShpkOXCu": "Välj en art ovanför kartan, klicka på ”Lägg till träd” och klicka sedan på kartan för att placera det."
+	},
+	"lib/components/plan/TreeListItem.svelte": {
+		"Q3bwBUTa": "{height} högt",
+		"mw8bEK_1": "planerat",
+		"_1DG3LXL": "För nära ett annat träd"
+	},
+	"lib/components/plans/CreatePlanDialog.svelte": {
+		"A2stOQ-J": "Din plats",
+		"K1DxLS5R": "Platsen är inte tillgänglig, du kan söka på kartan senare",
+		"DmRoJd-c": "Ny plan",
+		"4bLDbdiV": "En plan är ett område, som din trädgård eller fruktodling.",
+		"3NHVIj9z": "Namn",
+		"jvNfFmSf": "Bakgård",
+		"Um4Ah8w_": "Beskrivning",
+		"Wb5xMzyW": "Valfritt",
+		"kAG-2ovZ": "Börja på min plats",
+		"GXZu1syy": "Avbryt",
+		"TiB6SP72": "Skapa plan"
+	},
+	"lib/components/plans/PlanCard.svelte": {
+		"ZhtWdVNB": "Ta bort plan",
+		"GTBmW0ED": "1 träd",
+		"_UAauY-k": "{plan.treeCount} träd",
+		"6aK770b2": "Ta bort plan?",
+		"nk5ZC1YO": "”{plan.name}” och alla dess träd tas bort permanent."
+	},
+	"lib/components/species/SpeciesForm.svelte": {
+		"3NHVIj9z": "Namn",
+		"gMX387sL": "Fikon",
+		"KSwG8ARa": "Kategori",
+		"Ao6VYWwY": "Kartfärg",
+		"NwJmOCHn": "Fullvuxen höjd (m)",
+		"GCMszQD0": "Fullvuxen krona (m)",
+		"oEoo5Lnr": "År till fullvuxen",
+		"VyaLo-UC": "Ungefär när trädet når sin fulla storlek"
+	},
+	"lib/components/species/SpeciesRow.svelte": {
+		"rataWEbm": "{species.yearsToMaturity} år",
+		"pNJoaAF8": "delad",
+		"PDnruuF2": "Översätt namn",
+		"gFKBzmKJ": "Redigera art",
+		"zJaky6wA": "Ta bort art",
+		"GXZu1syy": "Avbryt",
+		"FQn1YfJB": "Spara",
+		"5UimrjmI": "Ta bort art?",
+		"tAeC_QT5": "”{species.name}” tas bort från alla användares katalog.",
+		"n8U0wz4v": "”{species.name}” tas bort från din katalog.",
+		"AANfZ2W6": "Kunde inte ta bort"
+	},
+	"lib/components/ui/ConfirmDialog.svelte": {
+		"GXZu1syy": "Avbryt",
+		"4tClSWjq": "Ta bort"
+	},
+	"lib/components/ui/Dialog.svelte": {
+		"fZ63rLE-": "Stäng"
+	},
+	"lib/components/ui/Spinner.svelte": {
+		"uju74Q2L": "Laddar…"
+	},
+	"lib/remote/admin.remote.ts": {
+		"5FycCTg9": "Du kan inte ändra ditt eget konto här"
+	},
+	"lib/remote/auth.remote.ts": {
+		"xugf33iz": "Ange en giltig e-postadress",
+		"wGv5ZwF0": "Ange ditt lösenord",
+		"DgC76DX4": "För många försök, försök igen om en minut",
+		"TU_y47n2": "Fel e-postadress eller lösenord",
+		"Ca2obe5M": "Det här kontot har inaktiverats",
+		"BCHeEgRE": "Ange ditt namn",
+		"6sSfjlo_": "Använd minst 8 tecken",
+		"3LCibxe3": "Registrering är för närvarande avstängd",
+		"hIpe5zSW": "Det finns redan ett konto med den här e-postadressen"
+	},
+	"lib/remote/basemaps.remote.ts": {
+		"YE_RsuKc": "Namn krävs",
+		"eVTEQg-W": "Ange en giltig URL",
+		"F9IAHhbE": "Platt-URL:er behöver platshållarna {z}, {x} och {y}",
+		"UokobM4P": "Bakgrundskartan hittades inte",
+		"O9VskjYV": "Okänd förinställning"
+	},
+	"lib/remote/plans.remote.ts": {
+		"8tPjQGr9": "Ge din plan ett namn"
+	},
+	"lib/remote/shares.remote.ts": {
+		"c5NnHuKg": "Delningslänken hittades inte"
+	},
+	"lib/remote/species.remote.ts": {
+		"YE_RsuKc": "Namn krävs",
+		"SFCxdLcT": "Obligatoriskt",
+		"qPNEr8JT": "Arten hittades inte",
+		"ExXPXV2K": "Okänt språk",
+		"Qu2Er34O": "Arten används fortfarande av träd i en plan"
+	},
+	"lib/remote/trees.remote.ts": {
+		"Hf6TCjdF": "Okänd art",
+		"hFjj1bu3": "Trädet hittades inte",
+		"9Cc51kIG": "Ange ett giltigt datum",
+		"SFCxdLcT": "Obligatoriskt"
+	},
+	"lib/server/access.ts": {
+		"Ie7Iv0Jz": "Planen hittades inte",
+		"0UVFkd2L": "Logga in för att redigera planen",
+		"vPt8ThiR": "Du kan inte ändra den här planen"
+	},
+	"lib/server/guards.ts": {
+		"SR_JHNdu": "Inte inloggad",
+		"tscJJsGq": "Endast för administratörer"
+	},
+	"lib/species.ts": {
+		"q9TwROKu": "Lövträd",
+		"ClrxLVgi": "Barrträd",
+		"d5CJs_dX": "Fruktträd",
+		"LbQPcAc5": "Buske"
+	},
+	"routes/(app)/admin/+layout.server.ts": {
+		"tscJJsGq": "Endast för administratörer"
+	},
+	"routes/(app)/admin/+layout.svelte": {
+		"S0LGaQ6-": "Administration",
+		"qu73uDc3": "Hantera konton, delade arter, kartor och vem som får gå med."
+	},
+	"routes/(app)/admin/maps/+page.svelte": {
+		"VAK8ADUq": "Bakgrundskartor",
+		"wcIksDzZ": "Admin"
+	},
+	"routes/(app)/admin/settings/+page.svelte": {
+		"dKiDoDe8": "Inställningar",
+		"wcIksDzZ": "Admin"
+	},
+	"routes/(app)/admin/species/+page.svelte": {
+		"ViBeEsIP": "Arter",
+		"wcIksDzZ": "Admin",
+		"rwqsXsVP": "Delade arter ({species.length})",
+		"k_kM7u-n": "Synliga för alla användare bredvid deras egna arter. Arter som fortfarande används av träd kan inte tas bort.",
+		"ON6H9LOn": "Lägg till art",
+		"B-A6A0HG": "Inga delade arter än",
+		"f_zgS4DH": "Användare ser bara de arter de själva har lagt till.",
+		"KSwG8ARa": "Kategori",
+		"v-LspAF5": "Höjd",
+		"KZaMONH6": "Krona",
+		"JeJxtilY": "Fullvuxen",
+		"KfNINi4-": "Lägg till delad art",
+		"GXZu1syy": "Avbryt"
+	},
+	"routes/(app)/admin/users/+page.svelte": {
+		"awzJBNCB": "Användare",
+		"wcIksDzZ": "Admin",
+		"VN91WilE": "Användare ({users.length})",
+		"tRLZfny_": "Användare",
+		"FHNqLrn0": "Roll",
+		"3-iy8N4m": "Planer",
+		"aTGLDGqS": "Gick med"
+	},
+	"routes/(app)/plans/+page.svelte": {
+		"3-iy8N4m": "Planer",
+		"1-7QxhLS": "Dina planer",
+		"NtP8a8in": "Varje plan är en karta med träd du vill plantera.",
+		"DmRoJd-c": "Ny plan",
+		"0hLQjJ1A": "Inga planer än",
+		"5fZYneyd": "Skapa en plan, placera träd på kartan och se hur mycket plats de behöver när de växer.",
+		"hkfOWzWS": "Skapa din första plan"
+	},
+	"routes/(app)/species/+page.svelte": {
+		"ViBeEsIP": "Arter",
+		"2tw-s92K": "Den fullvuxna storleken styr tillväxtuppskattningen på kartan. Lägg till egna arter om någon saknas.",
+		"ON6H9LOn": "Lägg till art",
+		"KSwG8ARa": "Kategori",
+		"v-LspAF5": "Höjd",
+		"KZaMONH6": "Krona",
+		"JeJxtilY": "Fullvuxen",
+		"GXZu1syy": "Avbryt"
+	},
+	"routes/(auth)/login/+page.svelte": {
+		"v9QCsvbz": "Logga in",
+		"ZiEklRS3": "Välkommen tillbaka",
+		"KUGFq9Vr": "Logga in för att fortsätta planera dina träd.",
+		"lpzL089j": "E-post",
+		"588-9PF8": "Lösenord",
+		"cxbMUQ-c": "Inget konto än?",
+		"XiuOllA9": "Registrera dig"
+	},
+	"routes/(auth)/signup/+page.svelte": {
+		"XiuOllA9": "Registrera dig",
+		"hgM_daTA": "Skapa ett konto",
+		"pG77_Kum": "Planera var dina träd ska stå innan du gräver.",
+		"40X8bImu": "Registrering är för närvarande avstängd. Be en administratör att skapa ett konto åt dig.",
+		"1YdQOuzR": "Det här är det första kontot, det får administratörsbehörighet.",
+		"3NHVIj9z": "Namn",
+		"lpzL089j": "E-post",
+		"588-9PF8": "Lösenord",
+		"l387Jnap": "Minst 8 tecken",
+		"eYyizhi_": "Skapa konto",
+		"53_qk20-": "Har du redan ett konto?",
+		"v9QCsvbz": "Logga in"
+	},
+	"routes/(share)/s/[token]/+page.server.ts": {
+		"heo_8rfG": "Delningslänken finns inte eller har återkallats"
+	}
+}
