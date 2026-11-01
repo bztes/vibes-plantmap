@@ -1,5 +1,11 @@
 # vibes-plantmap
 
+## 0.3.0
+
+### Minor Changes
+
+- [`b9b70f2`](https://github.com/bztes/vibes-plantmap/commit/b9b70f26068662658c60055646758fc53b4fd927) Thanks [@bztes](https://github.com/bztes)! - The map's locate button now keeps tracking your position with high-accuracy GPS until you turn it off
+
 ## 0.2.0
 
 ### Minor Changes
