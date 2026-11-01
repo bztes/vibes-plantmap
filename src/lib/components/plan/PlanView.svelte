@@ -2,12 +2,13 @@
 	import { t } from '#lib/i18n/index.ts';
 	import {
 		Check,
+		ChevronUp,
 		Eye,
 		List,
 		Pencil,
-		Plus,
 		Settings,
 		Share2,
+		TreeDeciduous,
 		TriangleAlert,
 		X
 	} from '@lucide/svelte';
@@ -21,11 +22,10 @@
 	import { findConflicts, findUpcomingConflicts, sizeTrees, type PlannedTree } from '#lib/plan.ts';
 	import type { MapView } from '#lib/components/map/layers.ts';
 	import PlanMap from '#lib/components/map/PlanMap.svelte';
-	import BasemapToggle from '#lib/components/map/BasemapToggle.svelte';
+	import LayerMenu from '#lib/components/map/LayerMenu.svelte';
 	import TimelineBar from '#lib/components/map/TimelineBar.svelte';
 	import AddTreeDialog, { type TreeDraft } from '#lib/components/plan/AddTreeDialog.svelte';
 	import ConflictList from '#lib/components/plan/ConflictList.svelte';
-	import MapLegend from '#lib/components/plan/MapLegend.svelte';
 	import PlanSettingsDialog from '#lib/components/plan/PlanSettingsDialog.svelte';
 	import SharePlanDialog from '#lib/components/plan/SharePlanDialog.svelte';
 	import TreeDetails from '#lib/components/plan/TreeDetails.svelte';
@@ -59,6 +59,8 @@
 	/** tree following the map center until the move is confirmed */
 	let movingId = $state<string | null>(null);
 	let tab = $state<'trees' | 'conflicts'>('trees');
+	/** whether the side panel is expanded, only collapsible on small screens */
+	let panelOpen = $state(false);
 	let settingsOpen = $state(false);
 	let shareOpen = $state(false);
 	let map = $state<PlanMap<PlannedTree>>();
@@ -120,12 +122,14 @@
 		} else if (draft) {
 			const details = draft;
 			draft = null;
-			selectedId = await createTree({
-				planRef,
-				...details,
-				lng: at[0],
-				lat: at[1]
-			});
+			select(
+				await createTree({
+					planRef,
+					...details,
+					lng: at[0],
+					lat: at[1]
+				})
+			);
 		}
 	}
 
@@ -145,6 +149,11 @@
 				savePlanView({ id: plan.id, centerLng: view.lng, centerLat: view.lat, zoom: view.zoom }),
 			1000
 		);
+	}
+
+	function select(id: string | null) {
+		selectedId = id;
+		if (id) panelOpen = true;
 	}
 
 	function focusPair(a: PlannedTree, b: PlannedTree) {
@@ -175,9 +184,12 @@
 
 <div class="flex h-full flex-col-reverse md:flex-row">
 	<aside
-		class="flex h-[45%] w-full shrink-0 flex-col border-t border-stone-200 bg-white md:h-full md:w-96 md:border-t-0 md:border-r"
+		class={[
+			'flex w-full shrink-0 flex-col border-t border-stone-200 bg-white md:h-full md:w-96 md:border-t-0 md:border-r',
+			panelOpen && 'h-[45%]'
+		]}
 	>
-		<div class="flex items-center gap-2 border-b border-stone-100 px-4 py-3">
+		<div class="flex items-center gap-2 border-b border-stone-100 px-4 py-2 md:py-3">
 			<div class="min-w-0 flex-1">
 				<h1 class="truncate font-semibold text-stone-900">{plan.name}</h1>
 				{#if plan.description}
@@ -203,9 +215,18 @@
 					<Settings />
 				</IconButton>
 			{/if}
+			<IconButton
+				label={panelOpen ? t`Collapse panel` : t`Expand panel`}
+				small
+				class="md:hidden"
+				aria-expanded={panelOpen}
+				onclick={() => (panelOpen = !panelOpen)}
+			>
+				<ChevronUp class={['transition-transform', panelOpen && 'rotate-180']} />
+			</IconButton>
 		</div>
 
-		<div class="min-h-0 flex-1 overflow-y-auto p-4">
+		<div class={['min-h-0 flex-1 overflow-y-auto p-4 md:block', !panelOpen && 'hidden']}>
 			{#if selected}
 				{#key selected.id}
 					<TreeDetails
@@ -259,35 +280,18 @@
 			{showMature}
 			{basemaps}
 			{basemap}
-			onselect={(id) => (selectedId = id)}
+			onselect={select}
 			oncenter={followCenter}
 			onviewchange={rememberView}
 		/>
 
-		<div
-			class="pointer-events-none absolute inset-x-3 top-3 flex flex-wrap items-start gap-2 pr-12"
-		>
-			<div class="pointer-events-auto flex gap-2">
-				{#if placing}
-					<Button class="shadow-md" onclick={place}>
-						<Check />
-						{draft ? t`Plant here` : t`Move here`}
-					</Button>
-					<Button class="shadow-md" variant="outline" onclick={cancelPlacing}
-						><X /> {t`Cancel`}</Button
-					>
-				{:else if canEdit}
-					<Button class="shadow-md" onclick={() => (addOpen = true)}><Plus /> {t`Add tree`}</Button>
-				{/if}
-			</div>
-			{#if basemaps.length > 1}
-				<div class="pointer-events-auto">
-					<BasemapToggle
-						bind:value={() => basemap?.id ?? null, (id) => (basemapId = id)}
-						{basemaps}
-					/>
-				</div>
-			{/if}
+		<div class="absolute top-3 left-3 flex gap-2">
+			<LayerMenu
+				bind:value={() => basemap?.id ?? null, (id) => (basemapId = id)}
+				bind:showMature
+				{basemaps}
+			/>
+			<TimelineBar bind:years />
 		</div>
 
 		{#if basemaps.length === 0}
@@ -313,16 +317,30 @@
 			<div
 				class="pointer-events-none absolute top-18 left-1/2 max-w-[90%] -translate-x-1/2 rounded-full bg-stone-900/85 px-4 py-1.5 text-center text-sm text-white shadow"
 			>
-				{t`Move the map to position the tree`}
+				{t`Move map to place tree`}
 			</div>
 		{/if}
 
-		<div class="absolute right-3 bottom-8 hidden lg:block">
-			<MapLegend bind:showMature />
-		</div>
-
-		<div class="pointer-events-none absolute inset-x-3 bottom-8 flex justify-center lg:right-56">
-			<div class="pointer-events-auto w-full max-w-xl"><TimelineBar bind:years /></div>
+		<div class="absolute right-14 bottom-20 flex flex-col items-end gap-2">
+			{#if placing}
+				<div class="flex rounded-lg shadow-md">
+					<Button class="rounded-r-none shadow-none" onclick={place}>
+						<Check />
+						{draft ? t`Plant here` : t`Move here`}
+					</Button>
+					<Button class="rounded-l-none" variant="secondary" onclick={cancelPlacing}
+						><X /> {t`Cancel`}</Button
+					>
+				</div>
+			{:else if canEdit}
+				<Button
+					class="h-12 rounded-full px-6 text-base shadow-lg max-sm:size-16 max-sm:p-0 [&_svg]:size-5 [&_svg]:max-sm:size-7"
+					aria-label={t`Add tree`}
+					onclick={() => (addOpen = true)}
+				>
+					<TreeDeciduous /><span class="max-sm:hidden">{t`Add tree`}</span>
+				</Button>
+			{/if}
 		</div>
 	</section>
 </div>

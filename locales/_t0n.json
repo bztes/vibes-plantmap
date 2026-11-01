@@ -91,13 +91,17 @@
 		"Y4ND_sfA": "Admin panel",
 		"SPDT05fU": "Sign out"
 	},
-	"lib/components/map/BasemapToggle.svelte": {
-		"-EnotfSH": "Base map"
+	"lib/components/map/LayerMenu.svelte": {
+		"WvUEZDuW": "Map layers",
+		"-EnotfSH": "Base map",
+		"deVJalwn": "Mature size",
+		"vo5LAXp4": "Show mature size"
 	},
 	"lib/components/map/PlaceSearch.svelte": {
 		"SZJfLfxq": "Search address or place"
 	},
 	"lib/components/map/TimelineBar.svelte": {
+		"nc_5jidf": "Timeline",
 		"hY5Lp6Kf": "Pause",
 		"3x3pEyHj": "Play growth",
 		"KwZcfJzk": "Today",
@@ -136,14 +140,6 @@
 		"k--vUDVm": "mature {matureSpread}",
 		"rGSUz1FW": "Growth towards mature size"
 	},
-	"lib/components/plan/MapLegend.svelte": {
-		"dILjdLW9": "Legend",
-		"m0RT2K7Y": "Crown at selected year",
-		"LvXiF1ZD": "Not planted yet",
-		"ZpDBvJCk": "Too close",
-		"deVJalwn": "Mature size",
-		"vo5LAXp4": "Show mature size"
-	},
 	"lib/components/plan/PlanSettingsDialog.svelte": {
 		"-GvycTav": "Plan settings",
 		"3NHVIj9z": "Name",
@@ -157,14 +153,16 @@
 		"N3ThwgSs": "Shared by {owner}",
 		"bJjRvTS8": "Share plan",
 		"-GvycTav": "Plan settings",
+		"itgLwbus": "Collapse panel",
+		"SnRmfxlw": "Expand panel",
 		"9msViuJl": "Trees ({trees.length})",
 		"n16jXcf5": "Conflicts",
+		"yuCZ6gh9": "No base maps are set up yet. An admin can add them under Administration.",
+		"s8iHL8jg": "Move map to place tree",
 		"pp_1LE0K": "Plant here",
 		"VvEkd3dJ": "Move here",
 		"GXZu1syy": "Cancel",
-		"fVt38b7l": "Add tree",
-		"yuCZ6gh9": "No base maps are set up yet. An admin can add them under Administration.",
-		"FuROpwjX": "Move the map to position the tree"
+		"fVt38b7l": "Add tree"
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "Share plan",
@@ -184,13 +182,10 @@
 		"c3I5Wxwn": "Delete tree",
 		"ViBeEsIP": "Species",
 		"krXGLqWH": "Planted",
-		"FZSJTTak": "Move the map to position the tree.",
-		"GXZu1syy": "Cancel",
 		"mluM8qF_": "Move tree",
 		"Z6-jUvMQ": "Overlaps {name} by {overlap} in {year}",
 		"9ngb3uJL": "Touches {name} around {c.year}",
 		"inUlsUkv": "Notes",
-		"TZEwQysI": "Sizes are estimates. Soil, climate and pruning have a big influence on how large a tree really gets.",
 		"WNPfer3r": "Delete tree?",
 		"AUSAq47k": "“{displayName}” will be removed from this plan."
 	},

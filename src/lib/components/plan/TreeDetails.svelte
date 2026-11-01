@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ArrowLeft, Move, Pencil, Trash2, TriangleAlert, X } from '@lucide/svelte';
+	import { ArrowLeft, Move, Pencil, Trash2 } from '@lucide/svelte';
 	import { deleteTree, type TreeRow } from '#lib/remote/trees.remote.ts';
 	import {
 		treeName,
@@ -94,16 +94,10 @@
 
 	{#if editable}
 		<div class="flex items-center gap-2">
-			{#if moving}
-				<p class="flex-1 text-sm text-stone-600">{t`Move the map to position the tree.`}</p>
-				<Button size="sm" variant="secondary" onclick={() => onmove(false)}
-					><X /> {t`Cancel`}</Button
-				>
-			{:else}
-				<Button size="sm" variant="outline" onclick={() => onmove(true)}
-					><Move /> {t`Move tree`}</Button
-				>
-			{/if}
+			<!-- confirmed or cancelled from the map -->
+			<Button size="sm" variant="outline" disabled={moving} onclick={() => onmove(true)}
+				><Move /> {t`Move tree`}</Button
+			>
 		</div>
 	{/if}
 
@@ -133,11 +127,6 @@
 			<p class="text-sm whitespace-pre-line text-stone-600">{tree.notes}</p>
 		</div>
 	{/if}
-
-	<p class="flex items-start gap-1.5 text-xs text-stone-500">
-		<TriangleAlert class="mt-0.5 size-3.5 shrink-0" />
-		{t`Sizes are estimates. Soil, climate and pruning have a big influence on how large a tree really gets.`}
-	</p>
 </div>
 
 {#if editable}

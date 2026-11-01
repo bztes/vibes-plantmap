@@ -91,13 +91,17 @@
 		"Y4ND_sfA": "Verwaltung",
 		"SPDT05fU": "Abmelden"
 	},
-	"lib/components/map/BasemapToggle.svelte": {
-		"-EnotfSH": "Grundkarte"
+	"lib/components/map/LayerMenu.svelte": {
+		"WvUEZDuW": "Kartenebenen",
+		"-EnotfSH": "Grundkarte",
+		"deVJalwn": "Endgröße",
+		"vo5LAXp4": "Endgröße anzeigen"
 	},
 	"lib/components/map/PlaceSearch.svelte": {
 		"SZJfLfxq": "Adresse oder Ort suchen"
 	},
 	"lib/components/map/TimelineBar.svelte": {
+		"nc_5jidf": "Zeitleiste",
 		"hY5Lp6Kf": "Pause",
 		"3x3pEyHj": "Wachstum abspielen",
 		"KwZcfJzk": "Heute",
@@ -136,14 +140,6 @@
 		"k--vUDVm": "ausgewachsen {matureSpread}",
 		"rGSUz1FW": "Wachstum bis zur Endgröße"
 	},
-	"lib/components/plan/MapLegend.svelte": {
-		"dILjdLW9": "Legende",
-		"m0RT2K7Y": "Krone im gewählten Jahr",
-		"LvXiF1ZD": "Noch nicht gepflanzt",
-		"ZpDBvJCk": "Zu nah",
-		"deVJalwn": "Endgröße",
-		"vo5LAXp4": "Endgröße anzeigen"
-	},
 	"lib/components/plan/PlanSettingsDialog.svelte": {
 		"-GvycTav": "Planeinstellungen",
 		"3NHVIj9z": "Name",
@@ -157,14 +153,16 @@
 		"N3ThwgSs": "Geteilt von {owner}",
 		"bJjRvTS8": "Plan teilen",
 		"-GvycTav": "Planeinstellungen",
+		"itgLwbus": "Bereich einklappen",
+		"SnRmfxlw": "Bereich ausklappen",
 		"9msViuJl": "Bäume ({trees.length})",
 		"n16jXcf5": "Konflikte",
+		"yuCZ6gh9": "Es sind noch keine Grundkarten eingerichtet. Ein Admin kann sie unter Verwaltung hinzufügen.",
+		"s8iHL8jg": "Karte verschieben zum Platzieren",
 		"pp_1LE0K": "Hier pflanzen",
 		"VvEkd3dJ": "Hierher verschieben",
 		"GXZu1syy": "Abbrechen",
-		"fVt38b7l": "Baum hinzufügen",
-		"yuCZ6gh9": "Es sind noch keine Grundkarten eingerichtet. Ein Admin kann sie unter Verwaltung hinzufügen.",
-		"FuROpwjX": "Verschiebe die Karte, um den Baum zu platzieren"
+		"fVt38b7l": "Baum hinzufügen"
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "Plan teilen",
@@ -184,13 +182,10 @@
 		"c3I5Wxwn": "Baum löschen",
 		"ViBeEsIP": "Arten",
 		"krXGLqWH": "Gepflanzt",
-		"FZSJTTak": "Verschiebe die Karte, um den Baum zu platzieren.",
-		"GXZu1syy": "Abbrechen",
 		"mluM8qF_": "Baum verschieben",
 		"Z6-jUvMQ": "Überschneidet sich {year} um {overlap} mit {name}",
 		"9ngb3uJL": "Berührt {name} ab etwa {c.year}",
 		"inUlsUkv": "Notizen",
-		"TZEwQysI": "Die Größen sind Schätzungen. Boden, Klima und Schnitt beeinflussen stark, wie groß ein Baum tatsächlich wird.",
 		"WNPfer3r": "Baum löschen?",
 		"AUSAq47k": "„{displayName}“ wird aus diesem Plan entfernt."
 	},

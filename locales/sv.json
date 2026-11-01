@@ -91,13 +91,17 @@
 		"Y4ND_sfA": "Adminpanel",
 		"SPDT05fU": "Logga ut"
 	},
-	"lib/components/map/BasemapToggle.svelte": {
-		"-EnotfSH": "Bakgrundskarta"
+	"lib/components/map/LayerMenu.svelte": {
+		"WvUEZDuW": "Kartlager",
+		"-EnotfSH": "Bakgrundskarta",
+		"deVJalwn": "Fullvuxen storlek",
+		"vo5LAXp4": "Visa fullvuxen storlek"
 	},
 	"lib/components/map/PlaceSearch.svelte": {
 		"SZJfLfxq": "Sök adress eller plats"
 	},
 	"lib/components/map/TimelineBar.svelte": {
+		"nc_5jidf": "Tidslinje",
 		"hY5Lp6Kf": "Pausa",
 		"3x3pEyHj": "Spela upp tillväxt",
 		"KwZcfJzk": "Idag",
@@ -136,14 +140,6 @@
 		"k--vUDVm": "fullvuxen {matureSpread}",
 		"rGSUz1FW": "Tillväxt mot fullvuxen storlek"
 	},
-	"lib/components/plan/MapLegend.svelte": {
-		"dILjdLW9": "Teckenförklaring",
-		"m0RT2K7Y": "Krona valt år",
-		"LvXiF1ZD": "Inte planterat än",
-		"ZpDBvJCk": "För nära",
-		"deVJalwn": "Fullvuxen storlek",
-		"vo5LAXp4": "Visa fullvuxen storlek"
-	},
 	"lib/components/plan/PlanSettingsDialog.svelte": {
 		"-GvycTav": "Planinställningar",
 		"3NHVIj9z": "Namn",
@@ -157,14 +153,16 @@
 		"N3ThwgSs": "Delad av {owner}",
 		"bJjRvTS8": "Dela plan",
 		"-GvycTav": "Planinställningar",
+		"itgLwbus": "Fäll ihop panelen",
+		"SnRmfxlw": "Fäll ut panelen",
 		"9msViuJl": "Träd ({trees.length})",
 		"n16jXcf5": "Konflikter",
+		"yuCZ6gh9": "Inga bakgrundskartor är inställda än. En administratör kan lägga till dem under Administration.",
+		"s8iHL8jg": "Flytta kartan för att placera",
 		"pp_1LE0K": "Plantera här",
 		"VvEkd3dJ": "Flytta hit",
 		"GXZu1syy": "Avbryt",
-		"fVt38b7l": "Lägg till träd",
-		"yuCZ6gh9": "Inga bakgrundskartor är inställda än. En administratör kan lägga till dem under Administration.",
-		"FuROpwjX": "Flytta kartan för att placera trädet"
+		"fVt38b7l": "Lägg till träd"
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "Dela plan",
@@ -184,13 +182,10 @@
 		"c3I5Wxwn": "Ta bort träd",
 		"ViBeEsIP": "Art",
 		"krXGLqWH": "Planterat",
-		"FZSJTTak": "Flytta kartan för att placera trädet.",
-		"GXZu1syy": "Avbryt",
 		"mluM8qF_": "Flytta träd",
 		"Z6-jUvMQ": "Överlappar {name} med {overlap} år {year}",
 		"9ngb3uJL": "Nuddar {name} runt {c.year}",
 		"inUlsUkv": "Anteckningar",
-		"TZEwQysI": "Storlekarna är uppskattningar. Jord, klimat och beskärning påverkar mycket hur stort ett träd faktiskt blir.",
 		"WNPfer3r": "Ta bort träd?",
 		"AUSAq47k": "”{displayName}” tas bort från den här planen."
 	},

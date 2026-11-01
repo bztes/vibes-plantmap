@@ -197,6 +197,9 @@
 </script>
 
 <!-- maplibre forces position: relative on its container, so position a wrapper instead -->
-<div class="absolute inset-0 bg-stone-200">
+<!-- touch screens pinch to zoom, so small screens skip the zoom buttons -->
+<div
+	class="absolute inset-0 bg-stone-200 max-md:[&_.maplibregl-ctrl-zoom-in,&_.maplibregl-ctrl-zoom-out]:hidden"
+>
 	<div {@attach setup} class="h-full w-full"></div>
 </div>
