@@ -1,5 +1,13 @@
 # vibes-plantmap
 
+## 0.2.0
+
+### Minor Changes
+
+- [`c57668f`](https://github.com/bztes/vibes-plantmap/commit/c57668f06fdf490a7c025c63edfed349be8b56c3) Thanks [@bztes](https://github.com/bztes)! - Compact map controls for small screens
+
+- [`85fe1a5`](https://github.com/bztes/vibes-plantmap/commit/85fe1a55394d888829f1eb33b6d1b9baa0a0f710) Thanks [@bztes](https://github.com/bztes)! - Map source credits moved into an info dialog
+
 ## 0.1.1
 
 ### Patch Changes
