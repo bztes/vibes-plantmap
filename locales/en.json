@@ -21,7 +21,7 @@
 		"swF_Ucge": "A MapLibre style.json, e.g. https://tiles.openfreemap.org/styles/liberty",
 		"jxAersDC": "XYZ template with {z}, {x} and {y}, e.g. https://tile.openstreetmap.org/{z}/{x}/{y}.png",
 		"qQLczgiG": "Attribution",
-		"bM3ZxxkN": "HTML allowed, shown in the map corner",
+		"V8nrCpAH": "",
 		"Yh06yKDl": "Tile size",
 		"_WACN1qf": "Max zoom",
 		"hMUCq8fO": "Highest zoom with tiles, deeper zooms upscale",
@@ -99,6 +99,10 @@
 	},
 	"lib/components/map/PlaceSearch.svelte": {
 		"SZJfLfxq": "Search address or place"
+	},
+	"lib/components/map/PlanMap.svelte": {
+		"L2z2tgRH": "",
+		"xcYfvbei": ""
 	},
 	"lib/components/map/TimelineBar.svelte": {
 		"nc_5jidf": "",

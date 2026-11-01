@@ -21,7 +21,7 @@
 		"swF_Ucge": "Eine MapLibre style.json, z. B. https://tiles.openfreemap.org/styles/liberty",
 		"jxAersDC": "XYZ-Vorlage mit {z}, {x} und {y}, z. B. https://tile.openstreetmap.org/{z}/{x}/{y}.png",
 		"qQLczgiG": "Quellenangabe",
-		"bM3ZxxkN": "HTML erlaubt, wird in der Kartenecke angezeigt",
+		"V8nrCpAH": "HTML erlaubt, wird unter Kartenquellen aufgeführt",
 		"Yh06yKDl": "Kachelgröße",
 		"_WACN1qf": "Max. Zoom",
 		"hMUCq8fO": "Höchste Zoomstufe mit Kacheln, darüber wird hochskaliert",
@@ -99,6 +99,10 @@
 	},
 	"lib/components/map/PlaceSearch.svelte": {
 		"SZJfLfxq": "Adresse oder Ort suchen"
+	},
+	"lib/components/map/PlanMap.svelte": {
+		"L2z2tgRH": "Kartenquellen",
+		"xcYfvbei": "Für diese Karte sind keine Quellen anzugeben."
 	},
 	"lib/components/map/TimelineBar.svelte": {
 		"nc_5jidf": "Zeitleiste",

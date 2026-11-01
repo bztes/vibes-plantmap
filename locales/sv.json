@@ -21,7 +21,7 @@
 		"swF_Ucge": "En MapLibre-style.json, t.ex. https://tiles.openfreemap.org/styles/liberty",
 		"jxAersDC": "XYZ-mall med {z}, {x} och {y}, t.ex. https://tile.openstreetmap.org/{z}/{x}/{y}.png",
 		"qQLczgiG": "Attribution",
-		"bM3ZxxkN": "HTML tillåtet, visas i kartans hörn",
+		"V8nrCpAH": "HTML tillåtet, listas under kartkällor",
 		"Yh06yKDl": "Plattstorlek",
 		"_WACN1qf": "Max zoom",
 		"hMUCq8fO": "Högsta zoomnivå med plattor, djupare zoom skalas upp",
@@ -99,6 +99,10 @@
 	},
 	"lib/components/map/PlaceSearch.svelte": {
 		"SZJfLfxq": "Sök adress eller plats"
+	},
+	"lib/components/map/PlanMap.svelte": {
+		"L2z2tgRH": "Kartkällor",
+		"xcYfvbei": "Inga källor att ange för den här kartan."
 	},
 	"lib/components/map/TimelineBar.svelte": {
 		"nc_5jidf": "Tidslinje",

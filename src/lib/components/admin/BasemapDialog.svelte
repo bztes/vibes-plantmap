@@ -102,7 +102,7 @@
 				label={t`Attribution`}
 				for="bm-attribution"
 				class="col-span-2"
-				hint={t`HTML allowed, shown in the map corner`}
+				hint={t`HTML allowed, listed under the map sources`}
 				issues={f.attribution.issues()}
 			>
 				<Input id="bm-attribution" {...f.attribution.as('text', initial.attribution ?? '')} />

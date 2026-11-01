@@ -3,6 +3,9 @@
 	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 	import type { GeoJSONSource, Map, MapMouseEvent } from 'maplibre-gl';
 	import { untrack } from 'svelte';
+	import { Info } from '@lucide/svelte';
+	import { t } from '#lib/i18n/index.ts';
+	import Dialog from '#lib/components/ui/Dialog.svelte';
 	import type { Basemap } from '#lib/basemaps.ts';
 	import type { LngLat } from '#lib/geo.ts';
 	import type { Conflict, PlannedTree, Sized } from '#lib/plan.ts';
@@ -58,6 +61,8 @@
 	let cover = $state.raw<StyleCover>({ shapes: [], labels: [] });
 	/** URL of the vector style currently loaded, '' for the blank fallback */
 	let loadedStyle: string | undefined;
+	let attributions = $state.raw<string[]>([]);
+	let sourcesOpen = $state(false);
 	const styleUrl = $derived(styleFor(basemap, basemaps)?.url ?? '');
 
 	export function flyTo(at: LngLat, zoom?: number) {
@@ -99,7 +104,7 @@
 				center: [initial.lng, initial.lat],
 				zoom: initial.zoom,
 				maxZoom: 22,
-				attributionControl: { compact: true }
+				attributionControl: false
 			});
 			instance.addControl(new ml.NavigationControl({ visualizePitch: true }), 'top-right');
 			instance.addControl(
@@ -132,6 +137,26 @@
 			instance?.remove();
 			map = null;
 		};
+	}
+
+	function showSources() {
+		attributions = map ? attributionsOf(map) : [];
+		sourcesOpen = true;
+	}
+
+	/** credits of the sources currently drawn, as HTML from the style or the admin's settings */
+	function attributionsOf(m: Map) {
+		const visible = new Set(
+			m
+				.getStyle()
+				.layers.filter((l) => 'source' in l && l.layout?.visibility !== 'none')
+				.map((l) => (l as { source: string }).source)
+		);
+		return [
+			...new Set(
+				[...visible].map((id) => m.getSource(id)?.attribution).filter((a): a is string => !!a)
+			)
+		];
 	}
 
 	function wireInteractions(m: Map) {
@@ -202,4 +227,25 @@
 	class="absolute inset-0 bg-stone-200 max-md:[&_.maplibregl-ctrl-zoom-in,&_.maplibregl-ctrl-zoom-out]:hidden"
 >
 	<div {@attach setup} class="h-full w-full"></div>
+	<button
+		type="button"
+		aria-label={t`Map sources`}
+		title={t`Map sources`}
+		class="absolute right-2.5 bottom-2.5 flex size-7 items-center justify-center rounded-full bg-white/90 text-stone-600 shadow-md transition-colors hover:bg-white hover:text-stone-900 focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:outline-none"
+		onclick={showSources}
+	>
+		<Info class="size-4" />
+	</button>
 </div>
+
+<Dialog bind:open={sourcesOpen} title={t`Map sources`}>
+	{#if attributions.length === 0}
+		<p class="text-sm text-stone-500">{t`No sources to credit for this map.`}</p>
+	{/if}
+	<ul class="space-y-2 text-sm text-stone-700 [&_a]:text-leaf-700 [&_a]:underline">
+		{#each attributions as attribution (attribution)}
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -- the same markup maplibre would render -->
+			<li>{@html attribution}</li>
+		{/each}
+	</ul>
+</Dialog>
