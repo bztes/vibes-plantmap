@@ -108,7 +108,10 @@
 			});
 			instance.addControl(new ml.NavigationControl({ visualizePitch: true }), 'top-right');
 			instance.addControl(
-				new ml.GeolocateControl({ positionOptions: { enableHighAccuracy: true } }),
+				new ml.GeolocateControl({
+					positionOptions: { enableHighAccuracy: true, timeout: 30_000 },
+					trackUserLocation: true
+				}),
 				'top-right'
 			);
 			instance.addControl(new ml.ScaleControl({ unit: 'metric', maxWidth: 140 }), 'bottom-left');
