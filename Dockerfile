@@ -8,8 +8,8 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY . .
-# The build validates the env vars (see src/env.ts) but doesn't inline them: placeholders are enough.
-RUN DATABASE_URL=:memory: ORIGIN=http://localhost pnpm build
+# The build validates the env vars (see src/env.ts) but doesn't inline them: a placeholder is enough.
+RUN DATABASE_URL=:memory: pnpm build
 
 FROM node:24-bookworm-slim
 WORKDIR /app

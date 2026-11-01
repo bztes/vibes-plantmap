@@ -8,7 +8,7 @@ Built with SvelteKit (remote functions), Drizzle (SQLite/libSQL), session-cookie
 
 ```sh
 pnpm install
-cp .env.example .env   # set ORIGIN
+cp .env.example .env
 pnpm dev               # migrations in drizzle/ run on start
 ```
 
@@ -33,9 +33,10 @@ After changing `src/lib/server/db/schema.ts` run `pnpm db:generate` to add a mig
 ## Docker
 
 ```sh
-echo 'ORIGIN=https://plantmap.example.com' > .env
 docker compose up -d
 ```
+
+Serve it over HTTPS through a reverse proxy that passes on the `Host` header. The server takes its origin from the request headers and assumes `https`, so requests that change data are rejected as cross-site when the app is opened over plain `http`. If your proxy rewrites `Host`, set `HOST_HEADER=x-forwarded-host`; to take the protocol from the proxy, set `PROTOCOL_HEADER=x-forwarded-proto`.
 
 The database lives in the `data` volume (`/data/local.db`).
 
