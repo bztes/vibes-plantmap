@@ -331,7 +331,7 @@
 			{#if placingTree}
 				<!-- the tree at its real size; an overlay rather than a map layer so it doesn't lag behind panning -->
 				<div
-					class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-stone-700 drop-shadow-[0_0_1px_white]"
+					class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dotted border-stone-700/80 drop-shadow-[0_0_1px_white]"
 					style:width="{placingTree.matureSpread / metersPerPixel}px"
 					style:height="{placingTree.matureSpread / metersPerPixel}px"
 					aria-hidden="true"
@@ -349,10 +349,11 @@
 				class="pointer-events-none absolute top-1/2 left-1/2 size-10 -translate-x-1/2 -translate-y-1/2 text-stone-900 drop-shadow-[0_0_2px_white]"
 				aria-hidden="true"
 			>
-				<div class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 bg-current"></div>
-				<div class="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-current"></div>
+				<div class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-current/70"></div>
+				<div class="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-current/70"></div>
 				<div
-					class="absolute top-1/2 left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-current"
+					class="absolute top-1/2 left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-current shadow-md"
+					style:background-color={placingTree?.color}
 				></div>
 			</div>
 			<div

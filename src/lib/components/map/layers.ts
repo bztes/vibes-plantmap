@@ -1,5 +1,5 @@
 import type { FeatureCollection, LineString, Point, Polygon } from 'geojson';
-import type { Map, StyleSpecification } from 'maplibre-gl';
+import type { Map, StyleSpecification, SymbolLayerSpecification } from 'maplibre-gl';
 import type { Basemap } from '#lib/basemaps.ts';
 import { circleRing } from '#lib/geo.ts';
 import { formatMeters } from '#lib/growth.ts';
@@ -29,8 +29,17 @@ export function styleFor(active: Basemap | null, basemaps: Basemap[]) {
 	return basemaps.find((b) => b.kind === 'style') ?? null;
 }
 
-const FONT = ['Noto Sans Regular'];
-const CONFLICT_COLOR = '#dc2626';
+/** OpenFreeMap serves it, and so do the vector styles it hosts */
+const FONT = ['Noto Sans Bold'];
+const CONFLICT_COLOR = '#ef4444';
+const INK = '#1c1917';
+const PAPER = '#ffffff';
+
+/** the dotted mature outline: dark on maps, light on photos where the dark one vanishes */
+const MATURE_PAINT = {
+	ground: { color: '#57534e', opacity: 0.55, width: 1.5 },
+	imagery: { color: '#fafaf9', opacity: 0.9, width: 2 }
+};
 
 export const SOURCES = {
 	mature: 'plantmap-mature',
@@ -44,22 +53,96 @@ export const TRUNK_LAYER = 'plantmap-trunk';
 export const CANOPY_LAYER = 'plantmap-canopy-fill';
 export const MATURE_LAYER = 'plantmap-mature-line';
 
+/** label background fills, by kind */
+const PILL_FILLS = { light: PAPER, dark: INK, red: CONFLICT_COLOR };
+type PillKind = keyof typeof PILL_FILLS;
+const pill = (kind: PillKind) => `plantmap-pill-${kind}`;
+/** wraps a pill image around a symbol's text, matching the `content` box in `pillImage` */
+const PILL_FIT = {
+	'icon-text-fit': 'both',
+	'icon-text-fit-padding': [1, 2, 1, 2]
+} satisfies SymbolLayerSpecification['layout'];
+
 const empty = (): FeatureCollection => ({ type: 'FeatureCollection', features: [] });
 
+/**
+ * A rounded label background with a soft drop shadow, stretchable so `icon-text-fit`
+ * can wrap it around any text.
+ */
+function pillImage(fill: string): { image: ImageData; options: Parameters<Map['addImage']>[2] } {
+	const ratio = 2;
+	const px = (v: number) => v * ratio;
+	// logical px: shadow margin around a 24×20 rounded rectangle
+	const [w, h, mx, my, r] = [32, 28, 4, 3, 10];
+	const canvas = document.createElement('canvas');
+	canvas.width = px(w);
+	canvas.height = px(h);
+	const ctx = canvas.getContext('2d')!;
+	ctx.scale(ratio, ratio);
+	ctx.shadowColor = 'rgba(28, 25, 23, 0.28)';
+	ctx.shadowBlur = 4;
+	ctx.shadowOffsetY = 1;
+	ctx.fillStyle = fill;
+	ctx.beginPath();
+	ctx.roundRect(mx, my, w - 2 * mx, h - 2 * my - 1, r);
+	ctx.fill();
+	return {
+		image: ctx.getImageData(0, 0, canvas.width, canvas.height),
+		options: {
+			pixelRatio: ratio,
+			stretchX: [[px(mx + r), px(w - mx - r)]],
+			stretchY: [[px(my + r - 1), px(my + r + 1)]],
+			content: [px(mx + 7), px(my + 3), px(w - mx - 7), px(h - my - 4)]
+		}
+	};
+}
+
+/** drawn once: every style switch drops the map's images, and they are re-added from here */
+const pillImages: Partial<Record<PillKind, ReturnType<typeof pillImage>>> = {};
+
+function addImages(map: Map) {
+	for (const kind of Object.keys(PILL_FILLS) as PillKind[]) {
+		if (map.hasImage(pill(kind))) continue;
+		const { image, options } = (pillImages[kind] ??= pillImage(PILL_FILLS[kind]));
+		map.addImage(pill(kind), image, options);
+	}
+}
+
 export function addTreeLayers(map: Map) {
+	addImages(map);
 	for (const id of Object.values(SOURCES)) {
 		map.addSource(id, { type: 'geojson', data: empty() });
 	}
+
+	/** dots instead of dashes: zero-length dashes with round caps */
+	const dotted = (gap: number) => [0, gap] as never;
+	/** e.g. the old spot of a tree that is being moved */
+	const fadedOpacity = ['case', ['get', 'faded'], 0.3, 1] as const;
 
 	map.addLayer({
 		id: MATURE_LAYER,
 		type: 'line',
 		source: SOURCES.mature,
+		layout: { 'line-cap': 'round', 'line-join': 'round' },
 		paint: {
-			'line-color': '#57534e',
-			'line-width': 1,
-			'line-opacity': 0.6,
-			'line-dasharray': [2, 2]
+			'line-color': MATURE_PAINT.ground.color,
+			'line-width': MATURE_PAINT.ground.width,
+			'line-opacity': MATURE_PAINT.ground.opacity,
+			'line-dasharray': dotted(2.5)
+		}
+	});
+	// soft shadow that lifts the crowns off the ground
+	map.addLayer({
+		id: 'plantmap-canopy-shadow',
+		type: 'line',
+		source: SOURCES.canopy,
+		filter: ['!', ['get', 'faded']],
+		paint: {
+			'line-color': INK,
+			'line-width': 6,
+			'line-blur': 6,
+			'line-opacity': ['case', ['get', 'planted'], 0.18, 0.08],
+			'line-translate': [0, 2]
 		}
 	});
 	map.addLayer({
@@ -71,31 +154,45 @@ export function addTreeLayers(map: Map) {
 			'fill-opacity': [
 				'case',
 				['get', 'faded'],
-				0.08,
+				0.06,
 				['get', 'selected'],
-				0.55,
+				0.5,
 				['get', 'planted'],
-				0.35,
-				0.15
+				0.32,
+				0.14
 			]
 		}
 	});
-	const outlineColor = [
-		'case',
-		['get', 'conflict'],
-		CONFLICT_COLOR,
-		['get', 'selected'],
-		'#1c1917',
-		['get', 'color']
-	] as const;
-	const outlineWidth = ['case', ['get', 'selected'], 3, ['get', 'conflict'], 2.5, 1.5] as const;
-	/** e.g. the old spot of a tree that is being moved */
-	const fadedOpacity = ['case', ['get', 'faded'], 0.3, 1] as const;
+	const outlineColor = ['case', ['get', 'conflict'], CONFLICT_COLOR, ['get', 'color']] as const;
+	const outlineWidth = ['case', ['get', 'selected'], 3, ['get', 'conflict'], 2.5, 2] as const;
+	// glow around the selected crown
+	map.addLayer({
+		id: 'plantmap-canopy-glow',
+		type: 'line',
+		source: SOURCES.canopy,
+		filter: ['==', ['get', 'selected'], true],
+		paint: {
+			'line-color': outlineColor as never,
+			'line-width': 14,
+			'line-blur': 10,
+			'line-opacity': 0.55
+		}
+	});
+	// white ring under the selected outline, so it reads on any ground
+	map.addLayer({
+		id: 'plantmap-canopy-ring',
+		type: 'line',
+		source: SOURCES.canopy,
+		filter: ['==', ['get', 'selected'], true],
+		layout: { 'line-join': 'round' },
+		paint: { 'line-color': PAPER, 'line-width': 6, 'line-opacity': 0.9 }
+	});
 	map.addLayer({
 		id: 'plantmap-canopy-line',
 		type: 'line',
 		source: SOURCES.canopy,
 		filter: ['==', ['get', 'planted'], true],
+		layout: { 'line-join': 'round' },
 		paint: {
 			'line-color': outlineColor as never,
 			'line-width': outlineWidth as never,
@@ -107,18 +204,20 @@ export function addTreeLayers(map: Map) {
 		type: 'line',
 		source: SOURCES.canopy,
 		filter: ['==', ['get', 'planted'], false],
+		layout: { 'line-cap': 'round', 'line-join': 'round' },
 		paint: {
 			'line-color': outlineColor as never,
 			'line-width': outlineWidth as never,
 			'line-opacity': fadedOpacity as never,
-			'line-dasharray': [3, 2]
+			'line-dasharray': dotted(2)
 		}
 	});
 	map.addLayer({
 		id: 'plantmap-conflict-line',
 		type: 'line',
 		source: SOURCES.conflicts,
-		paint: { 'line-color': CONFLICT_COLOR, 'line-width': 2, 'line-dasharray': [1, 1.5] }
+		layout: { 'line-cap': 'round' },
+		paint: { 'line-color': CONFLICT_COLOR, 'line-width': 2.5, 'line-dasharray': dotted(2) }
 	});
 	map.addLayer({
 		id: 'plantmap-conflict-label',
@@ -128,10 +227,29 @@ export function addTreeLayers(map: Map) {
 			'symbol-placement': 'line-center',
 			'text-field': ['get', 'label'],
 			'text-font': FONT,
-			'text-size': 12,
-			'text-allow-overlap': true
+			'text-size': 11,
+			'text-allow-overlap': true,
+			// a badge reads better upright than turned along the line
+			'text-rotation-alignment': 'viewport',
+			'icon-rotation-alignment': 'viewport',
+			'icon-image': pill('red'),
+			...PILL_FIT,
+			'icon-allow-overlap': true
 		},
-		paint: { 'text-color': CONFLICT_COLOR, 'text-halo-color': '#fff', 'text-halo-width': 2 }
+		paint: { 'text-color': PAPER }
+	});
+	map.addLayer({
+		id: 'plantmap-trunk-shadow',
+		type: 'circle',
+		source: SOURCES.trunks,
+		filter: ['!', ['get', 'faded']],
+		paint: {
+			'circle-radius': ['case', ['get', 'selected'], 11, 8],
+			'circle-color': INK,
+			'circle-opacity': 0.3,
+			'circle-blur': 0.8,
+			'circle-translate': [0, 1.5]
+		}
 	});
 	map.addLayer({
 		id: TRUNK_LAYER,
@@ -139,9 +257,9 @@ export function addTreeLayers(map: Map) {
 		source: SOURCES.trunks,
 		paint: {
 			'circle-radius': ['case', ['get', 'selected'], 7, 5],
-			'circle-color': '#fff',
-			'circle-stroke-color': ['get', 'color'],
-			'circle-stroke-width': ['case', ['get', 'selected'], 4, 2.5],
+			'circle-color': ['get', 'color'],
+			'circle-stroke-color': PAPER,
+			'circle-stroke-width': ['case', ['get', 'selected'], 3, 2],
 			'circle-opacity': fadedOpacity as never,
 			'circle-stroke-opacity': fadedOpacity as never
 		}
@@ -154,16 +272,20 @@ export function addTreeLayers(map: Map) {
 		layout: {
 			'text-field': ['get', 'label'],
 			'text-font': FONT,
-			'text-size': 12,
-			'text-offset': [0, 1.2],
+			'text-size': 11,
+			'text-letter-spacing': 0.02,
+			'text-max-width': 12,
+			'text-offset': [0, 1.5],
 			'text-anchor': 'top',
-			'text-optional': true
+			'icon-image': ['case', ['get', 'selected'], pill('dark'), pill('light')] as never,
+			...PILL_FIT,
+			// the selected tree's label wins over its neighbours'
+			'symbol-sort-key': ['case', ['get', 'selected'], 0, 1] as never
 		},
 		paint: {
-			'text-color': '#1c1917',
-			'text-halo-color': '#fff',
-			'text-halo-width': 1.5,
-			'text-opacity': fadedOpacity as never
+			'text-color': ['case', ['get', 'selected'], PAPER, INK] as never,
+			'text-opacity': fadedOpacity as never,
+			'icon-opacity': fadedOpacity as never
 		}
 	});
 }
@@ -235,10 +357,10 @@ export function setBasemap(
 	for (const id of cover.shapes) show(id, !imagery);
 	for (const id of cover.labels) show(id, !imagery || active.labels);
 
-	// the dark dashed outline vanishes on photos, switch to a light one
-	map.setPaintProperty(MATURE_LAYER, 'line-color', imagery ? '#fafaf9' : '#57534e');
-	map.setPaintProperty(MATURE_LAYER, 'line-opacity', imagery ? 0.9 : 0.6);
-	map.setPaintProperty(MATURE_LAYER, 'line-width', imagery ? 1.5 : 1);
+	const mature = MATURE_PAINT[imagery ? 'imagery' : 'ground'];
+	map.setPaintProperty(MATURE_LAYER, 'line-color', mature.color);
+	map.setPaintProperty(MATURE_LAYER, 'line-opacity', mature.opacity);
+	map.setPaintProperty(MATURE_LAYER, 'line-width', mature.width);
 }
 
 export function setMatureVisible(map: Map, visible: boolean) {
