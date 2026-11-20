@@ -1,5 +1,11 @@
 # vibes-plantmap
 
+## 0.4.1
+
+### Patch Changes
+
+- [`d2e7d76`](https://github.com/bztes/vibes-plantmap/commit/d2e7d769ce868a3c8fb59f2d476475756bd52b35) Thanks [@bztes](https://github.com/bztes)! - Drop arm64 Docker image
+
 ## 0.4.0
 
 ### Minor Changes
