@@ -13,7 +13,7 @@
 	import TableCell from '#lib/components/ui/TableCell.svelte';
 	import TableRow from '#lib/components/ui/TableRow.svelte';
 	import { categoryLabel } from '#lib/species.ts';
-	import type { SpeciesCategory } from '#lib/server/db/schema.ts';
+	import type { SpeciesCategory } from '#lib/species.ts';
 
 	interface Props {
 		species: {

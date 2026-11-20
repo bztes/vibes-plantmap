@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { t } from '@bztes/vibes-t0n';
 	import type { saveSpecies } from '#lib/remote/species.remote.ts';
-	import type { SpeciesCategory } from '#lib/server/db/schema.ts';
 	import FormIssues from '#lib/components/layout/FormIssues.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Input from '#lib/components/ui/Input.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { categoryLabel } from '#lib/species.ts';
+	import { SPECIES_CATEGORIES, categoryLabel, type SpeciesCategory } from '#lib/species.ts';
 
 	interface Props {
 		id: string;
@@ -46,7 +45,7 @@
 	</Field>
 	<Field label={t`Category`} for="{id}-cat" issues={f.category.issues()}>
 		<Select id="{id}-cat" {...f.category.as('select', species?.category ?? 'deciduous')}>
-			{#each ['deciduous', 'conifer', 'fruit', 'shrub'] as category (category)}
+			{#each SPECIES_CATEGORIES as category (category)}
 				<option value={category}>{categoryLabel(category)}</option>
 			{/each}
 		</Select>

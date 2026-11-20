@@ -1,6 +1,7 @@
 import { randomBytes } from 'node:crypto';
 import { relations, sql } from 'drizzle-orm';
 import { index, integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { SPECIES_CATEGORIES, type SpeciesCategory } from '../../categories';
 import { user } from './auth.schema';
 
 const id = () =>
@@ -39,8 +40,7 @@ export const basemap = sqliteTable('basemap', {
 	createdAt: createdAt()
 });
 
-export const SPECIES_CATEGORIES = ['deciduous', 'conifer', 'fruit', 'shrub'] as const;
-export type SpeciesCategory = (typeof SPECIES_CATEGORIES)[number];
+export { SPECIES_CATEGORIES, type SpeciesCategory };
 
 /** Tree species catalog. Rows without an owner are shared (created by an admin) and visible to everyone. */
 export const species = sqliteTable(

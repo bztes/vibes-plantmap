@@ -1,6 +1,17 @@
+<script lang="ts" module>
+	import type { Component } from 'svelte';
+
+	export interface MenuAction {
+		label: string;
+		icon: Component;
+		onclick: () => void;
+	}
+</script>
+
 <script lang="ts">
 	import { t } from '@bztes/vibes-t0n';
-	import { ChevronDown, LogOut, Shield } from '@lucide/svelte';
+	import { ChevronDown, LogOut, Map, Shield, Sprout } from '@lucide/svelte';
+	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { signOut } from '#lib/remote/auth.remote.ts';
 	import Avatar from '#lib/components/ui/Avatar.svelte';
@@ -9,12 +20,25 @@
 
 	interface Props {
 		user: { name: string; email: string; isAdmin: boolean };
+		/** page specific entries shown above the navigation */
+		actions?: MenuAction[];
 	}
 
-	let { user }: Props = $props();
+	let { user, actions = [] }: Props = $props();
 
 	const item =
-		'flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-stone-700 transition-colors hover:bg-stone-100 hover:text-stone-900 focus-visible:bg-stone-100 focus-visible:outline-none';
+		'flex w-full cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm text-stone-700 transition-colors hover:bg-stone-100 hover:text-stone-900 focus-visible:bg-stone-100 focus-visible:outline-none [&_svg]:size-4';
+
+	const nav = $derived(
+		[
+			{ href: resolve('/(app)/plans'), label: t`Plans`, icon: Map },
+			{ href: resolve('/(app)/species'), label: t`Species`, icon: Sprout },
+			...(user.isAdmin ? [{ href: resolve('/(app)/admin'), label: t`Admin`, icon: Shield }] : [])
+		].map((link) => ({
+			...link,
+			active: page.url.pathname === link.href || page.url.pathname.startsWith(link.href + '/')
+		}))
+	);
 
 	let open = $state(false);
 	let root: HTMLDivElement;
@@ -48,7 +72,7 @@
 	{#if open}
 		<div
 			role="menu"
-			class="absolute right-0 mt-2 w-64 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-lg"
+			class="absolute right-0 z-30 mt-2 w-64 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-lg"
 		>
 			<div class="flex items-center gap-3 border-b border-stone-100 px-4 py-3">
 				<Avatar name={user.name} />
@@ -60,18 +84,43 @@
 					<div class="truncate text-xs text-stone-500">{user.email}</div>
 				</div>
 			</div>
-			<div class="border-b border-stone-100 px-2 py-2"><LocaleSwitcher /></div>
-			{#if user.isAdmin}
+			{#if actions.length > 0}
 				<div class="border-b border-stone-100 p-1">
-					<a href={resolve('/(app)/admin')} role="menuitem" class={item} onclick={() => close()}>
-						<Shield class="size-4" />
-						{t`Admin panel`}
-					</a>
+					{#each actions as action (action.label)}
+						<button
+							type="button"
+							role="menuitem"
+							class={item}
+							onclick={() => {
+								close();
+								action.onclick();
+							}}
+						>
+							<action.icon />
+							{action.label}
+						</button>
+					{/each}
 				</div>
 			{/if}
+			<nav class="border-b border-stone-100 p-1">
+				{#each nav as link (link.href)}
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve()d above -->
+					<a
+						href={link.href}
+						role="menuitem"
+						aria-current={link.active ? 'page' : undefined}
+						class={[item, link.active && 'bg-leaf-50 font-medium text-leaf-800']}
+						onclick={() => close()}
+					>
+						<link.icon />
+						{link.label}
+					</a>
+				{/each}
+			</nav>
+			<div class="border-b border-stone-100 px-2 py-2"><LocaleSwitcher /></div>
 			<form {...signOut} class="p-1">
 				<button type="submit" role="menuitem" class={item}>
-					<LogOut class="size-4" />
+					<LogOut />
 					{t`Sign out`}
 				</button>
 			</form>

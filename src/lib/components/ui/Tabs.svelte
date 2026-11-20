@@ -8,10 +8,14 @@
 		count?: number;
 	}
 
-	let { tabs, value = $bindable() }: { tabs: Tab[]; value: T } = $props();
+	let {
+		tabs,
+		value = $bindable(),
+		class: className
+	}: { tabs: Tab[]; value: T; class?: string } = $props();
 </script>
 
-<div role="tablist" class="flex gap-1 rounded-lg bg-stone-100 p-1">
+<div role="tablist" class={['flex gap-1 rounded-lg bg-stone-100 p-1', className]}>
 	{#each tabs as tab (tab.id)}
 		<button
 			type="button"

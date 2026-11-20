@@ -1,5 +1,6 @@
+import { t } from '@bztes/vibes-t0n';
 import { distance } from './geo';
-import { addYears, sizeAt, type GrowthParams, type TreeSize } from './growth';
+import { addYears, formatMeters, sizeAt, type GrowthParams, type TreeSize } from './growth';
 
 export interface PlannedTree extends GrowthParams {
 	id: string;
@@ -92,4 +93,11 @@ export function findUpcomingConflicts<T extends PlannedTree>(
 
 export function treeName(tree: Pick<PlannedTree, 'label' | 'speciesName'>) {
 	return tree.label || tree.speciesName;
+}
+
+/** one line with the species (when the tree has its own name) and current size */
+export function treeSummary(tree: Sized<PlannedTree>) {
+	const spread = formatMeters(tree.size.spread);
+	const height = formatMeters(tree.size.height);
+	return `${tree.label ? `${tree.speciesName} · ` : ''}⌀ ${spread} · ${t`${height} high`}`;
 }

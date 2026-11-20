@@ -8,10 +8,11 @@
 	interface Props {
 		trees: Sized<PlannedTree>[];
 		conflicts: Conflict[];
+		selectedId: string | null;
 		onselect: (id: string) => void;
 	}
 
-	let { trees, conflicts, onselect }: Props = $props();
+	let { trees, conflicts, selectedId, onselect }: Props = $props();
 
 	const conflicting = $derived(new Set(conflicts.flatMap((c) => [c.a.id, c.b.id])));
 </script>
@@ -20,12 +21,17 @@
 	<EmptyState
 		icon={TreeDeciduous}
 		title={t`No trees yet`}
-		description={t`Pick a species above the map, click “Add tree” and then click on the map to place it.`}
+		description={t`Tap “Add tree”, choose a species and move the map to place it.`}
 	/>
 {:else}
 	<div class="flex flex-col gap-0.5">
 		{#each trees as tree (tree.id)}
-			<TreeListItem {tree} conflict={conflicting.has(tree.id)} onclick={() => onselect(tree.id)} />
+			<TreeListItem
+				{tree}
+				conflict={conflicting.has(tree.id)}
+				selected={tree.id === selectedId}
+				onclick={() => onselect(tree.id)}
+			/>
 		{/each}
 	</div>
 {/if}

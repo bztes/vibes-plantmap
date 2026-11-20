@@ -80,15 +80,14 @@
 		"ZNDGt2ln": "{user.name} and all of their plans will be deleted permanently."
 	},
 	"lib/components/layout/AppHeader.svelte": {
-		"3-iy8N4m": "Plans",
-		"ViBeEsIP": "Species",
-		"wcIksDzZ": "Admin",
 		"v9QCsvbz": "Sign in"
 	},
 	"lib/components/layout/UserMenu.svelte": {
+		"3-iy8N4m": "Plans",
+		"ViBeEsIP": "Species",
+		"wcIksDzZ": "Admin",
 		"b6Jb4cUL": "User menu",
 		"jGl25bVB": "admin",
-		"Y4ND_sfA": "Admin panel",
 		"SPDT05fU": "Sign out"
 	},
 	"lib/components/map/LayerMenu.svelte": {
@@ -113,18 +112,6 @@
 		"PPwaufDy": "in {years} years",
 		"ifaDJWDe": "Year",
 		"hKl0L5rj": "Back to today"
-	},
-	"lib/components/plan/AddTreeDialog.svelte": {
-		"BgohRuuB": "Grows up to {height} tall and {spread} wide",
-		"fVt38b7l": "Add tree",
-		"XvPXWs1V": "Choose what to plant, then position it on the map.",
-		"ViBeEsIP": "Species",
-		"3NHVIj9z": "Name",
-		"mMxtcfBS": "Optional, e.g. “Grandpa's apple”",
-		"tPED68PN": "Planting date",
-		"wFy6QuzW": "Can be in the future for planned trees",
-		"GXZu1syy": "Cancel",
-		"eqYNlO_B": "Place on map"
 	},
 	"lib/components/plan/ConflictList.svelte": {
 		"_VgCIsSY": "Plenty of room",
@@ -153,22 +140,28 @@
 		"FQn1YfJB": "Save"
 	},
 	"lib/components/plan/PlanView.svelte": {
-		"BgohRuuB": "Grows up to {height} tall and {spread} wide",
+		"bJjRvTS8": "Share plan",
+		"-GvycTav": "Plan settings",
 		"Wr6eH7xb": "Can edit",
 		"m0xshZDp": "View only",
 		"N3ThwgSs": "Shared by {owner}",
-		"bJjRvTS8": "Share plan",
-		"-GvycTav": "Plan settings",
-		"itgLwbus": "Collapse panel",
-		"SnRmfxlw": "Expand panel",
 		"9msViuJl": "Trees ({trees.length})",
 		"n16jXcf5": "Conflicts",
+		"itgLwbus": "Collapse panel",
+		"SnRmfxlw": "Expand panel",
 		"yuCZ6gh9": "No base maps are set up yet. An admin can add them under Administration.",
 		"s8iHL8jg": "Move map to place tree",
+		"_1DG3LXL": "Too close to another tree",
+		"mluM8qF_": "Move tree",
+		"bsw99r_9": "Move",
+		"RZid5J-3": "Details",
+		"FCF0wZRX": "Deselect",
 		"pp_1LE0K": "Plant here",
 		"VvEkd3dJ": "Move here",
 		"GXZu1syy": "Cancel",
-		"fVt38b7l": "Add tree"
+		"fVt38b7l": "Add tree",
+		"XvPXWs1V": "Choose what to plant, then position it on the map.",
+		"eqYNlO_B": "Place on map"
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "Share plan",
@@ -182,24 +175,23 @@
 		"7Fugq7cX": "Access",
 		"5rhQz_av": "Create link"
 	},
-	"lib/components/plan/TreeDetails.svelte": {
-		"Xaj3-8Kd": "Back to list",
-		"Hd47zDnt": "Edit tree",
-		"c3I5Wxwn": "Delete tree",
+	"lib/components/plan/SpeciesDialog.svelte": {
+		"7LlCdKXB": "Change species",
+		"GXZu1syy": "Cancel",
+		"KngCXeaq": "Select"
+	},
+	"lib/components/plan/SpeciesPicker.svelte": {
+		"DMHyvk0u": "Search species",
 		"ViBeEsIP": "Species",
-		"krXGLqWH": "Planted",
-		"mluM8qF_": "Move tree",
+		"vLiKq1sV": "No species found"
+	},
+	"lib/components/plan/TreeDialog.svelte": {
 		"Z6-jUvMQ": "Overlaps {name} by {overlap} in {year}",
 		"9ngb3uJL": "Touches {name} around {c.year}",
-		"inUlsUkv": "Notes",
-		"WNPfer3r": "Delete tree?",
-		"AUSAq47k": "“{displayName}” will be removed from this plan."
-	},
-	"lib/components/plan/TreeEditDialog.svelte": {
-		"Hd47zDnt": "Edit tree",
 		"3NHVIj9z": "Name",
 		"mMxtcfBS": "Optional, e.g. “Grandpa's apple”",
 		"ViBeEsIP": "Species",
+		"wL91vXi_": "Change",
 		"tPED68PN": "Planting date",
 		"wFy6QuzW": "Can be in the future for planned trees",
 		"c09VkM4t": "Height when planted",
@@ -209,15 +201,20 @@
 		"NwJmOCHn": "Mature height (m)",
 		"GCMszQD0": "Mature crown (m)",
 		"inUlsUkv": "Notes",
+		"krXGLqWH": "Planted",
+		"c3I5Wxwn": "Delete tree",
+		"4tClSWjq": "Delete",
 		"GXZu1syy": "Cancel",
-		"3QrnpcvP": "Save changes"
+		"3QrnpcvP": "Save changes",
+		"fZ63rLE-": "Close",
+		"WNPfer3r": "Delete tree?",
+		"AUSAq47k": "“{displayName}” will be removed from this plan."
 	},
 	"lib/components/plan/TreeList.svelte": {
 		"ByaXcHRu": "No trees yet",
-		"ShpkOXCu": "Pick a species above the map, click “Add tree” and then click on the map to place it."
+		"5QQug909": "Tap “Add tree”, choose a species and move the map to place it."
 	},
 	"lib/components/plan/TreeListItem.svelte": {
-		"Q3bwBUTa": "{height} high",
 		"mw8bEK_1": "planned",
 		"_1DG3LXL": "Too close to another tree"
 	},
@@ -274,6 +271,9 @@
 	"lib/components/ui/Spinner.svelte": {
 		"uju74Q2L": "Loading…"
 	},
+	"lib/plan.ts": {
+		"Q3bwBUTa": "{height} high"
+	},
 	"lib/remote/admin.remote.ts": {
 		"5FycCTg9": "You cannot change your own account here"
 	},
@@ -327,7 +327,8 @@
 		"q9TwROKu": "Deciduous",
 		"ClrxLVgi": "Conifer",
 		"d5CJs_dX": "Fruit",
-		"LbQPcAc5": "Shrub"
+		"LbQPcAc5": "Shrub",
+		"BgohRuuB": "Grows up to {height} tall and {spread} wide"
 	},
 	"routes/(app)/admin/+layout.server.ts": {
 		"tscJJsGq": "Admins only"

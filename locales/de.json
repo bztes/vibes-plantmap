@@ -80,15 +80,14 @@
 		"ZNDGt2ln": "{user.name} und alle zugehörigen Pläne werden endgültig gelöscht."
 	},
 	"lib/components/layout/AppHeader.svelte": {
-		"3-iy8N4m": "Pläne",
-		"ViBeEsIP": "Arten",
-		"wcIksDzZ": "Admin",
 		"v9QCsvbz": "Anmelden"
 	},
 	"lib/components/layout/UserMenu.svelte": {
+		"3-iy8N4m": "Pläne",
+		"ViBeEsIP": "Arten",
+		"wcIksDzZ": "Admin",
 		"b6Jb4cUL": "Benutzermenü",
 		"jGl25bVB": "Admin",
-		"Y4ND_sfA": "Verwaltung",
 		"SPDT05fU": "Abmelden"
 	},
 	"lib/components/map/LayerMenu.svelte": {
@@ -113,18 +112,6 @@
 		"PPwaufDy": "in {years} Jahren",
 		"ifaDJWDe": "Jahr",
 		"hKl0L5rj": "Zurück zu heute"
-	},
-	"lib/components/plan/AddTreeDialog.svelte": {
-		"BgohRuuB": "Wird bis zu {height} hoch und {spread} breit",
-		"fVt38b7l": "Baum hinzufügen",
-		"XvPXWs1V": "Wähle, was du pflanzen möchtest, und platziere es dann auf der Karte.",
-		"ViBeEsIP": "Arten",
-		"3NHVIj9z": "Name",
-		"mMxtcfBS": "Optional, z. B. „Opas Apfelbaum“",
-		"tPED68PN": "Pflanzdatum",
-		"wFy6QuzW": "Kann für geplante Bäume in der Zukunft liegen",
-		"GXZu1syy": "Abbrechen",
-		"eqYNlO_B": "Auf der Karte platzieren"
 	},
 	"lib/components/plan/ConflictList.svelte": {
 		"_VgCIsSY": "Genug Platz",
@@ -153,22 +140,28 @@
 		"FQn1YfJB": "Speichern"
 	},
 	"lib/components/plan/PlanView.svelte": {
-		"BgohRuuB": "Wird bis zu {height} hoch und {spread} breit",
+		"bJjRvTS8": "Plan teilen",
+		"-GvycTav": "Planeinstellungen",
 		"Wr6eH7xb": "Darf bearbeiten",
 		"m0xshZDp": "Nur ansehen",
 		"N3ThwgSs": "Geteilt von {owner}",
-		"bJjRvTS8": "Plan teilen",
-		"-GvycTav": "Planeinstellungen",
-		"itgLwbus": "Bereich einklappen",
-		"SnRmfxlw": "Bereich ausklappen",
 		"9msViuJl": "Bäume ({trees.length})",
 		"n16jXcf5": "Konflikte",
+		"itgLwbus": "Bereich einklappen",
+		"SnRmfxlw": "Bereich ausklappen",
 		"yuCZ6gh9": "Es sind noch keine Grundkarten eingerichtet. Ein Admin kann sie unter Verwaltung hinzufügen.",
 		"s8iHL8jg": "Karte verschieben zum Platzieren",
+		"_1DG3LXL": "Zu nah an einem anderen Baum",
+		"mluM8qF_": "Baum verschieben",
+		"bsw99r_9": "Verschieben",
+		"RZid5J-3": "Details",
+		"FCF0wZRX": "Auswahl aufheben",
 		"pp_1LE0K": "Hier pflanzen",
 		"VvEkd3dJ": "Hierher verschieben",
 		"GXZu1syy": "Abbrechen",
-		"fVt38b7l": "Baum hinzufügen"
+		"fVt38b7l": "Baum hinzufügen",
+		"XvPXWs1V": "Wähle, was du pflanzen möchtest, und platziere es dann auf der Karte.",
+		"eqYNlO_B": "Auf der Karte platzieren"
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "Plan teilen",
@@ -182,24 +175,23 @@
 		"7Fugq7cX": "Zugriff",
 		"5rhQz_av": "Link erstellen"
 	},
-	"lib/components/plan/TreeDetails.svelte": {
-		"Xaj3-8Kd": "Zurück zur Liste",
-		"Hd47zDnt": "Baum bearbeiten",
-		"c3I5Wxwn": "Baum löschen",
+	"lib/components/plan/SpeciesDialog.svelte": {
+		"7LlCdKXB": "Art ändern",
+		"GXZu1syy": "Abbrechen",
+		"KngCXeaq": "Auswählen"
+	},
+	"lib/components/plan/SpeciesPicker.svelte": {
+		"DMHyvk0u": "Arten durchsuchen",
 		"ViBeEsIP": "Arten",
-		"krXGLqWH": "Gepflanzt",
-		"mluM8qF_": "Baum verschieben",
+		"vLiKq1sV": "Keine Arten gefunden"
+	},
+	"lib/components/plan/TreeDialog.svelte": {
 		"Z6-jUvMQ": "Überschneidet sich {year} um {overlap} mit {name}",
 		"9ngb3uJL": "Berührt {name} ab etwa {c.year}",
-		"inUlsUkv": "Notizen",
-		"WNPfer3r": "Baum löschen?",
-		"AUSAq47k": "„{displayName}“ wird aus diesem Plan entfernt."
-	},
-	"lib/components/plan/TreeEditDialog.svelte": {
-		"Hd47zDnt": "Baum bearbeiten",
 		"3NHVIj9z": "Name",
 		"mMxtcfBS": "Optional, z. B. „Opas Apfelbaum“",
 		"ViBeEsIP": "Arten",
+		"wL91vXi_": "Ändern",
 		"tPED68PN": "Pflanzdatum",
 		"wFy6QuzW": "Kann für geplante Bäume in der Zukunft liegen",
 		"c09VkM4t": "Höhe beim Pflanzen",
@@ -209,15 +201,20 @@
 		"NwJmOCHn": "Endhöhe (m)",
 		"GCMszQD0": "Endkrone (m)",
 		"inUlsUkv": "Notizen",
+		"krXGLqWH": "Gepflanzt",
+		"c3I5Wxwn": "Baum löschen",
+		"4tClSWjq": "Löschen",
 		"GXZu1syy": "Abbrechen",
-		"3QrnpcvP": "Änderungen speichern"
+		"3QrnpcvP": "Änderungen speichern",
+		"fZ63rLE-": "Schließen",
+		"WNPfer3r": "Baum löschen?",
+		"AUSAq47k": "„{displayName}“ wird aus diesem Plan entfernt."
 	},
 	"lib/components/plan/TreeList.svelte": {
 		"ByaXcHRu": "Noch keine Bäume",
-		"ShpkOXCu": "Wähle über der Karte eine Art, klicke auf „Baum hinzufügen“ und dann auf die Karte, um ihn zu platzieren."
+		"5QQug909": "Tippe auf „Baum hinzufügen“, wähle eine Art und verschiebe die Karte, um ihn zu platzieren."
 	},
 	"lib/components/plan/TreeListItem.svelte": {
-		"Q3bwBUTa": "{height} hoch",
 		"mw8bEK_1": "geplant",
 		"_1DG3LXL": "Zu nah an einem anderen Baum"
 	},
@@ -274,6 +271,9 @@
 	"lib/components/ui/Spinner.svelte": {
 		"uju74Q2L": "Wird geladen…"
 	},
+	"lib/plan.ts": {
+		"Q3bwBUTa": "{height} hoch"
+	},
 	"lib/remote/admin.remote.ts": {
 		"5FycCTg9": "Dein eigenes Konto kannst du hier nicht ändern"
 	},
@@ -327,7 +327,8 @@
 		"q9TwROKu": "Laubbaum",
 		"ClrxLVgi": "Nadelbaum",
 		"d5CJs_dX": "Obstbaum",
-		"LbQPcAc5": "Strauch"
+		"LbQPcAc5": "Strauch",
+		"BgohRuuB": "Wird bis zu {height} hoch und {spread} breit"
 	},
 	"routes/(app)/admin/+layout.server.ts": {
 		"tscJJsGq": "Nur für Admins"
