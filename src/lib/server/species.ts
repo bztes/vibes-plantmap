@@ -1,4 +1,4 @@
-import { getLocale } from '#lib/i18n/index.ts';
+import { getLocale } from '@bztes/vibes-t0n';
 
 /** Name in the locale of the current request, falls back to the base name. */
 export function localizedName(s: { name: string; nameTranslations: Record<string, string> }) {

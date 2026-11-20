@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { BASEMAP_PRESETS, type BasemapConfig } from '#lib/basemaps.ts';
 	import { saveBasemap } from '#lib/remote/basemaps.remote.ts';
 	import FormIssues from '#lib/components/layout/FormIssues.svelte';

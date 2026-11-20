@@ -2,3 +2,5 @@ allowBuilds:
   sharp: true
   esbuild: true
 engineStrict: true
+minimumReleaseAgeExclude:
+  - '@bztes/vibes-t0n@0.1.1'

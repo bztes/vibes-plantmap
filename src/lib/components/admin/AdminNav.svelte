@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { Layers, Settings, Sprout, Users } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';

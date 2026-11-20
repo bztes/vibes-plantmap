@@ -1,4 +1,4 @@
-import { getLocale } from '#lib/i18n/index.ts';
+import { getLocale } from '@bztes/vibes-t0n';
 export interface GrowthParams {
 	plantedAt: string;
 	heightAtPlanting: number;
@@ -39,6 +39,14 @@ export function sizeAt(params: GrowthParams, date: Date): TreeSize {
 		planted: age >= 0,
 		height: approach(params.heightAtPlanting, params.matureHeight, age, params.yearsToMaturity),
 		spread: approach(params.spreadAtPlanting, params.matureSpread, age, params.yearsToMaturity)
+	};
+}
+
+/** Size of a young nursery tree: ~10% of mature height (at least 1 m) and ~8% of its spread. */
+export function plantingSize(matureHeight: number, matureSpread: number) {
+	return {
+		heightAtPlanting: Math.max(1, Math.round(matureHeight * 0.1 * 10) / 10),
+		spreadAtPlanting: Math.max(0.3, Math.round(matureSpread * 0.08 * 10) / 10)
 	};
 }
 

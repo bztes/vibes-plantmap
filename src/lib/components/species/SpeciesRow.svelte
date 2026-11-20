@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { Languages, Pencil, Trash2 } from '@lucide/svelte';
 	import { deleteSpecies, saveSharedSpecies, saveSpecies } from '#lib/remote/species.remote.ts';
 	import SpeciesTranslationsDialog from '#lib/components/admin/SpeciesTranslationsDialog.svelte';

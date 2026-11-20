@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { TreeDeciduous } from '@lucide/svelte';
 	import type { Conflict, PlannedTree, Sized } from '#lib/plan.ts';
 	import EmptyState from '#lib/components/ui/EmptyState.svelte';

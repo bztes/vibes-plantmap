@@ -8,7 +8,7 @@
 		type Sized,
 		type UpcomingConflict
 	} from '#lib/plan.ts';
-	import { getLocale, t } from '#lib/i18n/index.ts';
+	import { getLocale, t } from '@bztes/vibes-t0n';
 	import { formatMeters } from '#lib/growth.ts';
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import Button from '#lib/components/ui/Button.svelte';

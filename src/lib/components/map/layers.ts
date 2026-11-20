@@ -68,7 +68,16 @@ export function addTreeLayers(map: Map) {
 		source: SOURCES.canopy,
 		paint: {
 			'fill-color': ['get', 'color'],
-			'fill-opacity': ['case', ['get', 'selected'], 0.55, ['get', 'planted'], 0.35, 0.15]
+			'fill-opacity': [
+				'case',
+				['get', 'faded'],
+				0.08,
+				['get', 'selected'],
+				0.55,
+				['get', 'planted'],
+				0.35,
+				0.15
+			]
 		}
 	});
 	const outlineColor = [
@@ -80,12 +89,18 @@ export function addTreeLayers(map: Map) {
 		['get', 'color']
 	] as const;
 	const outlineWidth = ['case', ['get', 'selected'], 3, ['get', 'conflict'], 2.5, 1.5] as const;
+	/** e.g. the old spot of a tree that is being moved */
+	const fadedOpacity = ['case', ['get', 'faded'], 0.3, 1] as const;
 	map.addLayer({
 		id: 'plantmap-canopy-line',
 		type: 'line',
 		source: SOURCES.canopy,
 		filter: ['==', ['get', 'planted'], true],
-		paint: { 'line-color': outlineColor as never, 'line-width': outlineWidth as never }
+		paint: {
+			'line-color': outlineColor as never,
+			'line-width': outlineWidth as never,
+			'line-opacity': fadedOpacity as never
+		}
 	});
 	map.addLayer({
 		id: 'plantmap-canopy-line-planned',
@@ -95,6 +110,7 @@ export function addTreeLayers(map: Map) {
 		paint: {
 			'line-color': outlineColor as never,
 			'line-width': outlineWidth as never,
+			'line-opacity': fadedOpacity as never,
 			'line-dasharray': [3, 2]
 		}
 	});
@@ -125,7 +141,9 @@ export function addTreeLayers(map: Map) {
 			'circle-radius': ['case', ['get', 'selected'], 7, 5],
 			'circle-color': '#fff',
 			'circle-stroke-color': ['get', 'color'],
-			'circle-stroke-width': ['case', ['get', 'selected'], 4, 2.5]
+			'circle-stroke-width': ['case', ['get', 'selected'], 4, 2.5],
+			'circle-opacity': fadedOpacity as never,
+			'circle-stroke-opacity': fadedOpacity as never
 		}
 	});
 	map.addLayer({
@@ -141,7 +159,12 @@ export function addTreeLayers(map: Map) {
 			'text-anchor': 'top',
 			'text-optional': true
 		},
-		paint: { 'text-color': '#1c1917', 'text-halo-color': '#fff', 'text-halo-width': 1.5 }
+		paint: {
+			'text-color': '#1c1917',
+			'text-halo-color': '#fff',
+			'text-halo-width': 1.5,
+			'text-opacity': fadedOpacity as never
+		}
 	});
 }
 
@@ -225,7 +248,9 @@ export function setMatureVisible(map: Map, visible: boolean) {
 export function treeData<T extends PlannedTree>(
 	trees: Sized<T>[],
 	conflicts: Conflict<T>[],
-	selectedId: string | null
+	selectedId: string | null,
+	/** tree drawn transparent, e.g. at its old spot while it's being moved */
+	fadedId: string | null = null
 ) {
 	const conflicting = new Set(conflicts.flatMap((c) => [c.a.id, c.b.id]));
 
@@ -238,7 +263,8 @@ export function treeData<T extends PlannedTree>(
 				color: t.color,
 				planted: t.size.planted,
 				conflict: conflicting.has(t.id),
-				selected: t.id === selectedId
+				selected: t.id === selectedId,
+				faded: t.id === fadedId
 			},
 			geometry: { type: 'Polygon', coordinates: [circleRing([t.lng, t.lat], t.size.spread / 2)] }
 		}))
@@ -246,18 +272,26 @@ export function treeData<T extends PlannedTree>(
 
 	const mature: FeatureCollection<Polygon> = {
 		type: 'FeatureCollection',
-		features: trees.map((t) => ({
-			type: 'Feature',
-			properties: { id: t.id },
-			geometry: { type: 'Polygon', coordinates: [circleRing([t.lng, t.lat], t.matureSpread / 2)] }
-		}))
+		features: trees
+			.filter((t) => t.id !== fadedId)
+			.map((t) => ({
+				type: 'Feature',
+				properties: { id: t.id },
+				geometry: { type: 'Polygon', coordinates: [circleRing([t.lng, t.lat], t.matureSpread / 2)] }
+			}))
 	};
 
 	const trunks: FeatureCollection<Point> = {
 		type: 'FeatureCollection',
 		features: trees.map((t) => ({
 			type: 'Feature',
-			properties: { id: t.id, color: t.color, label: treeName(t), selected: t.id === selectedId },
+			properties: {
+				id: t.id,
+				color: t.color,
+				label: treeName(t),
+				selected: t.id === selectedId,
+				faded: t.id === fadedId
+			},
 			geometry: { type: 'Point', coordinates: [t.lng, t.lat] }
 		}))
 	};

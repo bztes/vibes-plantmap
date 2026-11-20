@@ -4,7 +4,7 @@ import { and, eq } from 'drizzle-orm';
 import { db } from '#lib/server/db/index.ts';
 import { plan, planShare } from '#lib/server/db/schema.ts';
 import { requireUser } from '#lib/server/guards.ts';
-import { t } from '#lib/i18n/index.ts';
+import { t } from '@bztes/vibes-t0n';
 
 export type PlanRole = 'view' | 'edit' | 'owner';
 

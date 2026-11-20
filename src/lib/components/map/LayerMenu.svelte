@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { Check, Layers, Map, Satellite } from '@lucide/svelte';
 	import type { Basemap } from '#lib/basemaps.ts';
 	import Switch from '#lib/components/ui/Switch.svelte';

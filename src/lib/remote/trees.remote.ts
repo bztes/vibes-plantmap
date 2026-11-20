@@ -7,7 +7,8 @@ import { species, tree } from '#lib/server/db/schema.ts';
 import { getPlanAccess } from '#lib/server/access.ts';
 import { requireUser } from '#lib/server/guards.ts';
 import { localizedName } from '#lib/server/species.ts';
-import { t } from '#lib/i18n/index.ts';
+import { t } from '@bztes/vibes-t0n';
+import { plantingSize } from '#lib/growth.ts';
 
 /** Trees of a plan, `planRef` is a plan id or share link token (see `getPlanAccess`). */
 export const getTrees = query(v.string(), async (planRef) => {
@@ -84,9 +85,7 @@ export const createTree = command(
 				...data,
 				planId: plan.id,
 				label: data.label || null,
-				// young nursery trees: ~10% of mature height, at least 1 m
-				heightAtPlanting: Math.max(1, Math.round(s.matureHeight * 0.1 * 10) / 10),
-				spreadAtPlanting: Math.max(0.3, Math.round(s.matureSpread * 0.08 * 10) / 10)
+				...plantingSize(s.matureHeight, s.matureSpread)
 			})
 			.returning({ id: tree.id });
 		await getTrees(planRef).refresh();

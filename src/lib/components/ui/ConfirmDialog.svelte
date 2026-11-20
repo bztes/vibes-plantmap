@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import Button from './Button.svelte';
 	import Dialog from './Dialog.svelte';
 

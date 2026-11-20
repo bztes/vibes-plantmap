@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getLocale, t } from '#lib/i18n/index.ts';
+	import { getLocale, t } from '@bztes/vibes-t0n';
 	import { MapPin, Search } from '@lucide/svelte';
 	import type { LngLat } from '#lib/geo.ts';
 	import Input from '#lib/components/ui/Input.svelte';

@@ -6,7 +6,7 @@ import { db } from '#lib/server/db/index.ts';
 import { plan, planShare, SHARE_ROLES } from '#lib/server/db/schema.ts';
 import { getOwnedPlan } from '#lib/server/access.ts';
 import { requireUser } from '#lib/server/guards.ts';
-import { t } from '#lib/i18n/index.ts';
+import { t } from '@bztes/vibes-t0n';
 
 /** Share links of one of the user's plans, oldest first. */
 export const getPlanShares = query(v.string(), async (planId) => {

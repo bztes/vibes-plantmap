@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { localeNames, locales, t } from '#lib/i18n/index.ts';
+	import { localeNames, locales, t } from '@bztes/vibes-t0n';
 	import { setSpeciesTranslations } from '#lib/remote/species.remote.ts';
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import Button from '#lib/components/ui/Button.svelte';

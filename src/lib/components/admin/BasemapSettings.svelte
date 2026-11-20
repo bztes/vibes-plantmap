@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Layers, Plus } from '@lucide/svelte';
 	import { BASEMAP_PRESETS } from '#lib/basemaps.ts';
-	import { getLocale, t } from '#lib/i18n/index.ts';
+	import { getLocale, t } from '@bztes/vibes-t0n';
 	import { addBasemapPresets, getAdminBasemaps } from '#lib/remote/basemaps.remote.ts';
 	import BasemapDialog from '#lib/components/admin/BasemapDialog.svelte';
 	import BasemapRow from '#lib/components/admin/BasemapRow.svelte';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Ban, ShieldCheck, ShieldOff, Trash2, UserCheck } from '@lucide/svelte';
-	import { getLocale, t } from '#lib/i18n/index.ts';
+	import { getLocale, t } from '@bztes/vibes-t0n';
 	import { deleteUser, setUserBanned, setUserRole } from '#lib/remote/admin.remote.ts';
 	import Avatar from '#lib/components/ui/Avatar.svelte';
 	import Badge from '#lib/components/ui/Badge.svelte';

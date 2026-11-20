@@ -4,7 +4,7 @@
 	import type { GeoJSONSource, Map, MapMouseEvent } from 'maplibre-gl';
 	import { untrack } from 'svelte';
 	import { Info } from '@lucide/svelte';
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import Dialog from '#lib/components/ui/Dialog.svelte';
 	import type { Basemap } from '#lib/basemaps.ts';
 	import type { LngLat } from '#lib/geo.ts';
@@ -29,6 +29,8 @@
 		trees: Sized<T>[];
 		conflicts: Conflict<T>[];
 		selectedId: string | null;
+		/** tree drawn transparent, e.g. at its old spot while it's being moved */
+		fadedId?: string | null;
 		/** when true, the map center marks where a tree goes, clicking pans there instead of selecting */
 		placing: boolean;
 		showMature: boolean;
@@ -36,8 +38,8 @@
 		basemaps: Basemap[];
 		basemap: Basemap | null;
 		onselect: (id: string | null) => void;
-		/** fired continuously while the map moves */
-		oncenter: (at: LngLat) => void;
+		/** ground meters per screen pixel at the map center, fired while the map moves */
+		onscale: (metersPerPixel: number) => void;
 		onviewchange: (view: MapView) => void;
 	}
 
@@ -46,12 +48,13 @@
 		trees,
 		conflicts,
 		selectedId,
+		fadedId = null,
 		placing,
 		showMature,
 		basemaps,
 		basemap,
 		onselect,
-		oncenter,
+		onscale,
 		onviewchange
 	}: Props = $props();
 
@@ -125,10 +128,13 @@
 				ready = true;
 			});
 			loaded.once('load', () => wireInteractions(loaded));
-			loaded.on('move', () => {
-				const c = loaded.getCenter();
-				oncenter([c.lng, c.lat]);
-			});
+			const updateScale = () => {
+				// maplibre tiles are 512 px wide, the earth's circumference shrinks with latitude
+				const lat = (loaded.getCenter().lat * Math.PI) / 180;
+				onscale((40_075_016.686 * Math.cos(lat)) / (512 * 2 ** loaded.getZoom()));
+			};
+			updateScale();
+			loaded.on('move', updateScale);
 			loaded.on('moveend', () => {
 				const c = loaded.getCenter();
 				onviewchange({ lng: c.lng, lat: c.lat, zoom: loaded.getZoom() });
@@ -204,7 +210,7 @@
 
 	$effect(() => {
 		if (!map || !ready) return;
-		const data = treeData(trees, conflicts, selectedId);
+		const data = treeData(trees, conflicts, selectedId, fadedId);
 		for (const [key, source] of Object.entries(SOURCES)) {
 			map.getSource<GeoJSONSource>(source)?.setData(data[key as keyof typeof data]);
 		}

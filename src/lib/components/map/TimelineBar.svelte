@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { CalendarClock, Pause, Play, RotateCcw } from '@lucide/svelte';
 	import IconButton from '#lib/components/ui/IconButton.svelte';
 	import Slider from '#lib/components/ui/Slider.svelte';

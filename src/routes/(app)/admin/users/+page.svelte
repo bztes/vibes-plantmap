@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { getUsers } from '#lib/remote/admin.remote.ts';
 	import { getCurrentUser } from '#lib/remote/auth.remote.ts';
 	import UserRow from '#lib/components/admin/UserRow.svelte';

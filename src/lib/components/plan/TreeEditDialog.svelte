@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { updateTree, type TreeRow } from '#lib/remote/trees.remote.ts';
 	import FormIssues from '#lib/components/layout/FormIssues.svelte';
 	import Button from '#lib/components/ui/Button.svelte';

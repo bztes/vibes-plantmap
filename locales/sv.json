@@ -115,6 +115,7 @@
 		"hKl0L5rj": "Tillbaka till idag"
 	},
 	"lib/components/plan/AddTreeDialog.svelte": {
+		"BgohRuuB": "Blir upp till {height} hög och {spread} bred",
 		"fVt38b7l": "Lägg till träd",
 		"XvPXWs1V": "Välj vad du vill plantera och placera det sedan på kartan.",
 		"ViBeEsIP": "Art",
@@ -152,6 +153,7 @@
 		"FQn1YfJB": "Spara"
 	},
 	"lib/components/plan/PlanView.svelte": {
+		"BgohRuuB": "Blir upp till {height} hög och {spread} bred",
 		"Wr6eH7xb": "Kan redigera",
 		"m0xshZDp": "Endast visning",
 		"N3ThwgSs": "Delad av {owner}",

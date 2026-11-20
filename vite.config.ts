@@ -4,13 +4,13 @@ import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 import adapter from '@sveltejs/adapter-node';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { i18n } from './src/lib/i18n/plugin.ts';
+import { t0n } from '@bztes/vibes-t0n/vite';
 
 export default defineConfig({
 	plugins: [
 		enhancedImages(),
 		tailwindcss(),
-		i18n(),
+		t0n(),
 		sveltekit({
 			compilerOptions: {
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.

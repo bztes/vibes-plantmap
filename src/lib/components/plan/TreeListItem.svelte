@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { TriangleAlert } from '@lucide/svelte';
 	import { formatMeters } from '#lib/growth.ts';
 	import { treeName, type PlannedTree, type Sized } from '#lib/plan.ts';

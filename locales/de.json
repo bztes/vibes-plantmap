@@ -115,6 +115,7 @@
 		"hKl0L5rj": "Zurück zu heute"
 	},
 	"lib/components/plan/AddTreeDialog.svelte": {
+		"BgohRuuB": "Wird bis zu {height} hoch und {spread} breit",
 		"fVt38b7l": "Baum hinzufügen",
 		"XvPXWs1V": "Wähle, was du pflanzen möchtest, und platziere es dann auf der Karte.",
 		"ViBeEsIP": "Arten",
@@ -152,6 +153,7 @@
 		"FQn1YfJB": "Speichern"
 	},
 	"lib/components/plan/PlanView.svelte": {
+		"BgohRuuB": "Wird bis zu {height} hoch und {spread} breit",
 		"Wr6eH7xb": "Darf bearbeiten",
 		"m0xshZDp": "Nur ansehen",
 		"N3ThwgSs": "Geteilt von {owner}",

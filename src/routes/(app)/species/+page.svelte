@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { Plus } from '@lucide/svelte';
 	import { getSpecies } from '#lib/remote/species.remote.ts';
 	import PageContainer from '#lib/components/layout/PageContainer.svelte';

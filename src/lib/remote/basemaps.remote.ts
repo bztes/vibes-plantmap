@@ -6,7 +6,7 @@ import { BASEMAP_PRESETS, type Basemap } from '#lib/basemaps.ts';
 import { db } from '#lib/server/db/index.ts';
 import { BASEMAP_KINDS, basemap } from '#lib/server/db/schema.ts';
 import { requireAdmin } from '#lib/server/guards.ts';
-import { t } from '#lib/i18n/index.ts';
+import { t } from '@bztes/vibes-t0n';
 
 /** Enabled base maps in display order, for the plan map. Public, shared plans can be viewed signed out. */
 export const getBasemaps = query(async (): Promise<Basemap[]> => {

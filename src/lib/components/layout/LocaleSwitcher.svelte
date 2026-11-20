@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { refreshAll } from '$app/navigation';
-	import { getLocale, localeNames, locales, setLocale } from '#lib/i18n/index.ts';
+	import { getLocale, localeNames, locales, setLocale } from '@bztes/vibes-t0n';
 </script>
 
 <div class="flex items-center gap-1 text-xs">

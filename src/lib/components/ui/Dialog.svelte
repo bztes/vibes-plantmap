@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import type { Snippet } from 'svelte';
 	import { X } from '@lucide/svelte';
 	import IconButton from './IconButton.svelte';

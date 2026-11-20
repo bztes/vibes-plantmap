@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import {
 		Check,
 		ChevronUp,
@@ -18,7 +18,7 @@
 	import { createTree, getTrees, moveTree } from '#lib/remote/trees.remote.ts';
 	import { defaultBasemap } from '#lib/basemaps.ts';
 	import type { LngLat } from '#lib/geo.ts';
-	import { addYears } from '#lib/growth.ts';
+	import { addYears, formatMeters, plantingSize, sizeAt } from '#lib/growth.ts';
 	import { findConflicts, findUpcomingConflicts, sizeTrees, type PlannedTree } from '#lib/plan.ts';
 	import type { MapView } from '#lib/components/map/layers.ts';
 	import PlanMap from '#lib/components/map/PlanMap.svelte';
@@ -56,7 +56,7 @@
 	let addOpen = $state(false);
 	/** new tree waiting to be planted at the map center */
 	let draft = $state<TreeDraft | null>(null);
-	/** tree following the map center until the move is confirmed */
+	/** tree being moved, it stays faded at its old spot until the move is confirmed */
 	let movingId = $state<string | null>(null);
 	let tab = $state<'trees' | 'conflicts'>('trees');
 	/** whether the side panel is expanded, only collapsible on small screens */
@@ -75,6 +75,35 @@
 	);
 	const sized = $derived(sizeTrees(positioned, viewDate));
 	const conflicts = $derived(findConflicts(sized));
+
+	const draftSpecies = $derived(draft && species.find((s) => s.id === draft?.speciesId));
+	/** the tree being planted or moved, drawn as the marker in the map center */
+	const placingTree = $derived.by((): PlannedTree | null => {
+		if (movingId) return trees.find((t) => t.id === movingId) ?? null;
+		if (!draft || !draftSpecies) return null;
+		return {
+			id: 'draft',
+			label: draft.label || null,
+			lng: 0,
+			lat: 0,
+			speciesName: draftSpecies.name,
+			color: draftSpecies.color,
+			plantedAt: draft.plantedAt,
+			matureHeight: draftSpecies.matureHeight,
+			matureSpread: draftSpecies.matureSpread,
+			yearsToMaturity: draftSpecies.yearsToMaturity,
+			...plantingSize(draftSpecies.matureHeight, draftSpecies.matureSpread)
+		};
+	});
+	const placingSpread = $derived(placingTree ? sizeAt(placingTree, viewDate).spread : 0);
+	/** map scale at the center, to draw the marker at the tree's real size */
+	let metersPerPixel = $state(1);
+	const placingSize = $derived.by(() => {
+		if (!placingTree) return null;
+		const height = formatMeters(placingTree.matureHeight);
+		const spread = formatMeters(placingTree.matureSpread);
+		return t`Grows up to ${height} tall and ${spread} wide`;
+	});
 	const upcoming = $derived(findUpcomingConflicts(positioned, viewDate));
 	const selected = $derived(sized.find((t) => t.id === selectedId) ?? null);
 	const placing = $derived(draft !== null || movingId !== null);
@@ -92,7 +121,6 @@
 		if (!tree) return;
 		draft = null;
 		movingId = id;
-		preview = { id, at: [tree.lng, tree.lat] };
 		map?.flyTo([tree.lng, tree.lat]);
 	}
 
@@ -100,10 +128,6 @@
 		movingId = null;
 		preview = null;
 		draft = details;
-	}
-
-	function followCenter(at: LngLat) {
-		if (movingId) preview = { id: movingId, at };
 	}
 
 	async function place() {
@@ -276,12 +300,13 @@
 			trees={sized}
 			{conflicts}
 			{selectedId}
+			fadedId={movingId}
 			{placing}
 			{showMature}
 			{basemaps}
 			{basemap}
 			onselect={select}
-			oncenter={followCenter}
+			onscale={(m) => (metersPerPixel = m)}
 			onviewchange={rememberView}
 		/>
 
@@ -303,6 +328,23 @@
 		{/if}
 
 		{#if placing}
+			{#if placingTree}
+				<!-- the tree at its real size; an overlay rather than a map layer so it doesn't lag behind panning -->
+				<div
+					class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-stone-700/70 drop-shadow-[0_0_1px_white]"
+					style:width="{placingTree.matureSpread / metersPerPixel}px"
+					style:height="{placingTree.matureSpread / metersPerPixel}px"
+					aria-hidden="true"
+				></div>
+				<div
+					class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2"
+					style:width="{placingSpread / metersPerPixel}px"
+					style:height="{placingSpread / metersPerPixel}px"
+					style:border-color={placingTree.color}
+					style:background-color="color-mix(in srgb, {placingTree.color} 40%, transparent)"
+					aria-hidden="true"
+				></div>
+			{/if}
 			<!-- the map center is where the tree goes -->
 			<div
 				class="pointer-events-none absolute top-1/2 left-1/2 size-10 -translate-x-1/2 -translate-y-1/2 text-stone-900 drop-shadow-[0_0_2px_white]"
@@ -315,9 +357,12 @@
 				></div>
 			</div>
 			<div
-				class="pointer-events-none absolute top-18 left-1/2 max-w-[90%] -translate-x-1/2 rounded-full bg-stone-900/85 px-4 py-1.5 text-center text-sm text-white shadow"
+				class="pointer-events-none absolute top-18 left-1/2 max-w-[90%] -translate-x-1/2 rounded-2xl bg-stone-900/85 px-4 py-1.5 text-center text-sm text-white shadow"
 			>
 				{t`Move map to place tree`}
+				{#if placingSize}
+					<span class="block text-xs text-white/75">{placingSize}</span>
+				{/if}
 			</div>
 		{/if}
 

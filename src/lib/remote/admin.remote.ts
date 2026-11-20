@@ -7,7 +7,7 @@ import { db } from '#lib/server/db/index.ts';
 import { plan, user } from '#lib/server/db/schema.ts';
 import { requireAdmin } from '#lib/server/guards.ts';
 import { isSignupEnabled, setSignupEnabled } from '#lib/server/settings.ts';
-import { t } from '#lib/i18n/index.ts';
+import { t } from '@bztes/vibes-t0n';
 
 export const getUsers = query(async () => {
 	requireAdmin();

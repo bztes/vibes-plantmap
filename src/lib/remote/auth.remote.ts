@@ -12,7 +12,7 @@ import {
 import { db } from '#lib/server/db/index.ts';
 import { user } from '#lib/server/db/schema.ts';
 import { countUsers, isSignupEnabled } from '#lib/server/settings.ts';
-import { t } from '#lib/i18n/index.ts';
+import { t } from '@bztes/vibes-t0n';
 import { safeNext } from '#lib/server/guards.ts';
 
 /** where to go after signing in, e.g. back to a share link */

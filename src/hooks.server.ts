@@ -1,6 +1,6 @@
 import { sequence, type Handle } from '@sveltejs/kit/hooks';
 import { validateSession } from '#lib/server/auth.ts';
-import { handleLocale } from '#lib/i18n/server.ts';
+import { handleLocale } from '@bztes/vibes-t0n/sveltekit';
 
 const handleSession: Handle = async ({ event, resolve }) => {
 	const current = await validateSession();

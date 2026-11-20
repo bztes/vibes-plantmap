@@ -115,6 +115,7 @@
 		"hKl0L5rj": "Back to today"
 	},
 	"lib/components/plan/AddTreeDialog.svelte": {
+		"BgohRuuB": "Grows up to {height} tall and {spread} wide",
 		"fVt38b7l": "Add tree",
 		"XvPXWs1V": "Choose what to plant, then position it on the map.",
 		"ViBeEsIP": "Species",
@@ -152,6 +153,7 @@
 		"FQn1YfJB": "Save"
 	},
 	"lib/components/plan/PlanView.svelte": {
+		"BgohRuuB": "Grows up to {height} tall and {spread} wide",
 		"Wr6eH7xb": "Can edit",
 		"m0xshZDp": "View only",
 		"N3ThwgSs": "Shared by {owner}",

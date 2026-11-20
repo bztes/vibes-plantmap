@@ -7,18 +7,25 @@
 </script>
 
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { MapPin } from '@lucide/svelte';
 	import Button from '#lib/components/ui/Button.svelte';
 	import Dialog from '#lib/components/ui/Dialog.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Input from '#lib/components/ui/Input.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
+	import { formatMeters } from '#lib/growth.ts';
 	import { categoryLabel } from '#lib/species.ts';
 
 	interface Props {
 		open: boolean;
-		species: { id: string; name: string; category: string }[];
+		species: {
+			id: string;
+			name: string;
+			category: string;
+			matureHeight: number;
+			matureSpread: number;
+		}[];
 		/** called with the details once the user is ready to pick a spot on the map */
 		onplace: (draft: TreeDraft) => void;
 	}
@@ -29,6 +36,19 @@
 
 	// species and date are kept between dialogs so planting several of the same is quick
 	let last = $state({ speciesId: '', plantedAt: new Date().toISOString().slice(0, 10) });
+
+	// tracks the select so the mature size updates while choosing
+	let speciesId = $state('');
+	$effect.pre(() => {
+		if (open) speciesId = last.speciesId || species[0]?.id || '';
+	});
+	const selected = $derived(species.find((s) => s.id === speciesId));
+	const matureSize = $derived.by(() => {
+		if (!selected) return undefined;
+		const height = formatMeters(selected.matureHeight);
+		const spread = formatMeters(selected.matureSpread);
+		return t`Grows up to ${height} tall and ${spread} wide`;
+	});
 
 	function submit(e: SubmitEvent & { currentTarget: HTMLFormElement }) {
 		e.preventDefault();
@@ -50,12 +70,13 @@
 	description={t`Choose what to plant, then position it on the map.`}
 >
 	<form id="add-tree" onsubmit={submit} class="flex flex-col gap-4">
-		<Field label={t`Species`} for="add-tree-species">
+		<Field label={t`Species`} for="add-tree-species" hint={matureSize}>
 			<Select
 				id="add-tree-species"
 				name="speciesId"
 				required
-				value={last.speciesId || species[0]?.id}
+				value={speciesId}
+				onchange={(e) => (speciesId = e.currentTarget.value)}
 			>
 				{#each categories as category (category)}
 					<optgroup label={categoryLabel(category)}>

@@ -2,7 +2,7 @@ import { error, redirect } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import { db } from '#lib/server/db/index.ts';
 import { planShare } from '#lib/server/db/schema.ts';
-import { t } from '#lib/i18n/index.ts';
+import { t } from '@bztes/vibes-t0n';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals, params, url }) => {

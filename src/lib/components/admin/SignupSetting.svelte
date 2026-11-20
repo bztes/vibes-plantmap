@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { getSettings, updateSignupEnabled } from '#lib/remote/admin.remote.ts';
 	import Card from '#lib/components/ui/Card.svelte';
 	import Switch from '#lib/components/ui/Switch.svelte';

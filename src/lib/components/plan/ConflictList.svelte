@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import { CircleCheck } from '@lucide/svelte';
 	import { formatMeters } from '#lib/growth.ts';
 	import type { Conflict, PlannedTree, UpcomingConflict } from '#lib/plan.ts';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Trash2, TreeDeciduous } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import { getLocale, t } from '#lib/i18n/index.ts';
+	import { getLocale, t } from '@bztes/vibes-t0n';
 	import { deletePlan } from '#lib/remote/plans.remote.ts';
 	import Card from '#lib/components/ui/Card.svelte';
 	import ConfirmDialog from '#lib/components/ui/ConfirmDialog.svelte';

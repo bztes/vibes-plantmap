@@ -7,7 +7,7 @@ import { SPECIES_CATEGORIES, species, tree } from '#lib/server/db/schema.ts';
 import { getPlanAccess } from '#lib/server/access.ts';
 import { requireAdmin, requireUser } from '#lib/server/guards.ts';
 import { localizeSpecies } from '#lib/server/species.ts';
-import { isLocale, t } from '#lib/i18n/index.ts';
+import { isLocale, t } from '@bztes/vibes-t0n';
 
 const speciesSchema = v.object({
 	/** set to update an existing species */

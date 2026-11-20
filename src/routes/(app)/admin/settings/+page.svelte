@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '#lib/i18n/index.ts';
+	import { t } from '@bztes/vibes-t0n';
 	import SignupSetting from '#lib/components/admin/SignupSetting.svelte';
 </script>
 
