@@ -331,7 +331,7 @@
 			{#if placingTree}
 				<!-- the tree at its real size; an overlay rather than a map layer so it doesn't lag behind panning -->
 				<div
-					class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-stone-700/70 drop-shadow-[0_0_1px_white]"
+					class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-stone-700 drop-shadow-[0_0_1px_white]"
 					style:width="{placingTree.matureSpread / metersPerPixel}px"
 					style:height="{placingTree.matureSpread / metersPerPixel}px"
 					aria-hidden="true"
@@ -341,7 +341,6 @@
 					style:width="{placingSpread / metersPerPixel}px"
 					style:height="{placingSpread / metersPerPixel}px"
 					style:border-color={placingTree.color}
-					style:background-color="color-mix(in srgb, {placingTree.color} 40%, transparent)"
 					aria-hidden="true"
 				></div>
 			{/if}
