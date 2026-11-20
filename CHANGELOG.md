@@ -1,5 +1,21 @@
 # vibes-plantmap
 
+## 0.4.0
+
+### Minor Changes
+
+- [`26f0f5d`](https://github.com/bztes/vibes-plantmap/commit/26f0f5d2f81efb7c2db5ea5492f82daf850f6d98) Thanks [@bztes](https://github.com/bztes)! - Modernize the plan sidebar and move navigation into the user menu
+
+### Patch Changes
+
+- [`dd9d580`](https://github.com/bztes/vibes-plantmap/commit/dd9d580cbb84ec52e6ef4c89185a85dc75303946) Thanks [@bztes](https://github.com/bztes)! - Fix the arm64 docker build
+
+- [`691032b`](https://github.com/bztes/vibes-plantmap/commit/691032bbbd63608fdb42e1a0b3b89520b887b197) Thanks [@bztes](https://github.com/bztes)! - Modernize map tree styling
+
+- [`7f2f490`](https://github.com/bztes/vibes-plantmap/commit/7f2f490ee00bc7b4f4ba60f3990f77e251491c2e) Thanks [@bztes](https://github.com/bztes)! - The placement marker now shows the tree as opaque outlines only, so the ground underneath stays visible while placing or moving a tree
+
+- [`26f0f5d`](https://github.com/bztes/vibes-plantmap/commit/26f0f5d2f81efb7c2db5ea5492f82daf850f6d98) Thanks [@bztes](https://github.com/bztes)! - Searchable species picker for adding and editing trees
+
 ## 0.3.0
 
 ### Minor Changes
