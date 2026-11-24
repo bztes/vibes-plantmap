@@ -1,9 +1,8 @@
-import type { FeatureCollection, LineString, Point, Polygon } from 'geojson';
+import type { FeatureCollection, Point, Polygon } from 'geojson';
 import type { Map, StyleSpecification, SymbolLayerSpecification } from 'maplibre-gl';
 import type { Basemap } from '#lib/basemaps.ts';
 import { circleRing } from '#lib/geo.ts';
-import { formatMeters } from '#lib/growth.ts';
-import type { Conflict, PlannedTree, Sized } from '#lib/plan.ts';
+import type { PlannedTree, Sized } from '#lib/plan.ts';
 import { treeName } from '#lib/plan.ts';
 
 export interface MapView {
@@ -31,7 +30,6 @@ export function styleFor(active: Basemap | null, basemaps: Basemap[]) {
 
 /** OpenFreeMap serves it, and so do the vector styles it hosts */
 const FONT = ['Noto Sans Bold'];
-const CONFLICT_COLOR = '#ef4444';
 const INK = '#1c1917';
 const PAPER = '#ffffff';
 
@@ -44,8 +42,7 @@ const MATURE_PAINT = {
 export const SOURCES = {
 	mature: 'plantmap-mature',
 	canopy: 'plantmap-canopy',
-	trunks: 'plantmap-trunks',
-	conflicts: 'plantmap-conflicts'
+	trunks: 'plantmap-trunks'
 } as const;
 
 /** Layers that react to clicks, topmost first. */
@@ -54,7 +51,7 @@ export const CANOPY_LAYER = 'plantmap-canopy-fill';
 export const MATURE_LAYER = 'plantmap-mature-line';
 
 /** label background fills, by kind */
-const PILL_FILLS = { light: PAPER, dark: INK, red: CONFLICT_COLOR };
+const PILL_FILLS = { light: PAPER, dark: INK };
 type PillKind = keyof typeof PILL_FILLS;
 const pill = (kind: PillKind) => `plantmap-pill-${kind}`;
 /** wraps a pill image around a symbol's text, matching the `content` box in `pillImage` */
@@ -163,8 +160,7 @@ export function addTreeLayers(map: Map) {
 			]
 		}
 	});
-	const outlineColor = ['case', ['get', 'conflict'], CONFLICT_COLOR, ['get', 'color']] as const;
-	const outlineWidth = ['case', ['get', 'selected'], 3, ['get', 'conflict'], 2.5, 2] as const;
+	const outlineWidth = ['case', ['get', 'selected'], 3, 2] as const;
 	// glow around the selected crown
 	map.addLayer({
 		id: 'plantmap-canopy-glow',
@@ -172,7 +168,7 @@ export function addTreeLayers(map: Map) {
 		source: SOURCES.canopy,
 		filter: ['==', ['get', 'selected'], true],
 		paint: {
-			'line-color': outlineColor as never,
+			'line-color': ['get', 'color'],
 			'line-width': 14,
 			'line-blur': 10,
 			'line-opacity': 0.55
@@ -194,7 +190,7 @@ export function addTreeLayers(map: Map) {
 		filter: ['==', ['get', 'planted'], true],
 		layout: { 'line-join': 'round' },
 		paint: {
-			'line-color': outlineColor as never,
+			'line-color': ['get', 'color'],
 			'line-width': outlineWidth as never,
 			'line-opacity': fadedOpacity as never
 		}
@@ -206,37 +202,11 @@ export function addTreeLayers(map: Map) {
 		filter: ['==', ['get', 'planted'], false],
 		layout: { 'line-cap': 'round', 'line-join': 'round' },
 		paint: {
-			'line-color': outlineColor as never,
+			'line-color': ['get', 'color'],
 			'line-width': outlineWidth as never,
 			'line-opacity': fadedOpacity as never,
 			'line-dasharray': dotted(2)
 		}
-	});
-	map.addLayer({
-		id: 'plantmap-conflict-line',
-		type: 'line',
-		source: SOURCES.conflicts,
-		layout: { 'line-cap': 'round' },
-		paint: { 'line-color': CONFLICT_COLOR, 'line-width': 2.5, 'line-dasharray': dotted(2) }
-	});
-	map.addLayer({
-		id: 'plantmap-conflict-label',
-		type: 'symbol',
-		source: SOURCES.conflicts,
-		layout: {
-			'symbol-placement': 'line-center',
-			'text-field': ['get', 'label'],
-			'text-font': FONT,
-			'text-size': 11,
-			'text-allow-overlap': true,
-			// a badge reads better upright than turned along the line
-			'text-rotation-alignment': 'viewport',
-			'icon-rotation-alignment': 'viewport',
-			'icon-image': pill('red'),
-			...PILL_FIT,
-			'icon-allow-overlap': true
-		},
-		paint: { 'text-color': PAPER }
 	});
 	map.addLayer({
 		id: 'plantmap-trunk-shadow',
@@ -369,13 +339,10 @@ export function setMatureVisible(map: Map, visible: boolean) {
 
 export function treeData<T extends PlannedTree>(
 	trees: Sized<T>[],
-	conflicts: Conflict<T>[],
 	selectedId: string | null,
 	/** tree drawn transparent, e.g. at its old spot while it's being moved */
 	fadedId: string | null = null
 ) {
-	const conflicting = new Set(conflicts.flatMap((c) => [c.a.id, c.b.id]));
-
 	const canopy: FeatureCollection<Polygon> = {
 		type: 'FeatureCollection',
 		features: trees.map((t) => ({
@@ -384,7 +351,6 @@ export function treeData<T extends PlannedTree>(
 				id: t.id,
 				color: t.color,
 				planted: t.size.planted,
-				conflict: conflicting.has(t.id),
 				selected: t.id === selectedId,
 				faded: t.id === fadedId
 			},
@@ -418,20 +384,5 @@ export function treeData<T extends PlannedTree>(
 		}))
 	};
 
-	const lines: FeatureCollection<LineString> = {
-		type: 'FeatureCollection',
-		features: conflicts.map((c) => ({
-			type: 'Feature',
-			properties: { label: `−${formatMeters(c.overlap)}` },
-			geometry: {
-				type: 'LineString',
-				coordinates: [
-					[c.a.lng, c.a.lat],
-					[c.b.lng, c.b.lat]
-				]
-			}
-		}))
-	};
-
-	return { canopy, mature, trunks, conflicts: lines };
+	return { canopy, mature, trunks };
 }

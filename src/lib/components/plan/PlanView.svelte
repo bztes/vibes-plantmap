@@ -12,7 +12,6 @@
 		Settings,
 		Share2,
 		TreeDeciduous,
-		TriangleAlert,
 		X
 	} from '@lucide/svelte';
 	import { getCurrentUser } from '#lib/remote/auth.remote.ts';
@@ -24,21 +23,13 @@
 	import type { LngLat } from '#lib/geo.ts';
 	import { addYears, plantingSize, sizeAt } from '#lib/growth.ts';
 	import { matureSizeLabel } from '#lib/species.ts';
-	import {
-		findConflicts,
-		findUpcomingConflicts,
-		sizeTrees,
-		treeName,
-		treeSummary,
-		type PlannedTree
-	} from '#lib/plan.ts';
+	import { sizeTrees, treeName, treeSummary, type PlannedTree } from '#lib/plan.ts';
 	import type { MapView } from '#lib/components/map/layers.ts';
 	import AppHeader from '#lib/components/layout/AppHeader.svelte';
 	import type { MenuAction } from '#lib/components/layout/UserMenu.svelte';
 	import PlanMap from '#lib/components/map/PlanMap.svelte';
 	import LayerMenu from '#lib/components/map/LayerMenu.svelte';
 	import TimelineBar from '#lib/components/map/TimelineBar.svelte';
-	import ConflictList from '#lib/components/plan/ConflictList.svelte';
 	import PlanSettingsDialog from '#lib/components/plan/PlanSettingsDialog.svelte';
 	import SharePlanDialog from '#lib/components/plan/SharePlanDialog.svelte';
 	import SpeciesDialog from '#lib/components/plan/SpeciesDialog.svelte';
@@ -48,7 +39,6 @@
 	import Button from '#lib/components/ui/Button.svelte';
 	import ColorSwatch from '#lib/components/ui/ColorSwatch.svelte';
 	import IconButton from '#lib/components/ui/IconButton.svelte';
-	import Tabs from '#lib/components/ui/Tabs.svelte';
 
 	interface Props {
 		/** plan id, or the token when opened through a share link */
@@ -82,7 +72,6 @@
 	let lastSpeciesId = $state('');
 	/** tree being moved, it stays faded at its old spot until the move is confirmed */
 	let movingId = $state<string | null>(null);
-	let tab = $state<'trees' | 'conflicts'>('trees');
 	/** whether the side panel is expanded, only collapsible on small screens */
 	let panelOpen = $state(false);
 	let settingsOpen = $state(false);
@@ -100,7 +89,6 @@
 		trees.map((t) => (preview?.id === t.id ? { ...t, lng: preview.at[0], lat: preview.at[1] } : t))
 	);
 	const sized = $derived(sizeTrees(positioned, viewDate));
-	const conflicts = $derived(findConflicts(sized));
 
 	const draftSpecies = $derived(draft && species.find((s) => s.id === draft));
 	/** the tree being planted or moved, drawn as the marker in the map center */
@@ -125,13 +113,8 @@
 	/** map scale at the center, to draw the marker at the tree's real size */
 	let metersPerPixel = $state(1);
 	const placingSize = $derived(placingTree && matureSizeLabel(placingTree));
-	const upcoming = $derived(findUpcomingConflicts(positioned, viewDate));
 	const selected = $derived(sized.find((t) => t.id === selectedId) ?? null);
 	const placing = $derived(draft !== null || movingId !== null);
-	const involves = (id: string) => (c: { a: { id: string }; b: { id: string } }) =>
-		c.a.id === id || c.b.id === id;
-	const selectedConflicts = $derived(selected ? conflicts.filter(involves(selected.id)) : []);
-	const selectedUpcoming = $derived(selected ? upcoming.filter(involves(selected.id)) : []);
 
 	const menuActions: MenuAction[] = $derived(
 		isOwner
@@ -214,14 +197,6 @@
 		detailsOpen = false;
 	}
 
-	function focusPair(a: PlannedTree, b: PlannedTree) {
-		select(a.id);
-		map?.fitTo([
-			[a.lng, a.lat],
-			[b.lng, b.lat]
-		]);
-	}
-
 	function selectFromList(id: string) {
 		select(id);
 		const tree = trees.find((t) => t.id === id);
@@ -270,14 +245,10 @@
 			]}
 		>
 			<div class="flex items-center gap-2 p-3 md:p-4 md:pb-2">
-				<Tabs
-					class="flex-1"
-					bind:value={() => tab, (id) => ((tab = id), (panelOpen = true))}
-					tabs={[
-						{ id: 'trees', label: t`Trees (${trees.length})`, icon: List },
-						{ id: 'conflicts', label: t`Conflicts`, icon: TriangleAlert, count: conflicts.length }
-					]}
-				/>
+				<h2 class="flex flex-1 items-center gap-2 text-sm font-semibold text-stone-900">
+					<List class="size-4 text-stone-500" />
+					{t`Trees (${trees.length})`}
+				</h2>
 				<IconButton
 					label={panelOpen ? t`Collapse panel` : t`Expand panel`}
 					class="md:hidden"
@@ -294,11 +265,7 @@
 					!panelOpen && 'hidden'
 				]}
 			>
-				{#if tab === 'trees'}
-					<TreeList trees={sized} {conflicts} {selectedId} onselect={selectFromList} />
-				{:else}
-					<ConflictList year={viewDate.getFullYear()} {conflicts} {upcoming} onfocus={focusPair} />
-				{/if}
+				<TreeList trees={sized} {selectedId} onselect={selectFromList} />
 			</div>
 		</aside>
 
@@ -307,7 +274,6 @@
 				bind:this={map}
 				view={initialView}
 				trees={sized}
-				{conflicts}
 				{selectedId}
 				fadedId={movingId}
 				{placing}
@@ -386,12 +352,6 @@
 							{treeSummary(selected)}
 						</p>
 					</div>
-					{#if selectedConflicts.length > 0}
-						<TriangleAlert
-							class="size-4 shrink-0 text-red-500"
-							aria-label={t`Too close to another tree`}
-						/>
-					{/if}
 					{#if canEdit}
 						<Button
 							size="sm"
@@ -441,8 +401,6 @@
 			editable={canEdit}
 			{species}
 			year={viewDate.getFullYear()}
-			conflicts={selectedConflicts}
-			upcoming={selectedUpcoming}
 			ondelete={() => select(null)}
 		/>
 	{/key}

@@ -2,16 +2,8 @@
 	import { getLocale, t } from '@bztes/vibes-t0n';
 	import { Trash2 } from '@lucide/svelte';
 	import { deleteTree, updateTree, type TreeRow } from '#lib/remote/trees.remote.ts';
-	import {
-		treeName,
-		type Conflict,
-		type PlannedTree,
-		type Sized,
-		type UpcomingConflict
-	} from '#lib/plan.ts';
-	import { formatMeters } from '#lib/growth.ts';
+	import { treeName, type Sized } from '#lib/plan.ts';
 	import FormIssues from '#lib/components/layout/FormIssues.svelte';
-	import Alert from '#lib/components/ui/Alert.svelte';
 	import Button from '#lib/components/ui/Button.svelte';
 	import ConfirmDialog from '#lib/components/ui/ConfirmDialog.svelte';
 	import Dialog from '#lib/components/ui/Dialog.svelte';
@@ -32,22 +24,10 @@
 		editable: boolean;
 		species: PickableSpecies[];
 		year: number;
-		conflicts: Conflict[];
-		upcoming: UpcomingConflict[];
 		ondelete: () => void;
 	}
 
-	let {
-		open = $bindable(),
-		tree,
-		planRef,
-		editable,
-		species,
-		year,
-		conflicts,
-		upcoming,
-		ondelete
-	}: Props = $props();
+	let { open = $bindable(), tree, planRef, editable, species, year, ondelete }: Props = $props();
 
 	const form = $derived(updateTree.for(tree.id));
 	const f = $derived(form.fields);
@@ -59,7 +39,6 @@
 	let choosingSpecies = $state(false);
 	const baseSpecies = $derived(species.find((s) => s.id === speciesId));
 	const displayName = $derived(treeName(tree));
-	const other = (c: { a: PlannedTree; b: PlannedTree }) => (c.a.id === tree.id ? c.b : c.a);
 	const planted = $derived(
 		new Date(tree.plantedAt).toLocaleDateString(getLocale(), {
 			dateStyle: 'medium',
@@ -73,22 +52,6 @@
 <Dialog bind:open title={displayName} description={tree.label ? tree.speciesName : undefined}>
 	<div class="flex flex-col gap-5">
 		<GrowthStats {tree} {year} />
-
-		{#if conflicts.length > 0 || upcoming.length > 0}
-			<Alert tone={conflicts.length ? 'error' : 'warning'}>
-				<ul class="flex flex-col gap-0.5">
-					{#each conflicts as c (c.a.id + c.b.id)}
-						{@const name = treeName(other(c))}
-						{@const overlap = formatMeters(c.overlap)}
-						<li>{t`Overlaps ${name} by ${overlap} in ${year}`}</li>
-					{/each}
-					{#each upcoming as c (c.a.id + c.b.id)}
-						{@const name = treeName(other(c))}
-						<li>{t`Touches ${name} around ${c.year}`}</li>
-					{/each}
-				</ul>
-			</Alert>
-		{/if}
 
 		{#if editable}
 			<form

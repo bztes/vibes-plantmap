@@ -1,20 +1,17 @@
 <script lang="ts">
 	import { t } from '@bztes/vibes-t0n';
 	import { TreeDeciduous } from '@lucide/svelte';
-	import type { Conflict, PlannedTree, Sized } from '#lib/plan.ts';
+	import type { PlannedTree, Sized } from '#lib/plan.ts';
 	import EmptyState from '#lib/components/ui/EmptyState.svelte';
 	import TreeListItem from './TreeListItem.svelte';
 
 	interface Props {
 		trees: Sized<PlannedTree>[];
-		conflicts: Conflict[];
 		selectedId: string | null;
 		onselect: (id: string) => void;
 	}
 
-	let { trees, conflicts, selectedId, onselect }: Props = $props();
-
-	const conflicting = $derived(new Set(conflicts.flatMap((c) => [c.a.id, c.b.id])));
+	let { trees, selectedId, onselect }: Props = $props();
 </script>
 
 {#if trees.length === 0}
@@ -26,12 +23,7 @@
 {:else}
 	<div class="flex flex-col gap-0.5">
 		{#each trees as tree (tree.id)}
-			<TreeListItem
-				{tree}
-				conflict={conflicting.has(tree.id)}
-				selected={tree.id === selectedId}
-				onclick={() => onselect(tree.id)}
-			/>
+			<TreeListItem {tree} selected={tree.id === selectedId} onclick={() => onselect(tree.id)} />
 		{/each}
 	</div>
 {/if}

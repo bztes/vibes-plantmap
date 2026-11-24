@@ -113,14 +113,6 @@
 		"ifaDJWDe": "Jahr",
 		"hKl0L5rj": "Zurück zu heute"
 	},
-	"lib/components/plan/ConflictList.svelte": {
-		"_VgCIsSY": "Genug Platz",
-		"iPNRpvL4": "Keine Kronen überschneiden sich, auch nicht, wenn alle Bäume ausgewachsen sind.",
-		"vuL8suGb": "Überschneidungen {year}",
-		"pRH7OgvE": "Kronen überschneiden sich um {overlap} · {distance} Abstand",
-		"-J9JHxG2": "Später",
-		"s3yS-GbA": "Kronen berühren sich ab etwa {c.year}"
-	},
 	"lib/components/plan/GrowthStats.svelte": {
 		"1WeOvKiM": "Größe {year}",
 		"q1-AYEMz": "1 Jahr nach der Pflanzung",
@@ -146,12 +138,10 @@
 		"m0xshZDp": "Nur ansehen",
 		"N3ThwgSs": "Geteilt von {owner}",
 		"9msViuJl": "Bäume ({trees.length})",
-		"n16jXcf5": "Konflikte",
 		"itgLwbus": "Bereich einklappen",
 		"SnRmfxlw": "Bereich ausklappen",
 		"yuCZ6gh9": "Es sind noch keine Grundkarten eingerichtet. Ein Admin kann sie unter Verwaltung hinzufügen.",
 		"s8iHL8jg": "Karte verschieben zum Platzieren",
-		"_1DG3LXL": "Zu nah an einem anderen Baum",
 		"mluM8qF_": "Baum verschieben",
 		"bsw99r_9": "Verschieben",
 		"RZid5J-3": "Details",
@@ -186,8 +176,6 @@
 		"vLiKq1sV": "Keine Arten gefunden"
 	},
 	"lib/components/plan/TreeDialog.svelte": {
-		"Z6-jUvMQ": "Überschneidet sich {year} um {overlap} mit {name}",
-		"9ngb3uJL": "Berührt {name} ab etwa {c.year}",
 		"3NHVIj9z": "Name",
 		"mMxtcfBS": "Optional, z. B. „Opas Apfelbaum“",
 		"ViBeEsIP": "Arten",
@@ -215,8 +203,7 @@
 		"5QQug909": "Tippe auf „Baum hinzufügen“, wähle eine Art und verschiebe die Karte, um ihn zu platzieren."
 	},
 	"lib/components/plan/TreeListItem.svelte": {
-		"mw8bEK_1": "geplant",
-		"_1DG3LXL": "Zu nah an einem anderen Baum"
+		"mw8bEK_1": "geplant"
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Dein Standort",

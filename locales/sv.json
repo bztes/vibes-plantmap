@@ -113,14 +113,6 @@
 		"ifaDJWDe": "År",
 		"hKl0L5rj": "Tillbaka till idag"
 	},
-	"lib/components/plan/ConflictList.svelte": {
-		"_VgCIsSY": "Gott om plats",
-		"iPNRpvL4": "Inga kronor överlappar, inte ens när alla träd är fullvuxna.",
-		"vuL8suGb": "Överlappar år {year}",
-		"pRH7OgvE": "Kronorna överlappar med {overlap} · {distance} isär",
-		"-J9JHxG2": "Längre fram",
-		"s3yS-GbA": "Kronorna börjar nudda varandra runt {c.year}"
-	},
 	"lib/components/plan/GrowthStats.svelte": {
 		"1WeOvKiM": "Storlek år {year}",
 		"q1-AYEMz": "1 år efter plantering",
@@ -146,12 +138,10 @@
 		"m0xshZDp": "Endast visning",
 		"N3ThwgSs": "Delad av {owner}",
 		"9msViuJl": "Träd ({trees.length})",
-		"n16jXcf5": "Konflikter",
 		"itgLwbus": "Fäll ihop panelen",
 		"SnRmfxlw": "Fäll ut panelen",
 		"yuCZ6gh9": "Inga bakgrundskartor är inställda än. En administratör kan lägga till dem under Administration.",
 		"s8iHL8jg": "Flytta kartan för att placera",
-		"_1DG3LXL": "För nära ett annat träd",
 		"mluM8qF_": "Flytta träd",
 		"bsw99r_9": "Flytta",
 		"RZid5J-3": "Detaljer",
@@ -186,8 +176,6 @@
 		"vLiKq1sV": "Inga arter hittades"
 	},
 	"lib/components/plan/TreeDialog.svelte": {
-		"Z6-jUvMQ": "Överlappar {name} med {overlap} år {year}",
-		"9ngb3uJL": "Nuddar {name} runt {c.year}",
 		"3NHVIj9z": "Namn",
 		"mMxtcfBS": "Valfritt, t.ex. ”Morfars äppelträd”",
 		"ViBeEsIP": "Arter",
@@ -215,8 +203,7 @@
 		"5QQug909": "Tryck på ”Lägg till träd”, välj en art och flytta kartan för att placera det."
 	},
 	"lib/components/plan/TreeListItem.svelte": {
-		"mw8bEK_1": "planerat",
-		"_1DG3LXL": "För nära ett annat träd"
+		"mw8bEK_1": "planerat"
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Din plats",

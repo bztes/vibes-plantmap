@@ -1,18 +1,16 @@
 <script lang="ts">
 	import { t } from '@bztes/vibes-t0n';
-	import { TriangleAlert } from '@lucide/svelte';
 	import { treeName, treeSummary, type PlannedTree, type Sized } from '#lib/plan.ts';
 	import Badge from '#lib/components/ui/Badge.svelte';
 	import ColorSwatch from '#lib/components/ui/ColorSwatch.svelte';
 
 	interface Props {
 		tree: Sized<PlannedTree>;
-		conflict: boolean;
 		selected: boolean;
 		onclick: () => void;
 	}
 
-	let { tree, conflict, selected, onclick }: Props = $props();
+	let { tree, selected, onclick }: Props = $props();
 </script>
 
 <button
@@ -34,7 +32,4 @@
 		<span class="block truncate text-xs text-stone-500">{treeSummary(tree)}</span>
 	</span>
 	{#if !tree.size.planted}<Badge tone="blue">{t`planned`}</Badge>{/if}
-	{#if conflict}
-		<TriangleAlert class="size-4 shrink-0 text-red-500" aria-label={t`Too close to another tree`} />
-	{/if}
 </button>

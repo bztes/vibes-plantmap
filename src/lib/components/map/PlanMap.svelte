@@ -8,7 +8,7 @@
 	import Dialog from '#lib/components/ui/Dialog.svelte';
 	import type { Basemap } from '#lib/basemaps.ts';
 	import type { LngLat } from '#lib/geo.ts';
-	import type { Conflict, PlannedTree, Sized } from '#lib/plan.ts';
+	import type { PlannedTree, Sized } from '#lib/plan.ts';
 	import {
 		addRasterBasemaps,
 		addTreeLayers,
@@ -27,7 +27,6 @@
 	interface Props {
 		view: MapView;
 		trees: Sized<T>[];
-		conflicts: Conflict<T>[];
 		selectedId: string | null;
 		/** tree drawn transparent, e.g. at its old spot while it's being moved */
 		fadedId?: string | null;
@@ -46,7 +45,6 @@
 	let {
 		view,
 		trees,
-		conflicts,
 		selectedId,
 		fadedId = null,
 		placing,
@@ -76,19 +74,6 @@
 		if (!map) return null;
 		const c = map.getCenter();
 		return [c.lng, c.lat];
-	}
-
-	export function fitTo(points: LngLat[], padding = 120) {
-		if (!map || points.length === 0) return;
-		const lngs = points.map((p) => p[0]);
-		const lats = points.map((p) => p[1]);
-		map.fitBounds(
-			[
-				[Math.min(...lngs), Math.min(...lats)],
-				[Math.max(...lngs), Math.max(...lats)]
-			],
-			{ padding, maxZoom: 20 }
-		);
 	}
 
 	function setup(container: HTMLDivElement) {
@@ -210,7 +195,7 @@
 
 	$effect(() => {
 		if (!map || !ready) return;
-		const data = treeData(trees, conflicts, selectedId, fadedId);
+		const data = treeData(trees, selectedId, fadedId);
 		for (const [key, source] of Object.entries(SOURCES)) {
 			map.getSource<GeoJSONSource>(source)?.setData(data[key as keyof typeof data]);
 		}

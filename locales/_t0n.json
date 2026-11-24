@@ -113,14 +113,6 @@
 		"ifaDJWDe": "Year",
 		"hKl0L5rj": "Back to today"
 	},
-	"lib/components/plan/ConflictList.svelte": {
-		"_VgCIsSY": "Plenty of room",
-		"iPNRpvL4": "No crowns overlap, not even when all trees are fully grown.",
-		"vuL8suGb": "Overlapping in {year}",
-		"pRH7OgvE": "Crowns overlap by {overlap} · {distance} apart",
-		"-J9JHxG2": "Later on",
-		"s3yS-GbA": "Crowns start touching around {c.year}"
-	},
 	"lib/components/plan/GrowthStats.svelte": {
 		"1WeOvKiM": "Size in {year}",
 		"q1-AYEMz": "1 year after planting",
@@ -146,12 +138,10 @@
 		"m0xshZDp": "View only",
 		"N3ThwgSs": "Shared by {owner}",
 		"9msViuJl": "Trees ({trees.length})",
-		"n16jXcf5": "Conflicts",
 		"itgLwbus": "Collapse panel",
 		"SnRmfxlw": "Expand panel",
 		"yuCZ6gh9": "No base maps are set up yet. An admin can add them under Administration.",
 		"s8iHL8jg": "Move map to place tree",
-		"_1DG3LXL": "Too close to another tree",
 		"mluM8qF_": "Move tree",
 		"bsw99r_9": "Move",
 		"RZid5J-3": "Details",
@@ -186,8 +176,6 @@
 		"vLiKq1sV": "No species found"
 	},
 	"lib/components/plan/TreeDialog.svelte": {
-		"Z6-jUvMQ": "Overlaps {name} by {overlap} in {year}",
-		"9ngb3uJL": "Touches {name} around {c.year}",
 		"3NHVIj9z": "Name",
 		"mMxtcfBS": "Optional, e.g. “Grandpa's apple”",
 		"ViBeEsIP": "Species",
@@ -215,8 +203,7 @@
 		"5QQug909": "Tap “Add tree”, choose a species and move the map to place it."
 	},
 	"lib/components/plan/TreeListItem.svelte": {
-		"mw8bEK_1": "planned",
-		"_1DG3LXL": "Too close to another tree"
+		"mw8bEK_1": "planned"
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Your location",
