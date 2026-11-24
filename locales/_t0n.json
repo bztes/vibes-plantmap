@@ -113,11 +113,24 @@
 		"ifaDJWDe": "Year",
 		"hKl0L5rj": "Back to today"
 	},
+	"lib/components/plan/GrowthChart.svelte": {
+		"GxmL1P5f": "Growth curve",
+		"1lGOXp9N": "Shown size",
+		"v-LspAF5": "Height",
+		"k8rSuo9P": "Crown width",
+		"KYG2Prx7": "This tree",
+		"-NA5W_qc": "Typical for the species",
+		"kpjI9LP_": "Measured",
+		"iRTmijiP": "Height over time",
+		"9KI8UYi3": "Crown width over time",
+		"-vWetYO_": "Typical",
+		"ypm38bFO": "Expected",
+		"onzklgUR": "Growing faster than typical, at {relative} of the usual pace. The forecast follows your measurements.",
+		"kA3APBom": "Growing slower than typical, at {relative} of the usual pace. The forecast follows your measurements.",
+		"hKl7DzTW": "The curve starts at the first measurement. Log more over the years to compare with the forecast and adjust it to this tree."
+	},
 	"lib/components/plan/GrowthStats.svelte": {
 		"1WeOvKiM": "Size in {year}",
-		"q1-AYEMz": "1 year after planting",
-		"QmkvA8fU": "{age} years after planting",
-		"_7T1XDYw": "not planted yet",
 		"v-LspAF5": "Height",
 		"C-sp0ySY": "mature {matureHeight}",
 		"k8rSuo9P": "Crown width",
@@ -180,16 +193,11 @@
 		"mMxtcfBS": "Optional, e.g. “Grandpa's apple”",
 		"ViBeEsIP": "Species",
 		"wL91vXi_": "Change",
-		"tPED68PN": "Planting date",
-		"wFy6QuzW": "Can be in the future for planned trees",
-		"c09VkM4t": "Height when planted",
-		"avbd2eT2": "Crown when planted",
 		"SECWDUok": "Override mature size",
 		"aaANJg1f": "Useful for dwarf rootstocks or pruned trees. Leave empty to use the species default.",
 		"NwJmOCHn": "Mature height (m)",
 		"GCMszQD0": "Mature crown (m)",
 		"inUlsUkv": "Notes",
-		"krXGLqWH": "Planted",
 		"c3I5Wxwn": "Delete tree",
 		"4tClSWjq": "Delete",
 		"GXZu1syy": "Cancel",
@@ -202,8 +210,18 @@
 		"ByaXcHRu": "No trees yet",
 		"5QQug909": "Tap “Add tree”, choose a species and move the map to place it."
 	},
-	"lib/components/plan/TreeListItem.svelte": {
-		"mw8bEK_1": "planned"
+	"lib/components/plan/TreeMeasurements.svelte": {
+		"PHV4A1ZJ": "Measurements",
+		"mcQKtAWS": "Date",
+		"v-LspAF5": "Height",
+		"k8rSuo9P": "Crown width",
+		"_4BZ3GdS": "Actions",
+		"EaK7GttU": "Delete measurement from {date}",
+		"W9Mwk7E9": "No measurements yet.",
+		"7-F8Pvdq": "Measured on",
+		"67a04rYY": "Height (m)",
+		"7Scql2r5": "Crown (m)",
+		"yrA6bPs8": "Add measurement"
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Your location",
@@ -299,7 +317,9 @@
 		"Hf6TCjdF": "Unknown species",
 		"hFjj1bu3": "Tree not found",
 		"9Cc51kIG": "Use a valid date",
-		"SFCxdLcT": "Required"
+		"ZN6iDuXG": "Can't be in the future",
+		"4Mkwd0q5": "Enter the height, the crown or both",
+		"8DSB533L": "A tree needs at least one measurement"
 	},
 	"lib/server/access.ts": {
 		"Ie7Iv0Jz": "Plan not found",

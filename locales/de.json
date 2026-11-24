@@ -113,11 +113,24 @@
 		"ifaDJWDe": "Jahr",
 		"hKl0L5rj": "Zurück zu heute"
 	},
+	"lib/components/plan/GrowthChart.svelte": {
+		"GxmL1P5f": "Wachstumskurve",
+		"1lGOXp9N": "Angezeigte Größe",
+		"v-LspAF5": "Höhe",
+		"k8rSuo9P": "Kronenbreite",
+		"KYG2Prx7": "Dieser Baum",
+		"-NA5W_qc": "Typisch für die Art",
+		"kpjI9LP_": "Gemessen",
+		"iRTmijiP": "Höhe im Zeitverlauf",
+		"9KI8UYi3": "Kronenbreite im Zeitverlauf",
+		"-vWetYO_": "Typisch",
+		"ypm38bFO": "Erwartet",
+		"onzklgUR": "Wächst schneller als üblich, mit {relative} des typischen Tempos. Die Prognose folgt deinen Messungen.",
+		"kA3APBom": "Wächst langsamer als üblich, mit {relative} des typischen Tempos. Die Prognose folgt deinen Messungen.",
+		"hKl7DzTW": "Die Kurve beginnt bei der ersten Messung. Trage über die Jahre weitere ein, um sie mit der Prognose zu vergleichen und diese an den Baum anzupassen."
+	},
 	"lib/components/plan/GrowthStats.svelte": {
 		"1WeOvKiM": "Größe {year}",
-		"q1-AYEMz": "1 Jahr nach der Pflanzung",
-		"QmkvA8fU": "{age} Jahre nach der Pflanzung",
-		"_7T1XDYw": "noch nicht gepflanzt",
 		"v-LspAF5": "Höhe",
 		"C-sp0ySY": "ausgewachsen {matureHeight}",
 		"k8rSuo9P": "Kronenbreite",
@@ -180,16 +193,11 @@
 		"mMxtcfBS": "Optional, z. B. „Opas Apfelbaum“",
 		"ViBeEsIP": "Arten",
 		"wL91vXi_": "Ändern",
-		"tPED68PN": "Pflanzdatum",
-		"wFy6QuzW": "Kann für geplante Bäume in der Zukunft liegen",
-		"c09VkM4t": "Höhe beim Pflanzen",
-		"avbd2eT2": "Krone beim Pflanzen",
 		"SECWDUok": "Endgröße anpassen",
 		"aaANJg1f": "Praktisch für schwach wachsende Unterlagen oder geschnittene Bäume. Leer lassen, um den Wert der Art zu verwenden.",
 		"NwJmOCHn": "Endhöhe (m)",
 		"GCMszQD0": "Endkrone (m)",
 		"inUlsUkv": "Notizen",
-		"krXGLqWH": "Gepflanzt",
 		"c3I5Wxwn": "Baum löschen",
 		"4tClSWjq": "Löschen",
 		"GXZu1syy": "Abbrechen",
@@ -202,8 +210,18 @@
 		"ByaXcHRu": "Noch keine Bäume",
 		"5QQug909": "Tippe auf „Baum hinzufügen“, wähle eine Art und verschiebe die Karte, um ihn zu platzieren."
 	},
-	"lib/components/plan/TreeListItem.svelte": {
-		"mw8bEK_1": "geplant"
+	"lib/components/plan/TreeMeasurements.svelte": {
+		"PHV4A1ZJ": "Messungen",
+		"mcQKtAWS": "Datum",
+		"v-LspAF5": "Höhe",
+		"k8rSuo9P": "Kronenbreite",
+		"_4BZ3GdS": "Aktionen",
+		"EaK7GttU": "Messung vom {date} löschen",
+		"W9Mwk7E9": "Noch keine Messungen.",
+		"7-F8Pvdq": "Gemessen am",
+		"67a04rYY": "Höhe (m)",
+		"7Scql2r5": "Krone (m)",
+		"yrA6bPs8": "Messung hinzufügen"
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Dein Standort",
@@ -299,7 +317,9 @@
 		"Hf6TCjdF": "Unbekannte Art",
 		"hFjj1bu3": "Baum nicht gefunden",
 		"9Cc51kIG": "Gib ein gültiges Datum ein",
-		"SFCxdLcT": "Erforderlich"
+		"ZN6iDuXG": "Darf nicht in der Zukunft liegen",
+		"4Mkwd0q5": "Gib die Höhe, die Krone oder beides ein",
+		"8DSB533L": "Ein Baum braucht mindestens eine Messung"
 	},
 	"lib/server/access.ts": {
 		"Ie7Iv0Jz": "Plan nicht gefunden",

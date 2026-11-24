@@ -12,22 +12,12 @@
 	let { tree, year }: Props = $props();
 
 	const progress = $derived(Math.min(1, tree.size.spread / tree.matureSpread));
-	const age = $derived(Math.floor(tree.size.age));
 	const matureHeight = $derived(formatMeters(tree.matureHeight));
 	const matureSpread = $derived(formatMeters(tree.matureSpread));
 </script>
 
 <div class="flex flex-col gap-2">
-	<div class="flex items-baseline justify-between text-sm">
-		<span class="font-medium text-stone-700">{t`Size in ${year}`}</span>
-		<span class="text-xs text-stone-500">
-			{#if tree.size.planted}
-				{age === 1 ? t`1 year after planting` : t`${age} years after planting`}
-			{:else}
-				{t`not planted yet`}
-			{/if}
-		</span>
-	</div>
+	<span class="text-sm font-medium text-stone-700">{t`Size in ${year}`}</span>
 	<div class="grid grid-cols-2 gap-2">
 		<StatTile
 			label={t`Height`}

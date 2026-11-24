@@ -113,11 +113,24 @@
 		"ifaDJWDe": "År",
 		"hKl0L5rj": "Tillbaka till idag"
 	},
+	"lib/components/plan/GrowthChart.svelte": {
+		"GxmL1P5f": "Tillväxtkurva",
+		"1lGOXp9N": "Visad storlek",
+		"v-LspAF5": "Höjd",
+		"k8rSuo9P": "Kronbredd",
+		"KYG2Prx7": "Det här trädet",
+		"-NA5W_qc": "Typiskt för arten",
+		"kpjI9LP_": "Uppmätt",
+		"iRTmijiP": "Höjd över tid",
+		"9KI8UYi3": "Kronbredd över tid",
+		"-vWetYO_": "Typiskt",
+		"ypm38bFO": "Förväntat",
+		"onzklgUR": "Växer snabbare än vanligt, i {relative} av den typiska takten. Prognosen följer dina mätningar.",
+		"kA3APBom": "Växer långsammare än vanligt, i {relative} av den typiska takten. Prognosen följer dina mätningar.",
+		"hKl7DzTW": "Kurvan börjar vid den första mätningen. Registrera fler under åren för att jämföra med prognosen och anpassa den till trädet."
+	},
 	"lib/components/plan/GrowthStats.svelte": {
 		"1WeOvKiM": "Storlek år {year}",
-		"q1-AYEMz": "1 år efter plantering",
-		"QmkvA8fU": "{age} år efter plantering",
-		"_7T1XDYw": "inte planterat än",
 		"v-LspAF5": "Höjd",
 		"C-sp0ySY": "fullvuxen {matureHeight}",
 		"k8rSuo9P": "Kronbredd",
@@ -180,16 +193,11 @@
 		"mMxtcfBS": "Valfritt, t.ex. ”Morfars äppelträd”",
 		"ViBeEsIP": "Arter",
 		"wL91vXi_": "Ändra",
-		"tPED68PN": "Planteringsdatum",
-		"wFy6QuzW": "Kan ligga i framtiden för planerade träd",
-		"c09VkM4t": "Höjd vid plantering",
-		"avbd2eT2": "Krona vid plantering",
 		"SECWDUok": "Ändra fullvuxen storlek",
 		"aaANJg1f": "Praktiskt för dvärgunderlag eller beskurna träd. Lämna tomt för artens standardvärde.",
 		"NwJmOCHn": "Fullvuxen höjd (m)",
 		"GCMszQD0": "Fullvuxen krona (m)",
 		"inUlsUkv": "Anteckningar",
-		"krXGLqWH": "Planterat",
 		"c3I5Wxwn": "Ta bort träd",
 		"4tClSWjq": "Ta bort",
 		"GXZu1syy": "Avbryt",
@@ -202,8 +210,18 @@
 		"ByaXcHRu": "Inga träd än",
 		"5QQug909": "Tryck på ”Lägg till träd”, välj en art och flytta kartan för att placera det."
 	},
-	"lib/components/plan/TreeListItem.svelte": {
-		"mw8bEK_1": "planerat"
+	"lib/components/plan/TreeMeasurements.svelte": {
+		"PHV4A1ZJ": "Mätningar",
+		"mcQKtAWS": "Datum",
+		"v-LspAF5": "Höjd",
+		"k8rSuo9P": "Kronbredd",
+		"_4BZ3GdS": "Åtgärder",
+		"EaK7GttU": "Ta bort mätningen från {date}",
+		"W9Mwk7E9": "Inga mätningar än.",
+		"7-F8Pvdq": "Uppmätt den",
+		"67a04rYY": "Höjd (m)",
+		"7Scql2r5": "Krona (m)",
+		"yrA6bPs8": "Lägg till mätning"
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Din plats",
@@ -299,7 +317,9 @@
 		"Hf6TCjdF": "Okänd art",
 		"hFjj1bu3": "Trädet hittades inte",
 		"9Cc51kIG": "Ange ett giltigt datum",
-		"SFCxdLcT": "Obligatoriskt"
+		"ZN6iDuXG": "Får inte ligga i framtiden",
+		"4Mkwd0q5": "Ange höjden, kronan eller båda",
+		"8DSB533L": "Ett träd behöver minst en mätning"
 	},
 	"lib/server/access.ts": {
 		"Ie7Iv0Jz": "Planen hittades inte",

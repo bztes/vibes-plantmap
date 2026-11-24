@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getLocale, t } from '@bztes/vibes-t0n';
+	import { t } from '@bztes/vibes-t0n';
 	import { Trash2 } from '@lucide/svelte';
 	import { deleteTree, updateTree, type TreeRow } from '#lib/remote/trees.remote.ts';
 	import { treeName, type Sized } from '#lib/plan.ts';
@@ -11,7 +11,9 @@
 	import Input from '#lib/components/ui/Input.svelte';
 	import ColorSwatch from '#lib/components/ui/ColorSwatch.svelte';
 	import Textarea from '#lib/components/ui/Textarea.svelte';
+	import GrowthChart from './GrowthChart.svelte';
 	import GrowthStats from './GrowthStats.svelte';
+	import TreeMeasurements from './TreeMeasurements.svelte';
 	import SpeciesDialog from './SpeciesDialog.svelte';
 	import type { PickableSpecies } from './SpeciesPicker.svelte';
 
@@ -23,11 +25,20 @@
 		/** false for view-only share links, the details are then read-only */
 		editable: boolean;
 		species: PickableSpecies[];
-		year: number;
+		/** date the map shows */
+		viewDate: Date;
 		ondelete: () => void;
 	}
 
-	let { open = $bindable(), tree, planRef, editable, species, year, ondelete }: Props = $props();
+	let {
+		open = $bindable(),
+		tree,
+		planRef,
+		editable,
+		species,
+		viewDate,
+		ondelete
+	}: Props = $props();
 
 	const form = $derived(updateTree.for(tree.id));
 	const f = $derived(form.fields);
@@ -39,19 +50,16 @@
 	let choosingSpecies = $state(false);
 	const baseSpecies = $derived(species.find((s) => s.id === speciesId));
 	const displayName = $derived(treeName(tree));
-	const planted = $derived(
-		new Date(tree.plantedAt).toLocaleDateString(getLocale(), {
-			dateStyle: 'medium',
-			timeZone: 'UTC'
-		})
-	);
-
 	let confirmingDelete = $state(false);
 </script>
 
 <Dialog bind:open title={displayName} description={tree.label ? tree.speciesName : undefined}>
 	<div class="flex flex-col gap-5">
-		<GrowthStats {tree} {year} />
+		<GrowthStats {tree} year={viewDate.getFullYear()} />
+		<GrowthChart {tree} {viewDate} />
+		<div class="border-t border-stone-100 pt-5">
+			<TreeMeasurements {tree} {planRef} {editable} />
+		</div>
 
 		{#if editable}
 			<form
@@ -85,34 +93,6 @@
 						</button>
 					</div>
 				</Field>
-
-				<Field
-					label={t`Planting date`}
-					for="tree-planted"
-					hint={t`Can be in the future for planned trees`}
-					issues={f.plantedAt.issues()}
-				>
-					<Input id="tree-planted" {...f.plantedAt.as('date', tree.plantedAt)} />
-				</Field>
-
-				<div class="grid grid-cols-2 gap-3">
-					<Field label={t`Height when planted`} for="tree-h0" issues={f.heightAtPlanting.issues()}>
-						<Input
-							id="tree-h0"
-							step="0.1"
-							min="0"
-							{...f.heightAtPlanting.as('number', tree.heightAtPlanting)}
-						/>
-					</Field>
-					<Field label={t`Crown when planted`} for="tree-s0" issues={f.spreadAtPlanting.issues()}>
-						<Input
-							id="tree-s0"
-							step="0.1"
-							min="0"
-							{...f.spreadAtPlanting.as('number', tree.spreadAtPlanting)}
-						/>
-					</Field>
-				</div>
 
 				<details class="group rounded-lg border border-stone-200 px-3 py-2">
 					<summary class="cursor-pointer text-sm font-medium text-stone-700">
@@ -157,8 +137,6 @@
 			<dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
 				<dt class="text-stone-500">{t`Species`}</dt>
 				<dd class="text-stone-900">{tree.speciesName}</dd>
-				<dt class="text-stone-500">{t`Planted`}</dt>
-				<dd class="text-stone-900">{planted}</dd>
 			</dl>
 			{#if tree.notes}
 				<div class="flex flex-col gap-1">

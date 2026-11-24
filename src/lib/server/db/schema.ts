@@ -118,12 +118,6 @@ export const tree = sqliteTable(
 		label: text('label'),
 		lng: real('lng').notNull(),
 		lat: real('lat').notNull(),
-		/** ISO date (YYYY-MM-DD), may be in the future for planned trees */
-		plantedAt: text('planted_at').notNull(),
-		/** height in meters when planted */
-		heightAtPlanting: real('height_at_planting').notNull().default(1.5),
-		/** crown diameter in meters when planted */
-		spreadAtPlanting: real('spread_at_planting').notNull().default(0.5),
 		/** optional per-tree overrides, e.g. for dwarf rootstock */
 		matureHeightOverride: real('mature_height_override'),
 		matureSpreadOverride: real('mature_spread_override'),
@@ -131,6 +125,28 @@ export const tree = sqliteTable(
 		createdAt: createdAt()
 	},
 	(t) => [index('tree_plan_idx').on(t.planId)]
+);
+
+/**
+ * Size of a tree measured on site. The first measurement is where the growth curve starts,
+ * later ones adjust its pace.
+ */
+export const treeMeasurement = sqliteTable(
+	'tree_measurement',
+	{
+		id: id(),
+		treeId: text('tree_id')
+			.notNull()
+			.references(() => tree.id, { onDelete: 'cascade' }),
+		/** ISO date (YYYY-MM-DD) */
+		measuredAt: text('measured_at').notNull(),
+		/** in meters, at least one of height and spread is set */
+		height: real('height'),
+		/** crown diameter in meters */
+		spread: real('spread'),
+		createdAt: createdAt()
+	},
+	(t) => [index('tree_measurement_tree_idx').on(t.treeId)]
 );
 
 export const speciesRelations = relations(species, ({ many }) => ({ trees: many(tree) }));
@@ -141,9 +157,13 @@ export const planRelations = relations(plan, ({ many }) => ({
 export const planShareRelations = relations(planShare, ({ one }) => ({
 	plan: one(plan, { fields: [planShare.planId], references: [plan.id] })
 }));
-export const treeRelations = relations(tree, ({ one }) => ({
+export const treeRelations = relations(tree, ({ one, many }) => ({
 	plan: one(plan, { fields: [tree.planId], references: [plan.id] }),
-	species: one(species, { fields: [tree.speciesId], references: [species.id] })
+	species: one(species, { fields: [tree.speciesId], references: [species.id] }),
+	measurements: many(treeMeasurement)
+}));
+export const treeMeasurementRelations = relations(treeMeasurement, ({ one }) => ({
+	tree: one(tree, { fields: [treeMeasurement.treeId], references: [tree.id] })
 }));
 
 export * from './auth.schema';

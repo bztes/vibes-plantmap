@@ -138,7 +138,7 @@ export function addTreeLayers(map: Map) {
 			'line-color': INK,
 			'line-width': 6,
 			'line-blur': 6,
-			'line-opacity': ['case', ['get', 'planted'], 0.18, 0.08],
+			'line-opacity': 0.18,
 			'line-translate': [0, 2]
 		}
 	});
@@ -148,16 +148,7 @@ export function addTreeLayers(map: Map) {
 		source: SOURCES.canopy,
 		paint: {
 			'fill-color': ['get', 'color'],
-			'fill-opacity': [
-				'case',
-				['get', 'faded'],
-				0.06,
-				['get', 'selected'],
-				0.5,
-				['get', 'planted'],
-				0.32,
-				0.14
-			]
+			'fill-opacity': ['case', ['get', 'faded'], 0.06, ['get', 'selected'], 0.5, 0.32]
 		}
 	});
 	const outlineWidth = ['case', ['get', 'selected'], 3, 2] as const;
@@ -187,25 +178,11 @@ export function addTreeLayers(map: Map) {
 		id: 'plantmap-canopy-line',
 		type: 'line',
 		source: SOURCES.canopy,
-		filter: ['==', ['get', 'planted'], true],
 		layout: { 'line-join': 'round' },
 		paint: {
 			'line-color': ['get', 'color'],
 			'line-width': outlineWidth as never,
 			'line-opacity': fadedOpacity as never
-		}
-	});
-	map.addLayer({
-		id: 'plantmap-canopy-line-planned',
-		type: 'line',
-		source: SOURCES.canopy,
-		filter: ['==', ['get', 'planted'], false],
-		layout: { 'line-cap': 'round', 'line-join': 'round' },
-		paint: {
-			'line-color': ['get', 'color'],
-			'line-width': outlineWidth as never,
-			'line-opacity': fadedOpacity as never,
-			'line-dasharray': dotted(2)
 		}
 	});
 	map.addLayer({
@@ -350,7 +327,6 @@ export function treeData<T extends PlannedTree>(
 			properties: {
 				id: t.id,
 				color: t.color,
-				planted: t.size.planted,
 				selected: t.id === selectedId,
 				faded: t.id === fadedId
 			},

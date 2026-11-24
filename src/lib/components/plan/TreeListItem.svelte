@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { t } from '@bztes/vibes-t0n';
 	import { treeName, treeSummary, type PlannedTree, type Sized } from '#lib/plan.ts';
-	import Badge from '#lib/components/ui/Badge.svelte';
 	import ColorSwatch from '#lib/components/ui/ColorSwatch.svelte';
 
 	interface Props {
@@ -31,5 +29,4 @@
 		<span class="block truncate text-sm font-medium text-stone-900">{treeName(tree)}</span>
 		<span class="block truncate text-xs text-stone-500">{treeSummary(tree)}</span>
 	</span>
-	{#if !tree.size.planted}<Badge tone="blue">{t`planned`}</Badge>{/if}
 </button>

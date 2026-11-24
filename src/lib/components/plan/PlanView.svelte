@@ -21,7 +21,7 @@
 	import { createTree, getTrees, moveTree } from '#lib/remote/trees.remote.ts';
 	import { defaultBasemap } from '#lib/basemaps.ts';
 	import type { LngLat } from '#lib/geo.ts';
-	import { addYears, plantingSize, sizeAt } from '#lib/growth.ts';
+	import { addYears, nurserySize, sizeAt } from '#lib/growth.ts';
 	import { matureSizeLabel } from '#lib/species.ts';
 	import { sizeTrees, treeName, treeSummary, type PlannedTree } from '#lib/plan.ts';
 	import type { MapView } from '#lib/components/map/layers.ts';
@@ -82,8 +82,8 @@
 	let preview = $state<{ id: string; at: LngLat } | null>(null);
 
 	const today = new Date();
-	// new trees are planted today, the date and everything else can be changed in the details later
-	const plantedToday = today.toISOString().slice(0, 10);
+	// new trees start as a nursery tree today, a real measurement can be logged in the details
+	const todayIso = today.toISOString().slice(0, 10);
 	const viewDate = $derived(addYears(today, years));
 	const positioned = $derived(
 		trees.map((t) => (preview?.id === t.id ? { ...t, lng: preview.at[0], lat: preview.at[1] } : t))
@@ -95,6 +95,7 @@
 	const placingTree = $derived.by((): PlannedTree | null => {
 		if (movingId) return trees.find((t) => t.id === movingId) ?? null;
 		if (!draft || !draftSpecies) return null;
+		const nursery = nurserySize(draftSpecies.matureHeight, draftSpecies.matureSpread);
 		return {
 			id: 'draft',
 			label: null,
@@ -102,11 +103,11 @@
 			lat: 0,
 			speciesName: draftSpecies.name,
 			color: draftSpecies.color,
-			plantedAt: plantedToday,
 			matureHeight: draftSpecies.matureHeight,
 			matureSpread: draftSpecies.matureSpread,
 			yearsToMaturity: draftSpecies.yearsToMaturity,
-			...plantingSize(draftSpecies.matureHeight, draftSpecies.matureSpread)
+			heightStart: { date: todayIso, value: nursery.height },
+			spreadStart: { date: todayIso, value: nursery.spread }
 		};
 	});
 	const placingSpread = $derived(placingTree ? sizeAt(placingTree, viewDate).spread : 0);
@@ -166,7 +167,6 @@
 				await createTree({
 					planRef,
 					speciesId,
-					plantedAt: plantedToday,
 					lng: at[0],
 					lat: at[1]
 				})
@@ -400,7 +400,7 @@
 			{planRef}
 			editable={canEdit}
 			{species}
-			year={viewDate.getFullYear()}
+			{viewDate}
 			ondelete={() => select(null)}
 		/>
 	{/key}
