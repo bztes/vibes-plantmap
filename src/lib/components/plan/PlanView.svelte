@@ -11,6 +11,7 @@
 	import type { LngLat } from '#lib/geo.ts';
 	import { addYears, nurserySize, sizeAt } from '#lib/growth.ts';
 	import { sizeTrees, type PlannedTree } from '#lib/plan.ts';
+	import { dayOfYear, minuteOfDay, momentOf, sunPosition } from '#lib/sun.ts';
 	import type { MapView } from '#lib/components/map/layers.ts';
 	import AppHeader from '#lib/components/layout/AppHeader.svelte';
 	import type { MenuAction } from '#lib/components/layout/UserMenu.svelte';
@@ -48,6 +49,7 @@
 
 	let years = $state(0);
 	let showMature = $state(true);
+	let shadows = $state(false);
 	let basemapId = $state<string | null>(null);
 	const basemap = $derived(basemaps.find((b) => b.id === basemapId) ?? defaultBasemap(basemaps));
 
@@ -80,6 +82,15 @@
 	// new trees start as a nursery tree today, a real measurement can be logged in the details
 	const todayIso = today.toISOString().slice(0, 10);
 	const viewDate = $derived(addYears(today, years));
+	// shadows start at the current moment, rounded to the slider's quarter hours
+	let shadowDay = $state(dayOfYear(today));
+	let shadowMinute = $state(minuteOfDay(today, 15));
+	const sun = $derived(
+		sunPosition(momentOf(viewDate.getFullYear(), shadowDay, shadowMinute), [
+			plan.centerLng,
+			plan.centerLat
+		])
+	);
 	const positioned = $derived(
 		trees.map((t) => (preview?.id === t.id ? { ...t, lng: preview.at[0], lat: preview.at[1] } : t))
 	);
@@ -311,6 +322,7 @@
 				fadedId={movingId}
 				{placing}
 				{showMature}
+				sun={shadows ? sun : null}
 				{basemaps}
 				{basemap}
 				onselect={openFromMap}
@@ -324,7 +336,13 @@
 					bind:showMature
 					{basemaps}
 				/>
-				<TimelineBar bind:years />
+				<TimelineBar
+					bind:years
+					bind:shadows
+					bind:day={shadowDay}
+					bind:minute={shadowMinute}
+					{sun}
+				/>
 			</div>
 
 			{#if basemaps.length === 0}

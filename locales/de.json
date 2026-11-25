@@ -104,6 +104,15 @@
 		"xcYfvbei": "Für diese Karte sind keine Quellen anzugeben."
 	},
 	"lib/components/map/TimelineBar.svelte": {
+		"jOhqauZd": "N",
+		"1TnNl8oa": "NO",
+		"qfUVZr1n": "O",
+		"8DG3CiZT": "SO",
+		"jeCzxH8R": "S",
+		"By8AX8Py": "SW",
+		"_LX0Dfm-": "W",
+		"wfz4Podd": "NW",
+		"xZDURdPD": "Sonne im {direction}, {altitude}° hoch",
 		"nc_5jidf": "Zeitleiste",
 		"hY5Lp6Kf": "Pause",
 		"3x3pEyHj": "Wachstum abspielen",
@@ -111,7 +120,14 @@
 		"JiiUO_Rk": "in 1 Jahr",
 		"PPwaufDy": "in {years} Jahren",
 		"ifaDJWDe": "Jahr",
-		"hKl0L5rj": "Zurück zu heute"
+		"hKl0L5rj": "Zurück zu heute",
+		"Khm9wJqj": "Schatten",
+		"IrOxuxTh": "Schatten anzeigen",
+		"jyNk4RuL": "Tag",
+		"ADQ6DxHE": "Tag im Jahr",
+		"M7k0ds9Z": "Uhrzeit",
+		"MY-xdPXr": "Tageszeit",
+		"m7nyIRb0": "Die Sonne steht unter dem Horizont."
 	},
 	"lib/components/panel/PlanPanel.svelte": {
 		"itgLwbus": "Bereich einklappen",

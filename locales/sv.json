@@ -104,6 +104,15 @@
 		"xcYfvbei": "Inga källor att ange för den här kartan."
 	},
 	"lib/components/map/TimelineBar.svelte": {
+		"jOhqauZd": "N",
+		"1TnNl8oa": "NO",
+		"qfUVZr1n": "Ö",
+		"8DG3CiZT": "SO",
+		"jeCzxH8R": "S",
+		"By8AX8Py": "SV",
+		"_LX0Dfm-": "V",
+		"wfz4Podd": "NV",
+		"xZDURdPD": "Solen i {direction}, {altitude}° över horisonten",
 		"nc_5jidf": "Tidslinje",
 		"hY5Lp6Kf": "Pausa",
 		"3x3pEyHj": "Spela upp tillväxt",
@@ -111,7 +120,14 @@
 		"JiiUO_Rk": "om 1 år",
 		"PPwaufDy": "om {years} år",
 		"ifaDJWDe": "År",
-		"hKl0L5rj": "Tillbaka till idag"
+		"hKl0L5rj": "Tillbaka till idag",
+		"Khm9wJqj": "Skuggor",
+		"IrOxuxTh": "Visa skuggor",
+		"jyNk4RuL": "Dag",
+		"ADQ6DxHE": "Dag på året",
+		"M7k0ds9Z": "Tid",
+		"MY-xdPXr": "Tid på dygnet",
+		"m7nyIRb0": "Solen är under horisonten."
 	},
 	"lib/components/panel/PlanPanel.svelte": {
 		"itgLwbus": "Fäll ihop panelen",

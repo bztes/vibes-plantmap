@@ -9,6 +9,7 @@
 	import type { Basemap } from '#lib/basemaps.ts';
 	import type { LngLat } from '#lib/geo.ts';
 	import type { PlannedTree, Sized } from '#lib/plan.ts';
+	import type { SunPosition } from '#lib/sun.ts';
 	import {
 		addRasterBasemaps,
 		addTreeLayers,
@@ -16,6 +17,7 @@
 		CANOPY_LAYER,
 		setBasemap,
 		setMatureVisible,
+		shadowData,
 		SOURCES,
 		styleFor,
 		TRUNK_LAYER,
@@ -37,6 +39,8 @@
 		/** when true, the map center marks where a tree goes, clicking pans there instead of selecting */
 		placing: boolean;
 		showMature: boolean;
+		/** where the sun stands, to draw the trees' shadows; null draws none */
+		sun?: SunPosition | null;
 		/** all base maps the user can switch between */
 		basemaps: Basemap[];
 		basemap: Basemap | null;
@@ -55,6 +59,7 @@
 		fadedId = null,
 		placing,
 		showMature,
+		sun = null,
 		basemaps,
 		basemap,
 		onselect,
@@ -206,9 +211,15 @@
 	$effect(() => {
 		if (!map || !ready) return;
 		const data = treeData(trees, selectedId, fadedId, highlightId);
-		for (const [key, source] of Object.entries(SOURCES)) {
-			map.getSource<GeoJSONSource>(source)?.setData(data[key as keyof typeof data]);
+		for (const [key, source] of Object.entries(data)) {
+			map.getSource<GeoJSONSource>(SOURCES[key as keyof typeof data])?.setData(source);
 		}
+	});
+
+	$effect(() => {
+		// on its own, so moving the sun doesn't redraw the trees
+		if (!map || !ready) return;
+		map.getSource<GeoJSONSource>(SOURCES.shadows)?.setData(shadowData(trees, sun, fadedId));
 	});
 
 	$effect(() => {

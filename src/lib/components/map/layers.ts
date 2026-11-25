@@ -4,6 +4,7 @@ import type { Basemap } from '#lib/basemaps.ts';
 import { circleRing } from '#lib/geo.ts';
 import type { PlannedTree, Sized } from '#lib/plan.ts';
 import { treeName } from '#lib/plan.ts';
+import { shadowRing, type SunPosition } from '#lib/sun.ts';
 
 export interface MapView {
 	lng: number;
@@ -40,6 +41,7 @@ const MATURE_PAINT = {
 };
 
 export const SOURCES = {
+	shadows: 'plantmap-shadows',
 	mature: 'plantmap-mature',
 	canopy: 'plantmap-canopy',
 	trunks: 'plantmap-trunks'
@@ -116,6 +118,13 @@ export function addTreeLayers(map: Map) {
 	/** e.g. the old spot of a tree that is being moved */
 	const fadedOpacity = ['case', ['get', 'faded'], 0.3, 1] as const;
 
+	// on the ground, below everything else of ours
+	map.addLayer({
+		id: 'plantmap-shadow',
+		type: 'fill',
+		source: SOURCES.shadows,
+		paint: { 'fill-color': INK, 'fill-opacity': 0.3 }
+	});
 	map.addLayer({
 		id: MATURE_LAYER,
 		type: 'line',
@@ -364,4 +373,27 @@ export function treeData<T extends PlannedTree>(
 	};
 
 	return { canopy, mature, trunks };
+}
+
+/** the shadows the trees cast with the sun at `sun`, none while it's down */
+export function shadowData<T extends PlannedTree>(
+	trees: Sized<T>[],
+	sun: SunPosition | null,
+	/** tree left out, e.g. at its old spot while it's being moved */
+	fadedId: string | null = null
+): FeatureCollection<Polygon> {
+	const rings = sun
+		? trees
+				.filter((t) => t.id !== fadedId)
+				.map((t) => shadowRing([t.lng, t.lat], t.size, sun))
+				.filter((ring) => ring !== null)
+		: [];
+	return {
+		type: 'FeatureCollection',
+		features: rings.map((ring) => ({
+			type: 'Feature',
+			properties: {},
+			geometry: { type: 'Polygon', coordinates: [ring] }
+		}))
+	};
 }
