@@ -1,13 +1,18 @@
+import { mkdirSync } from 'node:fs';
+import path from 'node:path';
 import { drizzle } from 'drizzle-orm/libsql';
 import { migrate } from 'drizzle-orm/libsql/migrator';
 import { createClient } from '@libsql/client';
 import * as schema from './schema';
 import { building } from '$app/env';
-import { DATABASE_URL } from '$app/env/private';
+import { DATA_DIR } from '$app/env/private';
 
-if (!DATABASE_URL) throw new Error('DATABASE_URL is not set');
+export const dataDir = path.resolve(DATA_DIR);
+if (!building) mkdirSync(dataDir, { recursive: true });
 
-const client = createClient({ url: DATABASE_URL });
+const client = createClient({
+	url: building ? ':memory:' : `file:${path.join(dataDir, 'local.db')}`
+});
 
 export const db = drizzle(client, { schema });
 

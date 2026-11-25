@@ -1,0 +1,13 @@
+# Settings go into a .env file next to this file, see .env.example.
+
+services:
+  plantmap:
+    image: ghcr.io/bztes/vibes-plantmap:latest
+    restart: unless-stopped
+    environment:
+      - ORIGIN
+    ports:
+      - '3000:3000'
+    volumes:
+      # Persistent Plantmap state: the SQLite database (local.db)
+      - ${DATA_DIR:-./data}:/data
