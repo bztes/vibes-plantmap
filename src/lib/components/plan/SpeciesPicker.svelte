@@ -14,7 +14,7 @@
 	import { Check, Search } from '@lucide/svelte';
 	import ColorSwatch from '#lib/components/ui/ColorSwatch.svelte';
 	import Input from '#lib/components/ui/Input.svelte';
-	import { SPECIES_CATEGORIES, categoryLabel, matureSizeLabel } from '#lib/species.ts';
+	import { categoryLabel, groupSpecies, searchSpecies } from '#lib/species.ts';
 
 	interface Props {
 		species: PickableSpecies[];
@@ -32,24 +32,11 @@
 	}: Props = $props();
 
 	/** sorted and grouped once per species list, the search only filters these */
-	const sorted = $derived(
-		SPECIES_CATEGORIES.map((category) => ({
-			category,
-			items: species
-				.filter((s) => s.category === category)
-				.sort((a, b) => a.name.localeCompare(b.name))
-				.map((s) => ({ ...s, search: s.name.toLocaleLowerCase(), size: matureSizeLabel(s) }))
-		}))
-	);
+	const sorted = $derived(groupSpecies(species));
 
 	let query = $state('');
 
-	const groups = $derived.by(() => {
-		const q = query.trim().toLocaleLowerCase();
-		return sorted
-			.map((g) => (q ? { ...g, items: g.items.filter((s) => s.search.includes(q)) } : g))
-			.filter((g) => g.items.length > 0);
-	});
+	const groups = $derived(searchSpecies(sorted, query));
 
 	$effect.pre(() => {
 		visible = groups.some((g) => g.items.some((s) => s.id === value));

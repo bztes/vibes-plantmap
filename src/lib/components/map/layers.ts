@@ -318,8 +318,11 @@ export function treeData<T extends PlannedTree>(
 	trees: Sized<T>[],
 	selectedId: string | null,
 	/** tree drawn transparent, e.g. at its old spot while it's being moved */
-	fadedId: string | null = null
+	fadedId: string | null = null,
+	/** tree drawn like the selected one, e.g. while it's hovered in the list */
+	highlightId: string | null = null
 ) {
+	const selected = (id: string) => id === selectedId || id === highlightId;
 	const canopy: FeatureCollection<Polygon> = {
 		type: 'FeatureCollection',
 		features: trees.map((t) => ({
@@ -327,7 +330,7 @@ export function treeData<T extends PlannedTree>(
 			properties: {
 				id: t.id,
 				color: t.color,
-				selected: t.id === selectedId,
+				selected: selected(t.id),
 				faded: t.id === fadedId
 			},
 			geometry: { type: 'Polygon', coordinates: [circleRing([t.lng, t.lat], t.size.spread / 2)] }
@@ -353,7 +356,7 @@ export function treeData<T extends PlannedTree>(
 				id: t.id,
 				color: t.color,
 				label: treeName(t),
-				selected: t.id === selectedId,
+				selected: selected(t.id),
 				faded: t.id === fadedId
 			},
 			geometry: { type: 'Point', coordinates: [t.lng, t.lat] }

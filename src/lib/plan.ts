@@ -26,3 +26,8 @@ export function treeSummary(tree: Sized<PlannedTree>) {
 	const height = formatMeters(tree.size.height);
 	return `${tree.label ? `${tree.speciesName} · ` : ''}⌀ ${spread} · ${t`${height} high`}`;
 }
+
+/** summed crown area in m², overlapping crowns count twice */
+export function canopyArea(trees: Sized<PlannedTree>[]) {
+	return trees.reduce((sum, t) => sum + Math.PI * (t.size.spread / 2) ** 2, 0);
+}

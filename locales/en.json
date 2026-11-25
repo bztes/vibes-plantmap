@@ -113,6 +113,17 @@
 		"ifaDJWDe": "Year",
 		"hKl0L5rj": "Back to today"
 	},
+	"lib/components/panel/PlanPanel.svelte": {
+		"itgLwbus": "",
+		"SnRmfxlw": ""
+	},
+	"lib/components/plan/AddTreePanel.svelte": {
+		"dpAPG_0W": "",
+		"Ufbzcmjc": "",
+		"DMHyvk0u": "",
+		"xfGHFicF": "",
+		"vLiKq1sV": ""
+	},
 	"lib/components/plan/GrowthChart.svelte": {
 		"GxmL1P5f": "",
 		"1lGOXp9N": "",
@@ -137,6 +148,14 @@
 		"k--vUDVm": "mature {matureSpread}",
 		"rGSUz1FW": "Growth towards mature size"
 	},
+	"lib/components/plan/PlacePanel.svelte": {
+		"k1MJkUPQ": "",
+		"pRwlf-8I": "",
+		"GXZu1syy": "",
+		"VvEkd3dJ": "",
+		"pp_1LE0K": "",
+		"7QdiKZbq": ""
+	},
 	"lib/components/plan/PlanSettingsDialog.svelte": {
 		"-GvycTav": "Plan settings",
 		"3NHVIj9z": "Name",
@@ -150,21 +169,7 @@
 		"Wr6eH7xb": "",
 		"m0xshZDp": "",
 		"N3ThwgSs": "",
-		"9msViuJl": "",
-		"itgLwbus": "",
-		"SnRmfxlw": "",
-		"yuCZ6gh9": "",
-		"s8iHL8jg": "",
-		"mluM8qF_": "",
-		"bsw99r_9": "",
-		"RZid5J-3": "",
-		"FCF0wZRX": "",
-		"pp_1LE0K": "",
-		"VvEkd3dJ": "",
-		"GXZu1syy": "",
-		"fVt38b7l": "",
-		"XvPXWs1V": "",
-		"eqYNlO_B": ""
+		"yuCZ6gh9": ""
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "",
@@ -188,40 +193,69 @@
 		"ViBeEsIP": "",
 		"vLiKq1sV": ""
 	},
-	"lib/components/plan/TreeDialog.svelte": {
+	"lib/components/plan/TreeDetail.svelte": {
+		"I-OSkdYT": "",
+		"tcEgsxbC": "",
+		"IrNGfBup": "",
+		"fo_R3qlI": "",
+		"bsw99r_9": "",
+		"6_lA8rPq": "",
+		"DfbxytNs": "",
+		"inUlsUkv": "",
+		"7dZPiPDb": "",
+		"12fnNWay": "",
+		"uF9fq_l9": "",
 		"3NHVIj9z": "",
 		"mMxtcfBS": "",
 		"ViBeEsIP": "",
 		"wL91vXi_": "",
-		"SECWDUok": "",
+		"deVJalwn": "",
+		"bN_Scdpj": "",
+		"5LsAAeLF": "",
 		"aaANJg1f": "",
-		"NwJmOCHn": "",
-		"GCMszQD0": "",
-		"inUlsUkv": "",
+		"67a04rYY": "",
+		"7Scql2r5": "",
+		"UmUSXEl_": "",
 		"c3I5Wxwn": "",
-		"4tClSWjq": "",
-		"GXZu1syy": "",
-		"3QrnpcvP": "",
-		"fZ63rLE-": "",
 		"WNPfer3r": "",
 		"AUSAq47k": ""
 	},
 	"lib/components/plan/TreeList.svelte": {
+		"EJ1vRV7Y": "",
+		"9hPxlmkn": "",
+		"GTBmW0ED": "",
+		"s_D4lIZI": "",
+		"QllFIO-h": "",
+		"3mMSkrH1": "",
+		"p71MBR0z": "",
+		"n9coxmya": "",
+		"UPbcPedU": "",
+		"ScJmuqqn": "",
+		"8dI_ltxP": "",
+		"1VihvPzt": "",
+		"qNcclhAF": "",
 		"ByaXcHRu": "No trees yet",
-		"5QQug909": ""
+		"3bok2f0k": "",
+		"Ddi2Muml": "",
+		"fVt38b7l": "",
+		"Cgl8spCA": "",
+		"UM63FrUj": "",
+		"uC65VpZ5": ""
 	},
 	"lib/components/plan/TreeMeasurements.svelte": {
 		"PHV4A1ZJ": "",
+		"IeSesrKZ": "",
+		"7-F8Pvdq": "",
+		"67a04rYY": "",
+		"7Scql2r5": "",
+		"GXZu1syy": "",
+		"g_e2Ead-": "",
 		"mcQKtAWS": "",
 		"v-LspAF5": "",
 		"k8rSuo9P": "",
 		"_4BZ3GdS": "",
 		"EaK7GttU": "",
-		"W9Mwk7E9": "",
-		"7-F8Pvdq": "",
-		"67a04rYY": "",
-		"7Scql2r5": "",
-		"yrA6bPs8": ""
+		"W9Mwk7E9": ""
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Your location",

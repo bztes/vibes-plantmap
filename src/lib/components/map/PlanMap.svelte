@@ -28,6 +28,10 @@
 		view: MapView;
 		trees: Sized<T>[];
 		selectedId: string | null;
+		/** tree drawn like the selected one, e.g. while it's hovered in the list */
+		highlightId?: string | null;
+		/** pixels covered at the bottom, e.g. by a sheet; the map centers in the space above */
+		bottomInset?: number;
 		/** tree drawn transparent, e.g. at its old spot while it's being moved */
 		fadedId?: string | null;
 		/** when true, the map center marks where a tree goes, clicking pans there instead of selecting */
@@ -46,6 +50,8 @@
 		view,
 		trees,
 		selectedId,
+		highlightId = null,
+		bottomInset = 0,
 		fadedId = null,
 		placing,
 		showMature,
@@ -67,7 +73,11 @@
 	const styleUrl = $derived(styleFor(basemap, basemaps)?.url ?? '');
 
 	export function flyTo(at: LngLat, zoom?: number) {
-		map?.flyTo({ center: at, zoom: Math.max(zoom ?? map.getZoom(), map.getZoom()) });
+		map?.flyTo({
+			center: at,
+			zoom: Math.max(zoom ?? map.getZoom(), map.getZoom()),
+			padding: { top: 0, left: 0, right: 0, bottom: bottomInset }
+		});
 	}
 
 	export function getCenter(): LngLat | null {
@@ -195,7 +205,7 @@
 
 	$effect(() => {
 		if (!map || !ready) return;
-		const data = treeData(trees, selectedId, fadedId);
+		const data = treeData(trees, selectedId, fadedId, highlightId);
 		for (const [key, source] of Object.entries(SOURCES)) {
 			map.getSource<GeoJSONSource>(source)?.setData(data[key as keyof typeof data]);
 		}
@@ -210,6 +220,11 @@
 	});
 
 	$effect(() => {
+		// the center (where new trees go) moves up with the padding, into the visible part
+		map?.easeTo({ padding: { top: 0, left: 0, right: 0, bottom: bottomInset }, duration: 250 });
+	});
+
+	$effect(() => {
 		// drop a leftover hover cursor, the map is only panned while placing
 		if (map && placing) map.getCanvas().style.cursor = '';
 	});
@@ -217,15 +232,18 @@
 
 <!-- maplibre forces position: relative on its container, so position a wrapper instead -->
 <!-- touch screens pinch to zoom, so small screens skip the zoom buttons -->
+<!-- the bottom controls stay above whatever covers the bottom of the map -->
 <div
-	class="absolute inset-0 bg-stone-200 max-md:[&_.maplibregl-ctrl-zoom-in,&_.maplibregl-ctrl-zoom-out]:hidden"
+	class="absolute inset-0 bg-stone-200 [&_.maplibregl-ctrl-bottom-left]:bottom-(--inset) [&_.maplibregl-ctrl-bottom-left]:transition-[bottom] max-md:[&_.maplibregl-ctrl-zoom-in,&_.maplibregl-ctrl-zoom-out]:hidden"
+	style:--inset="{bottomInset}px"
 >
 	<div {@attach setup} class="h-full w-full"></div>
 	<button
 		type="button"
 		aria-label={t`Map sources`}
 		title={t`Map sources`}
-		class="absolute right-2.5 bottom-2.5 flex size-7 items-center justify-center rounded-full bg-white/90 text-stone-600 shadow-md transition-colors hover:bg-white hover:text-stone-900 focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:outline-none"
+		style:bottom="calc({bottomInset}px + 0.625rem)"
+		class="absolute right-2.5 flex size-7 items-center justify-center rounded-full bg-white/90 text-stone-600 shadow-md transition-colors hover:bg-white hover:text-stone-900 focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:outline-none"
 		onclick={showSources}
 	>
 		<Info class="size-4" />

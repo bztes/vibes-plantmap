@@ -128,27 +128,45 @@ export const moveTree = command(
 	}
 );
 
-export const updateTree = form(
+/** Changes some of a tree's details, each field left out stays as it is. */
+export const patchTree = command(
 	v.object({
 		id: v.string(),
 		planRef: v.string(),
-		speciesId: v.string(),
+		speciesId: v.optional(v.string()),
 		label: v.optional(v.pipe(v.string(), v.trim(), v.maxLength(80))),
-		matureHeightOverride: optionalMeters(150),
-		matureSpreadOverride: optionalMeters(100),
 		notes: v.optional(v.pipe(v.string(), v.trim(), v.maxLength(2000)))
 	}),
-	async ({ id, planRef, ...data }) => {
+	async ({ id, planRef, speciesId, label, notes }) => {
 		const { plan } = await getEditableTree(id, planRef);
-		await assertSpeciesVisible(data.speciesId, plan.ownerId);
+		if (speciesId !== undefined) await assertSpeciesVisible(speciesId, plan.ownerId);
 		await db
 			.update(tree)
 			.set({
-				...data,
-				label: data.label || null,
-				notes: data.notes || null,
-				matureHeightOverride: data.matureHeightOverride ?? null,
-				matureSpreadOverride: data.matureSpreadOverride ?? null
+				...(speciesId !== undefined && { speciesId }),
+				...(label !== undefined && { label: label || null }),
+				...(notes !== undefined && { notes: notes || null })
+			})
+			.where(eq(tree.id, id));
+		await getTrees(planRef).refresh();
+	}
+);
+
+/** Mature size of a single tree, e.g. on a dwarf rootstock; empty fields use the species size. */
+export const updateMatureSize = form(
+	v.object({
+		id: v.string(),
+		planRef: v.string(),
+		matureHeightOverride: optionalMeters(150),
+		matureSpreadOverride: optionalMeters(100)
+	}),
+	async ({ id, planRef, matureHeightOverride, matureSpreadOverride }) => {
+		await getEditableTree(id, planRef);
+		await db
+			.update(tree)
+			.set({
+				matureHeightOverride: matureHeightOverride ?? null,
+				matureSpreadOverride: matureSpreadOverride ?? null
 			})
 			.where(eq(tree.id, id));
 		await getTrees(planRef).refresh();

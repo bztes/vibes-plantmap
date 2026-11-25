@@ -113,6 +113,17 @@
 		"ifaDJWDe": "Jahr",
 		"hKl0L5rj": "Zurück zu heute"
 	},
+	"lib/components/panel/PlanPanel.svelte": {
+		"itgLwbus": "Bereich einklappen",
+		"SnRmfxlw": "Bereich ausklappen"
+	},
+	"lib/components/plan/AddTreePanel.svelte": {
+		"dpAPG_0W": "Zurück",
+		"Ufbzcmjc": "Was pflanzt du?",
+		"DMHyvk0u": "Arten suchen",
+		"xfGHFicF": "Zuletzt gepflanzt",
+		"vLiKq1sV": "Keine Arten gefunden"
+	},
 	"lib/components/plan/GrowthChart.svelte": {
 		"GxmL1P5f": "Wachstumskurve",
 		"1lGOXp9N": "Angezeigte Größe",
@@ -137,6 +148,14 @@
 		"k--vUDVm": "ausgewachsen {matureSpread}",
 		"rGSUz1FW": "Wachstum bis zur Endgröße"
 	},
+	"lib/components/plan/PlacePanel.svelte": {
+		"k1MJkUPQ": "{0} verschieben",
+		"pRwlf-8I": "Verschiebe die Karte, bis das Kreuz auf der Stelle liegt.",
+		"GXZu1syy": "Abbrechen",
+		"VvEkd3dJ": "Hierher verschieben",
+		"pp_1LE0K": "Hier pflanzen",
+		"7QdiKZbq": "Der gepunktete Ring ist die Krone im ausgewachsenen Zustand. Verschiebe die Zeitleiste, um zu prüfen, wie der Baum in späteren Jahren passt."
+	},
 	"lib/components/plan/PlanSettingsDialog.svelte": {
 		"-GvycTav": "Planeinstellungen",
 		"3NHVIj9z": "Name",
@@ -150,21 +169,7 @@
 		"Wr6eH7xb": "Darf bearbeiten",
 		"m0xshZDp": "Nur ansehen",
 		"N3ThwgSs": "Geteilt von {owner}",
-		"9msViuJl": "Bäume ({trees.length})",
-		"itgLwbus": "Bereich einklappen",
-		"SnRmfxlw": "Bereich ausklappen",
-		"yuCZ6gh9": "Es sind noch keine Grundkarten eingerichtet. Ein Admin kann sie unter Verwaltung hinzufügen.",
-		"s8iHL8jg": "Karte verschieben zum Platzieren",
-		"mluM8qF_": "Baum verschieben",
-		"bsw99r_9": "Verschieben",
-		"RZid5J-3": "Details",
-		"FCF0wZRX": "Auswahl aufheben",
-		"pp_1LE0K": "Hier pflanzen",
-		"VvEkd3dJ": "Hierher verschieben",
-		"GXZu1syy": "Abbrechen",
-		"fVt38b7l": "Baum hinzufügen",
-		"XvPXWs1V": "Wähle, was du pflanzen möchtest, und platziere es dann auf der Karte.",
-		"eqYNlO_B": "Auf der Karte platzieren"
+		"yuCZ6gh9": "Es sind noch keine Grundkarten eingerichtet. Ein Admin kann sie unter Verwaltung hinzufügen."
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "Plan teilen",
@@ -188,40 +193,69 @@
 		"ViBeEsIP": "Arten",
 		"vLiKq1sV": "Keine Arten gefunden"
 	},
-	"lib/components/plan/TreeDialog.svelte": {
+	"lib/components/plan/TreeDetail.svelte": {
+		"I-OSkdYT": "Speichern…",
+		"tcEgsxbC": "Gespeichert",
+		"IrNGfBup": "Nicht gespeichert",
+		"fo_R3qlI": "Alle Bäume",
+		"bsw99r_9": "Verschieben",
+		"6_lA8rPq": "Messen",
+		"DfbxytNs": "Zeigen",
+		"inUlsUkv": "Notizen",
+		"7dZPiPDb": "Schnitt, Ernte, alles, was du dir merken willst",
+		"12fnNWay": "Keine Notizen.",
+		"uF9fq_l9": "Baum",
 		"3NHVIj9z": "Name",
 		"mMxtcfBS": "Optional, z. B. „Opas Apfelbaum“",
-		"ViBeEsIP": "Arten",
+		"ViBeEsIP": "Art",
 		"wL91vXi_": "Ändern",
-		"SECWDUok": "Endgröße anpassen",
+		"deVJalwn": "Ausgewachsene Größe",
+		"bN_Scdpj": "eigene",
+		"5LsAAeLF": "Standard der Art",
 		"aaANJg1f": "Praktisch für schwach wachsende Unterlagen oder geschnittene Bäume. Leer lassen, um den Wert der Art zu verwenden.",
-		"NwJmOCHn": "Endhöhe (m)",
-		"GCMszQD0": "Endkrone (m)",
-		"inUlsUkv": "Notizen",
+		"67a04rYY": "Höhe (m)",
+		"7Scql2r5": "Krone (m)",
+		"UmUSXEl_": "Größe speichern",
 		"c3I5Wxwn": "Baum löschen",
-		"4tClSWjq": "Löschen",
-		"GXZu1syy": "Abbrechen",
-		"3QrnpcvP": "Änderungen speichern",
-		"fZ63rLE-": "Schließen",
 		"WNPfer3r": "Baum löschen?",
 		"AUSAq47k": "„{displayName}“ wird aus diesem Plan entfernt."
 	},
 	"lib/components/plan/TreeList.svelte": {
+		"EJ1vRV7Y": "Bäume",
+		"9hPxlmkn": "Noch nichts gepflanzt",
+		"GTBmW0ED": "1 Baum",
+		"s_D4lIZI": "{treeCount} Bäume",
+		"QllFIO-h": "1 Art",
+		"3mMSkrH1": "{speciesCount} Arten",
+		"p71MBR0z": "{canopy} m² Kronen im Jahr {year}",
+		"n9coxmya": "Hinzufügen",
+		"UPbcPedU": "Filter {active.name} entfernen",
+		"ScJmuqqn": "Suchen",
+		"8dI_ltxP": "Namen, Arten, Notizen suchen",
+		"1VihvPzt": "Bäume suchen",
+		"qNcclhAF": "Nur anzeigen",
 		"ByaXcHRu": "Noch keine Bäume",
-		"5QQug909": "Tippe auf „Baum hinzufügen“, wähle eine Art und verschiebe die Karte, um ihn zu platzieren."
+		"3bok2f0k": "Wähle eine Art und verschiebe dann die Karte dorthin, wo der Baum wachsen soll.",
+		"Ddi2Muml": "In diesem Plan wurde noch nichts gepflanzt.",
+		"fVt38b7l": "Baum hinzufügen",
+		"Cgl8spCA": "Krone bei {0} % der ausgewachsenen Breite",
+		"UM63FrUj": "Hat Notizen",
+		"uC65VpZ5": "Keine passenden Bäume."
 	},
 	"lib/components/plan/TreeMeasurements.svelte": {
 		"PHV4A1ZJ": "Messungen",
+		"IeSesrKZ": "Erfassen",
+		"7-F8Pvdq": "Gemessen am",
+		"67a04rYY": "Höhe (m)",
+		"7Scql2r5": "Krone (m)",
+		"GXZu1syy": "Abbrechen",
+		"g_e2Ead-": "Messung speichern",
 		"mcQKtAWS": "Datum",
 		"v-LspAF5": "Höhe",
 		"k8rSuo9P": "Kronenbreite",
 		"_4BZ3GdS": "Aktionen",
 		"EaK7GttU": "Messung vom {date} löschen",
-		"W9Mwk7E9": "Noch keine Messungen.",
-		"7-F8Pvdq": "Gemessen am",
-		"67a04rYY": "Höhe (m)",
-		"7Scql2r5": "Krone (m)",
-		"yrA6bPs8": "Messung hinzufügen"
+		"W9Mwk7E9": "Noch keine Messungen."
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Dein Standort",

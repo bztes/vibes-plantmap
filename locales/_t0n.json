@@ -113,6 +113,17 @@
 		"ifaDJWDe": "Year",
 		"hKl0L5rj": "Back to today"
 	},
+	"lib/components/panel/PlanPanel.svelte": {
+		"itgLwbus": "Collapse panel",
+		"SnRmfxlw": "Expand panel"
+	},
+	"lib/components/plan/AddTreePanel.svelte": {
+		"dpAPG_0W": "Back",
+		"Ufbzcmjc": "What are you planting?",
+		"DMHyvk0u": "Search species",
+		"xfGHFicF": "Last planted",
+		"vLiKq1sV": "No species found"
+	},
 	"lib/components/plan/GrowthChart.svelte": {
 		"GxmL1P5f": "Growth curve",
 		"1lGOXp9N": "Shown size",
@@ -137,6 +148,14 @@
 		"k--vUDVm": "mature {matureSpread}",
 		"rGSUz1FW": "Growth towards mature size"
 	},
+	"lib/components/plan/PlacePanel.svelte": {
+		"k1MJkUPQ": "Move {0}",
+		"pRwlf-8I": "Move the map until the cross is on the spot.",
+		"GXZu1syy": "Cancel",
+		"VvEkd3dJ": "Move here",
+		"pp_1LE0K": "Plant here",
+		"7QdiKZbq": "The dotted ring is the crown when fully grown. Move the timeline to check how it fits in later years."
+	},
 	"lib/components/plan/PlanSettingsDialog.svelte": {
 		"-GvycTav": "Plan settings",
 		"3NHVIj9z": "Name",
@@ -150,21 +169,7 @@
 		"Wr6eH7xb": "Can edit",
 		"m0xshZDp": "View only",
 		"N3ThwgSs": "Shared by {owner}",
-		"9msViuJl": "Trees ({trees.length})",
-		"itgLwbus": "Collapse panel",
-		"SnRmfxlw": "Expand panel",
-		"yuCZ6gh9": "No base maps are set up yet. An admin can add them under Administration.",
-		"s8iHL8jg": "Move map to place tree",
-		"mluM8qF_": "Move tree",
-		"bsw99r_9": "Move",
-		"RZid5J-3": "Details",
-		"FCF0wZRX": "Deselect",
-		"pp_1LE0K": "Plant here",
-		"VvEkd3dJ": "Move here",
-		"GXZu1syy": "Cancel",
-		"fVt38b7l": "Add tree",
-		"XvPXWs1V": "Choose what to plant, then position it on the map.",
-		"eqYNlO_B": "Place on map"
+		"yuCZ6gh9": "No base maps are set up yet. An admin can add them under Administration."
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "Share plan",
@@ -188,40 +193,69 @@
 		"ViBeEsIP": "Species",
 		"vLiKq1sV": "No species found"
 	},
-	"lib/components/plan/TreeDialog.svelte": {
+	"lib/components/plan/TreeDetail.svelte": {
+		"I-OSkdYT": "Saving…",
+		"tcEgsxbC": "Saved",
+		"IrNGfBup": "Not saved",
+		"fo_R3qlI": "All trees",
+		"bsw99r_9": "Move",
+		"6_lA8rPq": "Measure",
+		"DfbxytNs": "Show",
+		"inUlsUkv": "Notes",
+		"7dZPiPDb": "Pruning, harvest, anything worth remembering",
+		"12fnNWay": "No notes.",
+		"uF9fq_l9": "Tree",
 		"3NHVIj9z": "Name",
 		"mMxtcfBS": "Optional, e.g. “Grandpa's apple”",
 		"ViBeEsIP": "Species",
 		"wL91vXi_": "Change",
-		"SECWDUok": "Override mature size",
+		"deVJalwn": "Mature size",
+		"bN_Scdpj": "custom",
+		"5LsAAeLF": "species default",
 		"aaANJg1f": "Useful for dwarf rootstocks or pruned trees. Leave empty to use the species default.",
-		"NwJmOCHn": "Mature height (m)",
-		"GCMszQD0": "Mature crown (m)",
-		"inUlsUkv": "Notes",
+		"67a04rYY": "Height (m)",
+		"7Scql2r5": "Crown (m)",
+		"UmUSXEl_": "Save size",
 		"c3I5Wxwn": "Delete tree",
-		"4tClSWjq": "Delete",
-		"GXZu1syy": "Cancel",
-		"3QrnpcvP": "Save changes",
-		"fZ63rLE-": "Close",
 		"WNPfer3r": "Delete tree?",
 		"AUSAq47k": "“{displayName}” will be removed from this plan."
 	},
 	"lib/components/plan/TreeList.svelte": {
+		"EJ1vRV7Y": "Trees",
+		"9hPxlmkn": "Nothing planted yet",
+		"GTBmW0ED": "1 tree",
+		"s_D4lIZI": "{treeCount} trees",
+		"QllFIO-h": "1 species",
+		"3mMSkrH1": "{speciesCount} species",
+		"p71MBR0z": "{canopy} m² crowns in {year}",
+		"n9coxmya": "Add",
+		"UPbcPedU": "Remove filter {active.name}",
+		"ScJmuqqn": "Search",
+		"8dI_ltxP": "Search names, species, notes",
+		"1VihvPzt": "Search trees",
+		"qNcclhAF": "Show only",
 		"ByaXcHRu": "No trees yet",
-		"5QQug909": "Tap “Add tree”, choose a species and move the map to place it."
+		"3bok2f0k": "Choose a species, then move the map to where it should grow.",
+		"Ddi2Muml": "Nothing has been planted in this plan yet.",
+		"fVt38b7l": "Add tree",
+		"Cgl8spCA": "Crown at {0}% of its mature width",
+		"UM63FrUj": "Has notes",
+		"uC65VpZ5": "No trees match."
 	},
 	"lib/components/plan/TreeMeasurements.svelte": {
 		"PHV4A1ZJ": "Measurements",
+		"IeSesrKZ": "Log",
+		"7-F8Pvdq": "Measured on",
+		"67a04rYY": "Height (m)",
+		"7Scql2r5": "Crown (m)",
+		"GXZu1syy": "Cancel",
+		"g_e2Ead-": "Save measurement",
 		"mcQKtAWS": "Date",
 		"v-LspAF5": "Height",
 		"k8rSuo9P": "Crown width",
 		"_4BZ3GdS": "Actions",
 		"EaK7GttU": "Delete measurement from {date}",
-		"W9Mwk7E9": "No measurements yet.",
-		"7-F8Pvdq": "Measured on",
-		"67a04rYY": "Height (m)",
-		"7Scql2r5": "Crown (m)",
-		"yrA6bPs8": "Add measurement"
+		"W9Mwk7E9": "No measurements yet."
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Your location",

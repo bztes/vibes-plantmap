@@ -14,9 +14,11 @@
 		/** plan id or share link token, see `getPlanAccess` */
 		planRef: string;
 		editable: boolean;
+		/** whether the form for a new measurement is open */
+		adding?: boolean;
 	}
 
-	let { tree, planRef, editable }: Props = $props();
+	let { tree, planRef, editable, adding = $bindable(false) }: Props = $props();
 
 	const form = $derived(addMeasurement.for(tree.id));
 	const f = $derived(form.fields);
@@ -29,7 +31,56 @@
 </script>
 
 <div class="flex flex-col gap-3">
-	<h3 class="text-sm font-medium text-stone-700">{t`Measurements`}</h3>
+	<div class="flex items-center gap-2">
+		<h3 class="flex-1 text-sm font-medium text-stone-700">{t`Measurements`}</h3>
+		{#if editable && !adding}
+			<Button size="sm" variant="ghost" class="-mr-2 text-leaf-700" onclick={() => (adding = true)}>
+				<Plus />
+				{t`Log`}
+			</Button>
+		{/if}
+	</div>
+
+	{#if editable && adding}
+		<form
+			{...form.enhance(async ({ element, submit }) => {
+				if (await submit()) {
+					element.reset();
+					adding = false;
+				}
+			})}
+			class="flex flex-col gap-2 rounded-lg border border-leaf-200 bg-leaf-50 p-3"
+		>
+			<FormIssues issues={f.issues()} />
+			<input {...f.treeId.as('hidden', tree.id)} />
+			<input {...f.planRef.as('hidden', planRef)} />
+			<div class="grid grid-cols-[1.4fr_1fr_1fr] gap-2">
+				<Field label={t`Measured on`} for="m-date" issues={f.measuredAt.issues()}>
+					<Input id="m-date" size="sm" max={today} {...f.measuredAt.as('date', today)} />
+				</Field>
+				<Field label={t`Height (m)`} for="m-height">
+					<Input
+						id="m-height"
+						size="sm"
+						step="0.1"
+						min="0.1"
+						{@attach (el) => el.focus()}
+						{...f.height.as('number')}
+					/>
+				</Field>
+				<Field label={t`Crown (m)`} for="m-spread" issues={f.spread.issues()}>
+					<Input id="m-spread" size="sm" step="0.1" min="0.1" {...f.spread.as('number')} />
+				</Field>
+			</div>
+			{#each f.height.issues() ?? [] as issue (issue.message)}
+				<p class="text-xs text-red-600">{issue.message}</p>
+			{/each}
+			<div class="flex justify-end gap-2">
+				<Button size="sm" variant="ghost" onclick={() => (adding = false)}>{t`Cancel`}</Button>
+				<Button type="submit" size="sm" loading={!!form.pending}>{t`Save measurement`}</Button>
+			</div>
+		</form>
+	{/if}
 
 	{#if newestFirst.length}
 		<table class="w-full text-sm">
@@ -68,36 +119,5 @@
 		</table>
 	{:else if !editable}
 		<p class="text-sm text-stone-500">{t`No measurements yet.`}</p>
-	{/if}
-
-	{#if editable}
-		<form
-			{...form.enhance(async ({ element, submit }) => {
-				if (await submit()) element.reset();
-			})}
-			class="flex flex-col gap-2 rounded-lg bg-stone-50 p-3"
-		>
-			<FormIssues issues={f.issues()} />
-			<input {...f.treeId.as('hidden', tree.id)} />
-			<input {...f.planRef.as('hidden', planRef)} />
-			<div class="grid grid-cols-[1.4fr_1fr_1fr] gap-2">
-				<Field label={t`Measured on`} for="m-date" issues={f.measuredAt.issues()}>
-					<Input id="m-date" size="sm" max={today} {...f.measuredAt.as('date', today)} />
-				</Field>
-				<Field label={t`Height (m)`} for="m-height">
-					<Input id="m-height" size="sm" step="0.1" min="0.1" {...f.height.as('number')} />
-				</Field>
-				<Field label={t`Crown (m)`} for="m-spread" issues={f.spread.issues()}>
-					<Input id="m-spread" size="sm" step="0.1" min="0.1" {...f.spread.as('number')} />
-				</Field>
-			</div>
-			{#each f.height.issues() ?? [] as issue (issue.message)}
-				<p class="text-xs text-red-600">{issue.message}</p>
-			{/each}
-			<Button type="submit" size="sm" variant="outline" class="self-end" loading={!!form.pending}>
-				<Plus />
-				{t`Add measurement`}
-			</Button>
-		</form>
 	{/if}
 </div>

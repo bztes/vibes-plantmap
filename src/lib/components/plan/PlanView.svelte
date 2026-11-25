@@ -1,19 +1,7 @@
 <script lang="ts">
 	import { t } from '@bztes/vibes-t0n';
-	import {
-		Check,
-		ChevronUp,
-		Eye,
-		Info,
-		List,
-		MapPin,
-		Move,
-		Pencil,
-		Settings,
-		Share2,
-		TreeDeciduous,
-		X
-	} from '@lucide/svelte';
+	import { Eye, Pencil, Settings, Share2 } from '@lucide/svelte';
+	import { tick } from 'svelte';
 	import { getCurrentUser } from '#lib/remote/auth.remote.ts';
 	import { getBasemaps } from '#lib/remote/basemaps.remote.ts';
 	import { getPlan, savePlanView } from '#lib/remote/plans.remote.ts';
@@ -22,23 +10,22 @@
 	import { defaultBasemap } from '#lib/basemaps.ts';
 	import type { LngLat } from '#lib/geo.ts';
 	import { addYears, nurserySize, sizeAt } from '#lib/growth.ts';
-	import { matureSizeLabel } from '#lib/species.ts';
-	import { sizeTrees, treeName, treeSummary, type PlannedTree } from '#lib/plan.ts';
+	import { sizeTrees, type PlannedTree } from '#lib/plan.ts';
 	import type { MapView } from '#lib/components/map/layers.ts';
 	import AppHeader from '#lib/components/layout/AppHeader.svelte';
 	import type { MenuAction } from '#lib/components/layout/UserMenu.svelte';
 	import PlanMap from '#lib/components/map/PlanMap.svelte';
 	import LayerMenu from '#lib/components/map/LayerMenu.svelte';
 	import TimelineBar from '#lib/components/map/TimelineBar.svelte';
+	import type { Snap } from '#lib/components/panel/panel.ts';
+	import PlanPanel from '#lib/components/panel/PlanPanel.svelte';
+	import AddTreePanel from '#lib/components/plan/AddTreePanel.svelte';
+	import PlacePanel from '#lib/components/plan/PlacePanel.svelte';
 	import PlanSettingsDialog from '#lib/components/plan/PlanSettingsDialog.svelte';
 	import SharePlanDialog from '#lib/components/plan/SharePlanDialog.svelte';
-	import SpeciesDialog from '#lib/components/plan/SpeciesDialog.svelte';
-	import TreeDialog from '#lib/components/plan/TreeDialog.svelte';
+	import TreeDetail from '#lib/components/plan/TreeDetail.svelte';
 	import TreeList from '#lib/components/plan/TreeList.svelte';
 	import Badge from '#lib/components/ui/Badge.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
-	import ColorSwatch from '#lib/components/ui/ColorSwatch.svelte';
-	import IconButton from '#lib/components/ui/IconButton.svelte';
 
 	interface Props {
 		/** plan id, or the token when opened through a share link */
@@ -63,17 +50,25 @@
 	let showMature = $state(true);
 	let basemapId = $state<string | null>(null);
 	const basemap = $derived(basemaps.find((b) => b.id === basemapId) ?? defaultBasemap(basemaps));
+
+	/** what the panel shows; a selected tree shows its details */
+	let adding = $state(false);
 	let selectedId = $state<string | null>(null);
-	let addOpen = $state(false);
-	let detailsOpen = $state(false);
+	/** tree hovered in the list */
+	let highlightId = $state<string | null>(null);
+	// the list's search and filter survive opening a tree
+	let query = $state('');
+	let filter = $state('all');
+	/** how far the panel is open on small screens, and how much of the map it covers */
+	let snap = $state<Snap>('peek');
+	let inset = $state(0);
+
 	/** species of the new tree waiting to be planted at the map center */
 	let draft = $state<string | null>(null);
 	// the species is kept between trees so planting several of the same is quick
 	let lastSpeciesId = $state('');
 	/** tree being moved, it stays faded at its old spot until the move is confirmed */
 	let movingId = $state<string | null>(null);
-	/** whether the side panel is expanded, only collapsible on small screens */
-	let panelOpen = $state(false);
 	let settingsOpen = $state(false);
 	let shareOpen = $state(false);
 	let map = $state<PlanMap<PlannedTree>>();
@@ -113,7 +108,6 @@
 	const placingSpread = $derived(placingTree ? sizeAt(placingTree, viewDate).spread : 0);
 	/** map scale at the center, to draw the marker at the tree's real size */
 	let metersPerPixel = $state(1);
-	const placingSize = $derived(placingTree && matureSizeLabel(placingTree));
 	const selected = $derived(sized.find((t) => t.id === selectedId) ?? null);
 	const placing = $derived(draft !== null || movingId !== null);
 
@@ -132,12 +126,46 @@
 		zoom: plan.zoom
 	});
 
-	function startMove(id: string) {
+	/** centers the map on a tree, in the part the panel leaves visible */
+	async function focus(id: string, zoom?: number) {
+		// let the sheet settle first, its new height decides where the center is
+		await tick();
 		const tree = trees.find((t) => t.id === id);
-		if (!tree) return;
+		if (tree) map?.flyTo([tree.lng, tree.lat], zoom);
+	}
+
+	function open(id: string | null) {
+		highlightId = null;
+		if (!id) {
+			// tapping empty map closes the tree, but not the species list
+			if (selectedId) selectedId = null;
+			return;
+		}
+		adding = false;
+		selectedId = id;
+		if (snap === 'peek') snap = 'half';
+	}
+
+	function openFromMap(id: string | null) {
+		open(id);
+		// on small screens the sheet may now cover the tree
+		if (id && inset > 0) focus(id);
+	}
+
+	function openFromList(id: string) {
+		open(id);
+		focus(id, 19);
+	}
+
+	function backToList() {
+		selectedId = null;
+		adding = false;
+	}
+
+	function startMove(id: string) {
 		draft = null;
 		movingId = id;
-		map?.flyTo([tree.lng, tree.lat]);
+		focus(id);
 	}
 
 	function startPlanting(speciesId: string) {
@@ -163,14 +191,7 @@
 		} else if (draft) {
 			const speciesId = draft;
 			draft = null;
-			select(
-				await createTree({
-					planRef,
-					speciesId,
-					lng: at[0],
-					lat: at[1]
-				})
-			);
+			open(await createTree({ planRef, speciesId, lng: at[0], lat: at[1] }));
 		}
 	}
 
@@ -191,17 +212,6 @@
 			1000
 		);
 	}
-
-	function select(id: string | null) {
-		selectedId = id;
-		detailsOpen = false;
-	}
-
-	function selectFromList(id: string) {
-		select(id);
-		const tree = trees.find((t) => t.id === id);
-		if (tree) map?.flyTo([tree.lng, tree.lat], 19);
-	}
 </script>
 
 <svelte:head><title>{plan.name} · Plantmap</title></svelte:head>
@@ -211,7 +221,7 @@
 		if (e.key !== 'Escape' || (e.target as HTMLElement).closest('input, textarea, select, dialog'))
 			return;
 		if (placing) cancelPlacing();
-		else select(null);
+		else backToList();
 	}}
 />
 
@@ -237,37 +247,58 @@
 		{/snippet}
 	</AppHeader>
 
-	<div class="flex min-h-0 flex-1 flex-col-reverse md:flex-row">
-		<aside
-			class={[
-				'flex w-full shrink-0 flex-col border-t border-stone-200 bg-white md:h-full md:w-96 md:border-t-0 md:border-r',
-				panelOpen && 'h-[45%]'
-			]}
-		>
-			<div class="flex items-center gap-2 p-3 md:p-4 md:pb-2">
-				<h2 class="flex flex-1 items-center gap-2 text-sm font-semibold text-stone-900">
-					<List class="size-4 text-stone-500" />
-					{t`Trees (${trees.length})`}
-				</h2>
-				<IconButton
-					label={panelOpen ? t`Collapse panel` : t`Expand panel`}
-					class="md:hidden"
-					aria-expanded={panelOpen}
-					onclick={() => (panelOpen = !panelOpen)}
-				>
-					<ChevronUp class={['transition-transform', panelOpen && 'rotate-180']} />
-				</IconButton>
-			</div>
-
-			<div
-				class={[
-					'min-h-0 flex-1 overflow-y-auto px-3 pb-3 md:block md:px-4 md:pb-4',
-					!panelOpen && 'hidden'
-				]}
-			>
-				<TreeList trees={sized} {selectedId} onselect={selectFromList} />
-			</div>
-		</aside>
+	<div class="relative flex min-h-0 flex-1">
+		<PlanPanel bind:snap bind:inset locked={placing}>
+			{#if placingTree}
+				<PlacePanel
+					tree={placingTree}
+					moving={!!movingId}
+					onplace={place}
+					oncancel={cancelPlacing}
+				/>
+			{:else if adding}
+				<AddTreePanel
+					{species}
+					{lastSpeciesId}
+					onpick={(id) => {
+						adding = false;
+						startPlanting(id);
+					}}
+					onback={backToList}
+				/>
+			{:else if selected}
+				{#key selected.id}
+					<TreeDetail
+						tree={selected}
+						{planRef}
+						editable={canEdit}
+						{species}
+						{viewDate}
+						onback={backToList}
+						onmove={() => startMove(selected.id)}
+						onshow={() => {
+							snap = 'peek';
+							focus(selected.id, 19);
+						}}
+						ondelete={backToList}
+					/>
+				{/key}
+			{:else}
+				<TreeList
+					trees={sized}
+					year={viewDate.getFullYear()}
+					editable={canEdit}
+					bind:query
+					bind:filter
+					bind:highlightId
+					onopen={openFromList}
+					onadd={() => {
+						adding = true;
+						snap = 'full';
+					}}
+				/>
+			{/if}
+		</PlanPanel>
 
 		<section class="relative min-h-0 flex-1">
 			<PlanMap
@@ -275,12 +306,14 @@
 				view={initialView}
 				trees={sized}
 				{selectedId}
+				{highlightId}
+				bottomInset={inset}
 				fadedId={movingId}
 				{placing}
 				{showMature}
 				{basemaps}
 				{basemap}
-				onselect={select}
+				onselect={openFromMap}
 				onscale={(m) => (metersPerPixel = m)}
 				onviewchange={rememberView}
 			/>
@@ -303,122 +336,43 @@
 			{/if}
 
 			{#if placing}
-				{#if placingTree}
-					<!-- the tree at its real size; an overlay rather than a map layer so it doesn't lag behind panning -->
-					<div
-						class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dotted border-stone-700/80 drop-shadow-[0_0_1px_white]"
-						style:width="{placingTree.matureSpread / metersPerPixel}px"
-						style:height="{placingTree.matureSpread / metersPerPixel}px"
-						aria-hidden="true"
-					></div>
-					<div
-						class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2"
-						style:width="{placingSpread / metersPerPixel}px"
-						style:height="{placingSpread / metersPerPixel}px"
-						style:border-color={placingTree.color}
-						aria-hidden="true"
-					></div>
-				{/if}
-				<!-- the map center is where the tree goes -->
+				<!-- the part of the map above the sheet, its center is where the tree goes -->
 				<div
-					class="pointer-events-none absolute top-1/2 left-1/2 size-10 -translate-x-1/2 -translate-y-1/2 text-stone-900 drop-shadow-[0_0_2px_white]"
+					class="pointer-events-none absolute inset-x-0 top-0 transition-[bottom] duration-300"
+					style:bottom="{inset}px"
 					aria-hidden="true"
 				>
-					<div class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-current/70"></div>
-					<div class="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-current/70"></div>
+					{#if placingTree}
+						<!-- the tree at its real size; an overlay rather than a map layer so it doesn't lag behind panning -->
+						<div
+							class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dotted border-stone-700/80 drop-shadow-[0_0_1px_white]"
+							style:width="{placingTree.matureSpread / metersPerPixel}px"
+							style:height="{placingTree.matureSpread / metersPerPixel}px"
+						></div>
+						<div
+							class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2"
+							style:width="{placingSpread / metersPerPixel}px"
+							style:height="{placingSpread / metersPerPixel}px"
+							style:border-color={placingTree.color}
+						></div>
+					{/if}
 					<div
-						class="absolute top-1/2 left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-current shadow-md"
-						style:background-color={placingTree?.color}
-					></div>
-				</div>
-				<div
-					class="pointer-events-none absolute top-18 left-1/2 max-w-[90%] -translate-x-1/2 rounded-2xl bg-stone-900/85 px-4 py-1.5 text-center text-sm text-white shadow"
-				>
-					{t`Move map to place tree`}
-					{#if placingSize}
-						<span class="block text-xs text-white/75">{placingSize}</span>
-					{/if}
-				</div>
-			{/if}
-
-			{#if selected && !placing}
-				<div
-					class="absolute inset-x-3 bottom-10 mx-auto flex max-w-md items-center gap-2 rounded-2xl border border-stone-200/80 bg-white/95 p-2 pl-3.5 shadow-lg backdrop-blur"
-				>
-					<ColorSwatch color={selected.color} class="size-3.5" />
-					<div class="min-w-0 flex-1">
-						<p class="truncate text-sm font-medium text-stone-900">{treeName(selected)}</p>
-						<p class="truncate text-xs text-stone-500">
-							{treeSummary(selected)}
-						</p>
-					</div>
-					{#if canEdit}
-						<Button
-							size="sm"
-							variant="outline"
-							aria-label={t`Move tree`}
-							onclick={() => startMove(selected.id)}
-						>
-							<Move /><span class="max-[420px]:hidden">{t`Move`}</span>
-						</Button>
-					{/if}
-					<Button size="sm" onclick={() => (detailsOpen = true)}><Info /> {t`Details`}</Button>
-					<IconButton label={t`Deselect`} small onclick={() => select(null)}><X /></IconButton>
-				</div>
-			{/if}
-
-			<div class="absolute right-14 bottom-20 flex flex-col items-end gap-2">
-				{#if placing}
-					<div class="flex rounded-lg shadow-md">
-						<Button class="rounded-r-none shadow-none" onclick={place}>
-							<Check />
-							{draft ? t`Plant here` : t`Move here`}
-						</Button>
-						<Button class="rounded-l-none" variant="secondary" onclick={cancelPlacing}
-							><X /> {t`Cancel`}</Button
-						>
-					</div>
-				{:else if canEdit && !selected}
-					<Button
-						class="h-12 rounded-full px-6 text-base shadow-lg max-sm:size-16 max-sm:p-0 [&_svg]:size-5 [&_svg]:max-sm:size-7"
-						aria-label={t`Add tree`}
-						onclick={() => (addOpen = true)}
+						class="absolute top-1/2 left-1/2 size-10 -translate-x-1/2 -translate-y-1/2 text-stone-900 drop-shadow-[0_0_2px_white]"
 					>
-						<TreeDeciduous /><span class="max-sm:hidden">{t`Add tree`}</span>
-					</Button>
-				{/if}
-			</div>
+						<div class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-current/70"></div>
+						<div class="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-current/70"></div>
+						<div
+							class="absolute top-1/2 left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-current shadow-md"
+							style:background-color={placingTree?.color}
+						></div>
+					</div>
+				</div>
+			{/if}
 		</section>
 	</div>
 </div>
 
-{#if selected}
-	{#key selected.id}
-		<TreeDialog
-			bind:open={detailsOpen}
-			tree={selected}
-			{planRef}
-			editable={canEdit}
-			{species}
-			{viewDate}
-			ondelete={() => select(null)}
-		/>
-	{/key}
-{/if}
-
 {#if isOwner}
 	<PlanSettingsDialog bind:open={settingsOpen} {plan} />
 	<SharePlanDialog bind:open={shareOpen} planId={plan.id} />
-{/if}
-{#if canEdit}
-	<SpeciesDialog
-		bind:open={addOpen}
-		{species}
-		value={lastSpeciesId || species[0]?.id || ''}
-		title={t`Add tree`}
-		description={t`Choose what to plant, then position it on the map.`}
-		onselect={startPlanting}
-	>
-		{#snippet submit()}<MapPin /> {t`Place on map`}{/snippet}
-	</SpeciesDialog>
 {/if}

@@ -113,6 +113,17 @@
 		"ifaDJWDe": "År",
 		"hKl0L5rj": "Tillbaka till idag"
 	},
+	"lib/components/panel/PlanPanel.svelte": {
+		"itgLwbus": "Fäll ihop panelen",
+		"SnRmfxlw": "Fäll ut panelen"
+	},
+	"lib/components/plan/AddTreePanel.svelte": {
+		"dpAPG_0W": "Tillbaka",
+		"Ufbzcmjc": "Vad planterar du?",
+		"DMHyvk0u": "Sök arter",
+		"xfGHFicF": "Senast planterad",
+		"vLiKq1sV": "Inga arter hittades"
+	},
 	"lib/components/plan/GrowthChart.svelte": {
 		"GxmL1P5f": "Tillväxtkurva",
 		"1lGOXp9N": "Visad storlek",
@@ -137,6 +148,14 @@
 		"k--vUDVm": "fullvuxen {matureSpread}",
 		"rGSUz1FW": "Tillväxt mot fullvuxen storlek"
 	},
+	"lib/components/plan/PlacePanel.svelte": {
+		"k1MJkUPQ": "Flytta {0}",
+		"pRwlf-8I": "Flytta kartan tills korset är på platsen.",
+		"GXZu1syy": "Avbryt",
+		"VvEkd3dJ": "Flytta hit",
+		"pp_1LE0K": "Plantera här",
+		"7QdiKZbq": "Den prickade ringen är kronan när trädet är fullvuxet. Flytta tidslinjen för att se hur det passar in senare år."
+	},
 	"lib/components/plan/PlanSettingsDialog.svelte": {
 		"-GvycTav": "Planinställningar",
 		"3NHVIj9z": "Namn",
@@ -150,21 +169,7 @@
 		"Wr6eH7xb": "Kan redigera",
 		"m0xshZDp": "Endast visning",
 		"N3ThwgSs": "Delad av {owner}",
-		"9msViuJl": "Träd ({trees.length})",
-		"itgLwbus": "Fäll ihop panelen",
-		"SnRmfxlw": "Fäll ut panelen",
-		"yuCZ6gh9": "Inga bakgrundskartor är inställda än. En administratör kan lägga till dem under Administration.",
-		"s8iHL8jg": "Flytta kartan för att placera",
-		"mluM8qF_": "Flytta träd",
-		"bsw99r_9": "Flytta",
-		"RZid5J-3": "Detaljer",
-		"FCF0wZRX": "Avmarkera",
-		"pp_1LE0K": "Plantera här",
-		"VvEkd3dJ": "Flytta hit",
-		"GXZu1syy": "Avbryt",
-		"fVt38b7l": "Lägg till träd",
-		"XvPXWs1V": "Välj vad du vill plantera och placera det sedan på kartan.",
-		"eqYNlO_B": "Placera på kartan"
+		"yuCZ6gh9": "Inga bakgrundskartor är inställda än. En administratör kan lägga till dem under Administration."
 	},
 	"lib/components/plan/SharePlanDialog.svelte": {
 		"bJjRvTS8": "Dela plan",
@@ -188,40 +193,69 @@
 		"ViBeEsIP": "Art",
 		"vLiKq1sV": "Inga arter hittades"
 	},
-	"lib/components/plan/TreeDialog.svelte": {
+	"lib/components/plan/TreeDetail.svelte": {
+		"I-OSkdYT": "Sparar…",
+		"tcEgsxbC": "Sparat",
+		"IrNGfBup": "Inte sparat",
+		"fo_R3qlI": "Alla träd",
+		"bsw99r_9": "Flytta",
+		"6_lA8rPq": "Mät",
+		"DfbxytNs": "Visa",
+		"inUlsUkv": "Anteckningar",
+		"7dZPiPDb": "Beskärning, skörd, allt som är värt att komma ihåg",
+		"12fnNWay": "Inga anteckningar.",
+		"uF9fq_l9": "Träd",
 		"3NHVIj9z": "Namn",
 		"mMxtcfBS": "Valfritt, t.ex. ”Morfars äppelträd”",
-		"ViBeEsIP": "Arter",
+		"ViBeEsIP": "Art",
 		"wL91vXi_": "Ändra",
-		"SECWDUok": "Ändra fullvuxen storlek",
+		"deVJalwn": "Fullvuxen storlek",
+		"bN_Scdpj": "anpassad",
+		"5LsAAeLF": "artens standard",
 		"aaANJg1f": "Praktiskt för dvärgunderlag eller beskurna träd. Lämna tomt för artens standardvärde.",
-		"NwJmOCHn": "Fullvuxen höjd (m)",
-		"GCMszQD0": "Fullvuxen krona (m)",
-		"inUlsUkv": "Anteckningar",
+		"67a04rYY": "Höjd (m)",
+		"7Scql2r5": "Krona (m)",
+		"UmUSXEl_": "Spara storlek",
 		"c3I5Wxwn": "Ta bort träd",
-		"4tClSWjq": "Ta bort",
-		"GXZu1syy": "Avbryt",
-		"3QrnpcvP": "Spara ändringar",
-		"fZ63rLE-": "Stäng",
-		"WNPfer3r": "Ta bort träd?",
+		"WNPfer3r": "Ta bort trädet?",
 		"AUSAq47k": "”{displayName}” tas bort från den här planen."
 	},
 	"lib/components/plan/TreeList.svelte": {
+		"EJ1vRV7Y": "Träd",
+		"9hPxlmkn": "Inget planterat än",
+		"GTBmW0ED": "1 träd",
+		"s_D4lIZI": "{treeCount} träd",
+		"QllFIO-h": "1 art",
+		"3mMSkrH1": "{speciesCount} arter",
+		"p71MBR0z": "{canopy} m² kronor år {year}",
+		"n9coxmya": "Lägg till",
+		"UPbcPedU": "Ta bort filtret {active.name}",
+		"ScJmuqqn": "Sök",
+		"8dI_ltxP": "Sök namn, arter, anteckningar",
+		"1VihvPzt": "Sök träd",
+		"qNcclhAF": "Visa bara",
 		"ByaXcHRu": "Inga träd än",
-		"5QQug909": "Tryck på ”Lägg till träd”, välj en art och flytta kartan för att placera det."
+		"3bok2f0k": "Välj en art och flytta sedan kartan dit trädet ska växa.",
+		"Ddi2Muml": "Inget har planterats i den här planen än.",
+		"fVt38b7l": "Lägg till träd",
+		"Cgl8spCA": "Kronan är {0} % av sin fullvuxna bredd",
+		"UM63FrUj": "Har anteckningar",
+		"uC65VpZ5": "Inga träd matchar."
 	},
 	"lib/components/plan/TreeMeasurements.svelte": {
 		"PHV4A1ZJ": "Mätningar",
+		"IeSesrKZ": "Registrera",
+		"7-F8Pvdq": "Uppmätt den",
+		"67a04rYY": "Höjd (m)",
+		"7Scql2r5": "Krona (m)",
+		"GXZu1syy": "Avbryt",
+		"g_e2Ead-": "Spara mätning",
 		"mcQKtAWS": "Datum",
 		"v-LspAF5": "Höjd",
 		"k8rSuo9P": "Kronbredd",
 		"_4BZ3GdS": "Åtgärder",
 		"EaK7GttU": "Ta bort mätningen från {date}",
-		"W9Mwk7E9": "Inga mätningar än.",
-		"7-F8Pvdq": "Uppmätt den",
-		"67a04rYY": "Höjd (m)",
-		"7Scql2r5": "Krona (m)",
-		"yrA6bPs8": "Lägg till mätning"
+		"W9Mwk7E9": "Inga mätningar än."
 	},
 	"lib/components/plans/CreatePlanDialog.svelte": {
 		"A2stOQ-J": "Din plats",
