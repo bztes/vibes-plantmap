@@ -1,5 +1,27 @@
 # vibes-plantmap
 
+## 0.5.0
+
+### Minor Changes
+
+- [`be6647c`](https://github.com/bztes/vibes-plantmap/commit/be6647ce5011fddeeab3a338d4ea0f8c51df71b1) Thanks [@bztes](https://github.com/bztes)! - Replace `DATABASE_URL` with `DATA_DIR`
+
+- [`1440ec5`](https://github.com/bztes/vibes-plantmap/commit/1440ec58fe96129e526dfb44bca6c4fa7e284d8c) Thanks [@bztes](https://github.com/bztes)! - Add a Docker health check
+
+- [`2a0e492`](https://github.com/bztes/vibes-plantmap/commit/2a0e4921964ef2c34708d9d9ea6ab2ca17822cb2) Thanks [@bztes](https://github.com/bztes)! - New plan screen: side panel on desktop, bottom sheet on phones
+
+- [`fad0e39`](https://github.com/bztes/vibes-plantmap/commit/fad0e39a5fddf180a97464fb9139401ffadea553) Thanks [@bztes](https://github.com/bztes)! - Remove the tree conflict feature
+
+- [`52d449e`](https://github.com/bztes/vibes-plantmap/commit/52d449e89e142a5305390e2fcb8f07b426c5ecd1) Thanks [@bztes](https://github.com/bztes)! - Remove the year timeline's play button
+
+- [`ed0247d`](https://github.com/bztes/vibes-plantmap/commit/ed0247d30295447c45d77ff3ca7f42589b6f80a9) Thanks [@bztes](https://github.com/bztes)! - Log tree measurements, replacing planting date and size
+
+- [`2a66298`](https://github.com/bztes/vibes-plantmap/commit/2a662981c7fb755ea4c3897c69e409bfefe51571) Thanks [@bztes](https://github.com/bztes)! - Tree shadows for a chosen day and time
+
+### Patch Changes
+
+- [`9f1602a`](https://github.com/bztes/vibes-plantmap/commit/9f1602ad5e3edd1c9e6a3eedab6b5d939fb1a2de) Thanks [@bztes](https://github.com/bztes)! - Publish the Docker image to GHCR
+
 ## 0.4.2
 
 ### Patch Changes
